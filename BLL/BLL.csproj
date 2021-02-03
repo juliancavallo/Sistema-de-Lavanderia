@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{0B21A3F6-EDF2-42E2-825B-E9AFACD33DCF}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BLL</RootNamespace>
+    <AssemblyName>BLL</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ArticuloBLL.cs" />
+    <Compile Include="AuditoriaBLL.cs" />
+    <Compile Include="CategoriaBLL.cs" />
+    <Compile Include="BultoCompuestoBLL.cs" />
+    <Compile Include="ColorBLL.cs" />
+    <Compile Include="EnvioBLL.cs" />
+    <Compile Include="EstadoEnvioBLL.cs" />
+    <Compile Include="EstadoHojaDeRutaBLL.cs" />
+    <Compile Include="HojaDeRutaBLL.cs" />
+    <Compile Include="MenuBLL.cs" />
+    <Compile Include="MovimientoBLL.cs" />
+    <Compile Include="ParametroDelSistemaBLL.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RecepcionBLL.cs" />
+    <Compile Include="RolBLL.cs" />
+    <Compile Include="SeguridadBLL.cs" />
+    <Compile Include="StockBLL.cs" />
+    <Compile Include="TalleBLL.cs" />
+    <Compile Include="TipoDePrendaBLL.cs" />
+    <Compile Include="UbicacionBLL.cs" />
+    <Compile Include="UsuarioBLL.cs" />
+    <Compile Include="Vistas\ArticuloVista.cs" />
+    <Compile Include="Vistas\AuditoriaDetalleVista.cs" />
+    <Compile Include="Vistas\AuditoriaVista.cs" />
+    <Compile Include="Vistas\EnvioDetalleVista.cs" />
+    <Compile Include="Vistas\EnvioVista.cs" />
+    <Compile Include="Vistas\HojaDeRutaVista.cs" />
+    <Compile Include="Vistas\MovimientoVista.cs" />
+    <Compile Include="Vistas\RecepcionDetalleVista.cs" />
+    <Compile Include="Vistas\RecepcionVista.cs" />
+    <Compile Include="Vistas\AjusteStockVista.cs" />
+    <Compile Include="Vistas\StockVista.cs" />
+    <Compile Include="Vistas\UbicacionVista.cs" />
+    <Compile Include="Vistas\UsuarioVista.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Entidades\Entidades.csproj">
+      <Project>{230a84f5-ec10-4353-bed1-3f8204b2c85f}</Project>
+      <Name>Entidades</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Mappers\Mappers.csproj">
+      <Project>{31e8acc3-88f2-43e2-8ed9-f1614cc334eb}</Project>
+      <Name>Mappers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Servicios\Servicios.csproj">
+      <Project>{8fe4986a-8739-47aa-86a7-fb3e5087023a}</Project>
+      <Name>Servicios</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

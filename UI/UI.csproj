@@ -1,0 +1,463 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B53EC357-735D-4E07-A385-0393B0A3CF09}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>UI</RootNamespace>
+    <AssemblyName>UI</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Formularios\Administracion\Articulo\frmAdministracionArticulo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\Administracion\Articulo\frmAdministracionArticulo.Designer.cs">
+      <DependentUpon>frmAdministracionArticulo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Administracion\Articulo\frmAltaArticulo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\Administracion\Articulo\frmAltaArticulo.Designer.cs">
+      <DependentUpon>frmAltaArticulo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Administracion\Categoria\frmAdministracionCategoria.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\Administracion\Categoria\frmAdministracionCategoria.Designer.cs">
+      <DependentUpon>frmAdministracionCategoria.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Administracion\Categoria\frmAltaCategoria.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\Administracion\Categoria\frmAltaCategoria.Designer.cs">
+      <DependentUpon>frmAltaCategoria.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Administracion\BultoCompuesto\frmAdministracionBultoCompuesto.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\Administracion\BultoCompuesto\frmAdministracionBultoCompuesto.Designer.cs">
+      <DependentUpon>frmAdministracionBultoCompuesto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Administracion\BultoCompuesto\frmAltaBultoCompuesto.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\Administracion\BultoCompuesto\frmAltaBultoCompuesto.Designer.cs">
+      <DependentUpon>frmAltaBultoCompuesto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Administracion\Color\frmAdministracionColor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\Administracion\Color\frmAdministracionColor.Designer.cs">
+      <DependentUpon>frmAdministracionColor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Administracion\Color\frmAltaColor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\Administracion\Color\frmAltaColor.Designer.cs">
+      <DependentUpon>frmAltaColor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Administracion\Stock\frmAdministracionStock.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\Administracion\Stock\frmAdministracionStock.Designer.cs">
+      <DependentUpon>frmAdministracionStock.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Administracion\Stock\frmAltaStock.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\Administracion\Stock\frmAltaStock.Designer.cs">
+      <DependentUpon>frmAltaStock.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Administracion\Talle\frmAdministracionTalle.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\Administracion\Talle\frmAdministracionTalle.Designer.cs">
+      <DependentUpon>frmAdministracionTalle.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Administracion\Talle\frmAltaTalle.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\Administracion\Talle\frmAltaTalle.Designer.cs">
+      <DependentUpon>frmAltaTalle.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Administracion\TipoDePrenda\frmAdministracionTipoDePrenda.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\Administracion\TipoDePrenda\frmAdministracionTipoDePrenda.Designer.cs">
+      <DependentUpon>frmAdministracionTipoDePrenda.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Administracion\TipoDePrenda\frmAltaTipoDePrenda.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\Administracion\TipoDePrenda\frmAltaTipoDePrenda.Designer.cs">
+      <DependentUpon>frmAltaTipoDePrenda.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Administracion\Ubicacion\frmAdministracionUbicacion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\Administracion\Ubicacion\frmAdministracionUbicacion.Designer.cs">
+      <DependentUpon>frmAdministracionUbicacion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Administracion\Ubicacion\frmAltaUbicacion.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\Administracion\Ubicacion\frmAltaUbicacion.Designer.cs">
+      <DependentUpon>frmAltaUbicacion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\frmLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\frmLogin.Designer.cs">
+      <DependentUpon>frmLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\frmPrincipal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\frmPrincipal.Designer.cs">
+      <DependentUpon>frmPrincipal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Procesos\Ajuste de Stock\frmAjusteStock.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\Procesos\Ajuste de Stock\frmAjusteStock.Designer.cs">
+      <DependentUpon>frmAjusteStock.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Procesos\Auditoria\frmAuditoria.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\Procesos\Auditoria\frmAuditoria.Designer.cs">
+      <DependentUpon>frmAuditoria.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Procesos\EnvioInterno\frmEnvioInterno.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\Procesos\EnvioInterno\frmEnvioInterno.Designer.cs">
+      <DependentUpon>frmEnvioInterno.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Procesos\EnvioALavadero\frmEnvioALavadero.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\Procesos\EnvioALavadero\frmEnvioALavadero.Designer.cs">
+      <DependentUpon>frmEnvioALavadero.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Procesos\EnvioAClinica\frmEnvioAClinica.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\Procesos\EnvioAClinica\frmEnvioAClinica.Designer.cs">
+      <DependentUpon>frmEnvioAClinica.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Procesos\HojaDeRuta\frmHojaDeRuta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\Procesos\HojaDeRuta\frmHojaDeRuta.Designer.cs">
+      <DependentUpon>frmHojaDeRuta.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Procesos\RecepcionEnClinica\frmRecepcionEnClinica.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\Procesos\RecepcionEnClinica\frmRecepcionEnClinica.Designer.cs">
+      <DependentUpon>frmRecepcionEnClinica.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Procesos\RecepcionEnLavadero\frmRecepcionEnLavadero.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\Procesos\RecepcionEnLavadero\frmRecepcionEnLavadero.Designer.cs">
+      <DependentUpon>frmRecepcionEnLavadero.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Reportes\AjusteDeStock\frmReporteAjusteStock.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\Reportes\AjusteDeStock\frmReporteAjusteStock.Designer.cs">
+      <DependentUpon>frmReporteAjusteStock.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Reportes\EnviosAClinica\frmReporteEnviosAClinica.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\Reportes\EnviosAClinica\frmReporteEnviosAClinica.Designer.cs">
+      <DependentUpon>frmReporteEnviosAClinica.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Reportes\frmReporteRecepcionDetalle.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\Reportes\frmReporteRecepcionDetalle.Designer.cs">
+      <DependentUpon>frmReporteRecepcionDetalle.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Reportes\Movimientos\frmReporteMovimientos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\Reportes\Movimientos\frmReporteMovimientos.Designer.cs">
+      <DependentUpon>frmReporteMovimientos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Reportes\HojasDeRuta\frmReporteHojasDeRuta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\Reportes\HojasDeRuta\frmReporteHojasDeRuta.Designer.cs">
+      <DependentUpon>frmReporteHojasDeRuta.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Reportes\RecepcionEnClinica\frmReporteRecepcionesEnClinica.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\Reportes\RecepcionEnClinica\frmReporteRecepcionesEnClinica.Designer.cs">
+      <DependentUpon>frmReporteRecepcionesEnClinica.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Reportes\RecepcionEnLavadero\frmReporteRecepcionesEnLavadero.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\Reportes\RecepcionEnLavadero\frmReporteRecepcionesEnLavadero.Designer.cs">
+      <DependentUpon>frmReporteRecepcionesEnLavadero.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Reportes\EnviosInternos\frmReporteEnviosInternos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\Reportes\EnviosInternos\frmReporteEnviosInternos.Designer.cs">
+      <DependentUpon>frmReporteEnviosInternos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Reportes\EnviosALavadero\frmReporteEnviosALavadero.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\Reportes\EnviosALavadero\frmReporteEnviosALavadero.Designer.cs">
+      <DependentUpon>frmReporteEnviosALavadero.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Reportes\frmReporteEnvioDetalle.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\Reportes\frmReporteEnvioDetalle.Designer.cs">
+      <DependentUpon>frmReporteEnvioDetalle.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Reportes\Auditorias\frmReporteAuditoria.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\Reportes\Auditorias\frmReporteAuditoria.Designer.cs">
+      <DependentUpon>frmReporteAuditoria.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Reportes\Auditorias\frmReporteAuditoriaDetalle.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\Reportes\Auditorias\frmReporteAuditoriaDetalle.Designer.cs">
+      <DependentUpon>frmReporteAuditoriaDetalle.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Seguridad\Roles\frmAdministracionRoles.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\Seguridad\Roles\frmAdministracionRoles.Designer.cs">
+      <DependentUpon>frmAdministracionRoles.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Seguridad\Roles\frmAltaRol.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\Seguridad\Roles\frmAltaRol.Designer.cs">
+      <DependentUpon>frmAltaRol.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Seguridad\Usuarios\frmAdministracionUsuarios.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\Seguridad\Usuarios\frmAdministracionUsuarios.Designer.cs">
+      <DependentUpon>frmAdministracionUsuarios.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Seguridad\Usuarios\frmAltaUsuario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\Seguridad\Usuarios\frmAltaUsuario.Designer.cs">
+      <DependentUpon>frmAltaUsuario.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Formularios\Administracion\Articulo\frmAdministracionArticulo.resx">
+      <DependentUpon>frmAdministracionArticulo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Administracion\Articulo\frmAltaArticulo.resx">
+      <DependentUpon>frmAltaArticulo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Administracion\Categoria\frmAdministracionCategoria.resx">
+      <DependentUpon>frmAdministracionCategoria.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Administracion\Categoria\frmAltaCategoria.resx">
+      <DependentUpon>frmAltaCategoria.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Administracion\BultoCompuesto\frmAdministracionBultoCompuesto.resx">
+      <DependentUpon>frmAdministracionBultoCompuesto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Administracion\BultoCompuesto\frmAltaBultoCompuesto.resx">
+      <DependentUpon>frmAltaBultoCompuesto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Administracion\Color\frmAdministracionColor.resx">
+      <DependentUpon>frmAdministracionColor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Administracion\Color\frmAltaColor.resx">
+      <DependentUpon>frmAltaColor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Administracion\Stock\frmAdministracionStock.resx">
+      <DependentUpon>frmAdministracionStock.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Administracion\Stock\frmAltaStock.resx">
+      <DependentUpon>frmAltaStock.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Administracion\Talle\frmAdministracionTalle.resx">
+      <DependentUpon>frmAdministracionTalle.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Administracion\Talle\frmAltaTalle.resx">
+      <DependentUpon>frmAltaTalle.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Administracion\TipoDePrenda\frmAdministracionTipoDePrenda.resx">
+      <DependentUpon>frmAdministracionTipoDePrenda.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Administracion\TipoDePrenda\frmAltaTipoDePrenda.resx">
+      <DependentUpon>frmAltaTipoDePrenda.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Administracion\Ubicacion\frmAdministracionUbicacion.resx">
+      <DependentUpon>frmAdministracionUbicacion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Administracion\Ubicacion\frmAltaUbicacion.resx">
+      <DependentUpon>frmAltaUbicacion.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\frmLogin.resx">
+      <DependentUpon>frmLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\frmPrincipal.resx">
+      <DependentUpon>frmPrincipal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Procesos\Ajuste de Stock\frmAjusteStock.resx">
+      <DependentUpon>frmAjusteStock.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Procesos\Auditoria\frmAuditoria.resx">
+      <DependentUpon>frmAuditoria.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Procesos\EnvioInterno\frmEnvioInterno.resx">
+      <DependentUpon>frmEnvioInterno.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Procesos\EnvioALavadero\frmEnvioALavadero.resx">
+      <DependentUpon>frmEnvioALavadero.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Procesos\EnvioAClinica\frmEnvioAClinica.resx">
+      <DependentUpon>frmEnvioAClinica.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Procesos\HojaDeRuta\frmHojaDeRuta.resx">
+      <DependentUpon>frmHojaDeRuta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Procesos\RecepcionEnClinica\frmRecepcionEnClinica.resx">
+      <DependentUpon>frmRecepcionEnClinica.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Procesos\RecepcionEnLavadero\frmRecepcionEnLavadero.resx">
+      <DependentUpon>frmRecepcionEnLavadero.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Reportes\AjusteDeStock\frmReporteAjusteStock.resx">
+      <DependentUpon>frmReporteAjusteStock.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Reportes\EnviosAClinica\frmReporteEnviosAClinica.resx">
+      <DependentUpon>frmReporteEnviosAClinica.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Reportes\frmReporteRecepcionDetalle.resx">
+      <DependentUpon>frmReporteRecepcionDetalle.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Reportes\Movimientos\frmReporteMovimientos.resx">
+      <DependentUpon>frmReporteMovimientos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Reportes\HojasDeRuta\frmReporteHojasDeRuta.resx">
+      <DependentUpon>frmReporteHojasDeRuta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Reportes\RecepcionEnClinica\frmReporteRecepcionesEnClinica.resx">
+      <DependentUpon>frmReporteRecepcionesEnClinica.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Reportes\RecepcionEnLavadero\frmReporteRecepcionesEnLavadero.resx">
+      <DependentUpon>frmReporteRecepcionesEnLavadero.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Reportes\EnviosInternos\frmReporteEnviosInternos.resx">
+      <DependentUpon>frmReporteEnviosInternos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Reportes\EnviosALavadero\frmReporteEnviosALavadero.resx">
+      <DependentUpon>frmReporteEnviosALavadero.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Reportes\frmReporteEnvioDetalle.resx">
+      <DependentUpon>frmReporteEnvioDetalle.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Reportes\Auditorias\frmReporteAuditoria.resx">
+      <DependentUpon>frmReporteAuditoria.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Reportes\Auditorias\frmReporteAuditoriaDetalle.resx">
+      <DependentUpon>frmReporteAuditoriaDetalle.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Seguridad\Roles\frmAdministracionRoles.resx">
+      <DependentUpon>frmAdministracionRoles.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Seguridad\Roles\frmAltaRol.resx">
+      <DependentUpon>frmAltaRol.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Seguridad\Usuarios\frmAdministracionUsuarios.resx">
+      <DependentUpon>frmAdministracionUsuarios.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Seguridad\Usuarios\frmAltaUsuario.resx">
+      <DependentUpon>frmAltaUsuario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fondo.jpeg" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Controlador\Controlador.csproj">
+      <Project>{182f8dbc-1de1-4560-bfb9-4f37e70d34b6}</Project>
+      <Name>Controlador</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
