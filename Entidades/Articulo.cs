@@ -8,6 +8,7 @@ namespace Entidades
     {
         public int Id { get; set; }
         public string Codigo { get; set; }
+        public decimal PrecioUnitario { get; set; }
         
         #region Entidades
         public TipoDePrenda TipoDePrenda { get; set; }

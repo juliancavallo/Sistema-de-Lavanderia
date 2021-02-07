@@ -114,7 +114,8 @@ namespace Mappers
                 Codigo = row["Codigo"].ToString(),
                 TipoDePrenda = mppTipoDePrenda.Obtener(idTipoDePrenda),
                 Color = mppColor.Obtener(idColor),
-                Talle = mppTalle.Obtener(idTalle)
+                Talle = mppTalle.Obtener(idTalle),
+                PrecioUnitario = decimal.Parse(row["PrecioUnitario"].ToString())
             };
             return articulo;
         }
@@ -124,6 +125,7 @@ namespace Mappers
            dr["IdTipoDePrenda"] = obj.TipoDePrenda.Id;
            dr["IdColor"] = obj.Color.Id;
            dr["IdTalle"] = obj.Talle.Id;
+           dr["PrecioUnitario"] = obj.PrecioUnitario;
         }
     }
 }

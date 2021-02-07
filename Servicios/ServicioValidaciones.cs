@@ -33,6 +33,17 @@ namespace Servicios
             return true;
         }
 
+        public static bool FormatoDecimalValido(TextBox txt, string nombreControl)
+        {
+            decimal result;
+            decimal.TryParse(txt.Text.Replace('.',','), out result);
+
+            if (result < 1)
+                throw new Exception(string.Format("El campo {0} debe ser un número decimal mayor a 0", nombreControl));
+
+            return true;
+        }
+
         public static bool ItemSeleccionado(ComboBox combo, string nombreControl)
         {
             if(combo.SelectedItem == null)

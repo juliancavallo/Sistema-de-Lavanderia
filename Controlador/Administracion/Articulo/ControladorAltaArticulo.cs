@@ -44,6 +44,8 @@ namespace Controlador
         private bool DatosValidos()
         {
             ServicioValidaciones.TextoCompleto((TextBox)controles.Find(x => x.Name == "txtCodigo"), "Codigo");
+            ServicioValidaciones.TextoCompleto((TextBox)controles.Find(x => x.Name == "txtPrecioUnitario"), "Precio Unitario");
+            ServicioValidaciones.FormatoDecimalValido((TextBox)controles.Find(x => x.Name == "txtPrecioUnitario"), "Precio Unitario");
             ServicioValidaciones.ItemSeleccionado((ComboBox)controles.Find(x => x.Name == "comboTipoDePrenda"), "Tipo de Prenda");
             ServicioValidaciones.ItemSeleccionado((ComboBox)controles.Find(x => x.Name == "comboColor"), "Color");
             ServicioValidaciones.ItemSeleccionado((ComboBox)controles.Find(x => x.Name == "comboTalle"), "Talle");
@@ -70,6 +72,7 @@ namespace Controlador
                 if (articulo != null)
                 {
                     ((TextBox)controles.Find(x => x.Name == "txtCodigo")).Text = articulo.Codigo;
+                    ((TextBox)controles.Find(x => x.Name == "txtPrecioUnitario")).Text = articulo.PrecioUnitario.ToString();
                     comboTipoDePrenda.SelectedValue = articulo.TipoDePrenda.Id;
                     comboColor.SelectedValue = articulo.Color.Id;
                     comboTalle.SelectedValue = articulo.Talle.Id;
@@ -95,6 +98,7 @@ namespace Controlador
                     var articulo = new Articulo();
                     articulo.Id = idArticulo ?? 0;
                     articulo.Codigo = ((TextBox)controles.Find(x => x.Name == "txtCodigo")).Text;
+                    articulo.PrecioUnitario = decimal.Parse(((TextBox)controles.Find(x => x.Name == "txtPrecioUnitario")).Text.Replace('.',','));
 
                     string tipoDePrenda = ((ComboBox)controles.Find(x => x.Name == "comboTipoDePrenda")).SelectedValue.ToString();
                     string color = ((ComboBox)controles.Find(x => x.Name == "comboColor")).SelectedValue.ToString();

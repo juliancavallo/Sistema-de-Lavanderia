@@ -380,7 +380,8 @@ namespace BLL
                 Codigo = "TOA-001",
                 Color = colorBLL.Obtener("Blanco"),
                 Talle = talleBLL.Obtener("Mediano"),
-                TipoDePrenda = tipoDePrendaBLL.Obtener("Toalla de mano") 
+                TipoDePrenda = tipoDePrendaBLL.Obtener("Toalla de mano"),
+                PrecioUnitario = 70m
             };
             articuloBLL.Alta(articulo);
 
@@ -389,7 +390,8 @@ namespace BLL
                 Codigo = "TOA-002",
                 Color = colorBLL.Obtener("Blanco"),
                 Talle = talleBLL.Obtener("Chico"),
-                TipoDePrenda = tipoDePrendaBLL.Obtener("Toalla de mano")
+                TipoDePrenda = tipoDePrendaBLL.Obtener("Toalla de mano"),
+                PrecioUnitario = 70m
             };
             articuloBLL.Alta(articulo);
 
@@ -399,7 +401,8 @@ namespace BLL
                 Codigo = "SAB-001",
                 Color = colorBLL.Obtener("Blanco"),
                 Talle = talleBLL.Obtener("Grande"),
-                TipoDePrenda = tipoDePrendaBLL.Obtener("Sabana")
+                TipoDePrenda = tipoDePrendaBLL.Obtener("Sabana"),
+                PrecioUnitario = 150.5m
             };
             articuloBLL.Alta(articulo);
 
@@ -408,7 +411,8 @@ namespace BLL
                 Codigo = "CHA-001",
                 Color = colorBLL.Obtener("Azul"),
                 Talle = talleBLL.Obtener("XL"),
-                TipoDePrenda = tipoDePrendaBLL.Obtener("Ambo chaqueta")
+                TipoDePrenda = tipoDePrendaBLL.Obtener("Ambo chaqueta"),
+                PrecioUnitario = 115.6m
             };
             articuloBLL.Alta(articulo);
 
@@ -417,7 +421,8 @@ namespace BLL
                 Codigo = "PAN-001",
                 Color = colorBLL.Obtener("Azul"),
                 Talle = talleBLL.Obtener("38"),
-                TipoDePrenda = tipoDePrendaBLL.Obtener("Ambo pantalón")
+                TipoDePrenda = tipoDePrendaBLL.Obtener("Ambo pantalón"),
+                PrecioUnitario = 90m
             };
             articuloBLL.Alta(articulo);
 
@@ -426,7 +431,8 @@ namespace BLL
                 Codigo = "CHA-002",
                 Color = colorBLL.Obtener("Azul"),
                 Talle = talleBLL.Obtener("L"),
-                TipoDePrenda = tipoDePrendaBLL.Obtener("Ambo chaqueta")
+                TipoDePrenda = tipoDePrendaBLL.Obtener("Ambo chaqueta"),
+                PrecioUnitario = 115.6m
             };
             articuloBLL.Alta(articulo);
 
@@ -435,7 +441,8 @@ namespace BLL
                 Codigo = "PAN-002",
                 Color = colorBLL.Obtener("Azul"),
                 Talle = talleBLL.Obtener("36"),
-                TipoDePrenda = tipoDePrendaBLL.Obtener("Ambo pantalón")
+                TipoDePrenda = tipoDePrendaBLL.Obtener("Ambo pantalón"),
+                PrecioUnitario = 90m
             };
             articuloBLL.Alta(articulo);
 
