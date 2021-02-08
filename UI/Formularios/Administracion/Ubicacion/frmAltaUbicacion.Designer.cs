@@ -38,6 +38,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.comboTipo = new System.Windows.Forms.ComboBox();
+            this.chkClienteExterno = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // label2
@@ -74,7 +75,7 @@
             // 
             // btnCancelar
             // 
-            this.btnCancelar.Location = new System.Drawing.Point(180, 279);
+            this.btnCancelar.Location = new System.Drawing.Point(180, 325);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(132, 46);
             this.btnCancelar.TabIndex = 11;
@@ -83,7 +84,7 @@
             // 
             // btnAceptar
             // 
-            this.btnAceptar.Location = new System.Drawing.Point(12, 279);
+            this.btnAceptar.Location = new System.Drawing.Point(12, 325);
             this.btnAceptar.Name = "btnAceptar";
             this.btnAceptar.Size = new System.Drawing.Size(132, 46);
             this.btnAceptar.TabIndex = 10;
@@ -126,11 +127,22 @@
             this.comboTipo.Size = new System.Drawing.Size(224, 21);
             this.comboTipo.TabIndex = 15;
             // 
+            // chkClienteExterno
+            // 
+            this.chkClienteExterno.AutoSize = true;
+            this.chkClienteExterno.Location = new System.Drawing.Point(41, 272);
+            this.chkClienteExterno.Name = "chkClienteExterno";
+            this.chkClienteExterno.Size = new System.Drawing.Size(97, 17);
+            this.chkClienteExterno.TabIndex = 17;
+            this.chkClienteExterno.Text = "Cliente Externo";
+            this.chkClienteExterno.UseVisualStyleBackColor = true;
+            // 
             // frmAltaUbicacion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(324, 342);
+            this.ClientSize = new System.Drawing.Size(324, 383);
+            this.Controls.Add(this.chkClienteExterno);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.comboTipo);
             this.Controls.Add(this.label3);
@@ -160,5 +172,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox comboTipo;
+        private System.Windows.Forms.CheckBox chkClienteExterno;
     }
 }

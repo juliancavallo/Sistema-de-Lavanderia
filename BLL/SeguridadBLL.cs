@@ -160,6 +160,16 @@ namespace BLL
             };
             ubicacionBLL.Alta(ubicacion);
 
+            ubicacion = new Ubicacion()
+            {
+                Descripcion = "Clinica Estrada",
+                Direccion = "Uriarte 1200",
+                TipoDeUbicacion = (int)Enums.TipoDeUbicacion.Clinica,
+                UbicacionPadre = null,
+                ClienteExterno = false
+            };
+            ubicacionBLL.Alta(ubicacion);
+
 
             var usuario = new Usuario()
             {

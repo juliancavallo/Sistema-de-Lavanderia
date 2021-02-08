@@ -112,7 +112,8 @@ namespace Mappers
                 Descripcion = row["Descripcion"].ToString(),
                 Direccion = row["Direccion"].ToString(),
                 TipoDeUbicacion = int.Parse(row["TipoDeUbicacion"].ToString()),
-                UbicacionPadre = idUbicacionPadre.HasValue ? this.Obtener(idUbicacionPadre.Value) : null
+                UbicacionPadre = idUbicacionPadre.HasValue ? this.Obtener(idUbicacionPadre.Value) : null,
+                ClienteExterno = bool.Parse(row["ClienteExterno"].ToString())
             };
             return ubicacion;
         }
@@ -123,6 +124,7 @@ namespace Mappers
             dr["Direccion"] = obj.Direccion;
             dr["TipoDeUbicacion"] = obj.TipoDeUbicacion;
             dr["IdUbicacionPadre"] = (object)obj.UbicacionPadre?.Id ?? DBNull.Value;
+            dr["ClienteExterno"] = obj.ClienteExterno;
         }
     }
 }

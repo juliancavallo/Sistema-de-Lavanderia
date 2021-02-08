@@ -254,6 +254,7 @@ namespace Servicios
             DataColumn colUbicacionDireccion = new DataColumn("Direccion", Type.GetType("System.String"));
             DataColumn colUbicacionTipoDeUbicacion = new DataColumn("TipoDeUbicacion", Type.GetType("System.Int32"));
             DataColumn colUbicacionIdUbicacionPadre = new DataColumn("IdUbicacionPadre", Type.GetType("System.Int32"));
+            DataColumn colUbicacionClienteExterno = new DataColumn("ClienteExterno", Type.GetType("System.Boolean"));
 
             dtUbicacion.Columns.AddRange(new DataColumn[]
             {
@@ -261,7 +262,8 @@ namespace Servicios
                  colUbicacionDescripcion,
                  colUbicacionDireccion,
                  colUbicacionTipoDeUbicacion,
-                 colUbicacionIdUbicacionPadre
+                 colUbicacionIdUbicacionPadre,
+                 colUbicacionClienteExterno
             });
 
             colUbicacionId.AutoIncrement = true;

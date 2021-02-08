@@ -71,6 +71,7 @@ namespace Controlador
                 {
                     ((TextBox)controles.Find(x => x.Name == "txtDescripcion")).Text = ubicacion.Descripcion;
                     ((TextBox)controles.Find(x => x.Name == "txtDireccion")).Text = ubicacion.Direccion;
+                    ((CheckBox)controles.Find(x => x.Name == "chkClienteExterno")).Checked = ubicacion.ClienteExterno;
                     comboTipo.SelectedValue = ubicacion.TipoDeUbicacion;
                     
                     this.ConfigurarComboUbicacionPadre(comboUbicacionPadre, ubicacionBLL.ObtenerSeleccionablesParaUbicacionPadre(idUbicacion).Where(x => x.TipoDeUbicacion == ubicacion.TipoDeUbicacion).ToList());
@@ -98,6 +99,7 @@ namespace Controlador
                     ubicacion.Id = idUbicacion ?? 0;
                     ubicacion.Descripcion = ((TextBox)controles.Find(x => x.Name == "txtDescripcion")).Text;
                     ubicacion.Direccion = ((TextBox)controles.Find(x => x.Name == "txtDireccion")).Text;
+                    ubicacion.ClienteExterno = ((CheckBox)controles.Find(x => x.Name == "chkClienteExterno")).Checked;
 
                     string tipoDeUbicacion = ((ComboBox)controles.Find(x => x.Name == "comboTipo")).SelectedValue.ToString();
                     ubicacion.TipoDeUbicacion = int.Parse(tipoDeUbicacion);
