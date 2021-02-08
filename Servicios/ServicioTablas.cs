@@ -285,7 +285,7 @@ namespace Servicios
             DataColumn colArticuloIdTipoDePrenda = new DataColumn("IdTipoDePrenda", Type.GetType("System.Int32"));
             DataColumn colArticuloIdColor = new DataColumn("IdColor", Type.GetType("System.Int32"));
             DataColumn colArticuloIdTalle = new DataColumn("IdTalle", Type.GetType("System.Int32"));
-            DataColumn colPrecioUnitario = new DataColumn("PrecioUnitario", Type.GetType("System.Decimal"));
+            DataColumn colArticuloPrecioUnitario = new DataColumn("PrecioUnitario", Type.GetType("System.Decimal"));
 
             dtArticulo.Columns.AddRange(new DataColumn[]
             {
@@ -294,7 +294,7 @@ namespace Servicios
                  colArticuloIdTipoDePrenda,
                  colArticuloIdColor,
                  colArticuloIdTalle,
-                 colPrecioUnitario
+                 colArticuloPrecioUnitario
             });
 
             colArticuloId.AutoIncrement = true;
@@ -575,12 +575,14 @@ namespace Servicios
             DataColumn colEnvioDetalleCantidad = new DataColumn("Cantidad", Type.GetType("System.Int32"));
             DataColumn colEnvioDetalleIdEnvio = new DataColumn("IdEnvio", Type.GetType("System.Int32"));
             DataColumn colEnvioDetalleIdArticulo = new DataColumn("IdArticulo", Type.GetType("System.Int32"));
+            DataColumn colEnvioDetallePrecioUnitario = new DataColumn("PrecioUnitario", Type.GetType("System.Decimal"));
 
             dtEnvioDetalle.Columns.AddRange(new DataColumn[]
             {
                  colEnvioDetalleCantidad,
                  colEnvioDetalleIdEnvio,
-                 colEnvioDetalleIdArticulo
+                 colEnvioDetalleIdArticulo,
+                 colEnvioDetallePrecioUnitario
             });
             dtEnvioDetalle.PrimaryKey = new DataColumn[] { colEnvioDetalleIdEnvio, colEnvioDetalleIdArticulo };
             ds.Tables.Add(dtEnvioDetalle);
@@ -660,13 +662,16 @@ namespace Servicios
             DataColumn colRecepcionDetalleCantidadRecibida = new DataColumn("CantidadRecibida", Type.GetType("System.Int32"));
             DataColumn colRecepcionDetalleIdRecepcion = new DataColumn("IdRecepcion", Type.GetType("System.Int32"));
             DataColumn colRecepcionDetalleIdArticulo = new DataColumn("IdArticulo", Type.GetType("System.Int32"));
+            DataColumn colRecepcionDetallePrecioUnitario = new DataColumn("PrecioUnitario", Type.GetType("System.Decimal"));
+
 
             dtRecepcionDetalle.Columns.AddRange(new DataColumn[]
             {
                  colRecepcionDetalleCantidadARecibir,
                  colRecepcionDetalleCantidadRecibida,
                  colRecepcionDetalleIdRecepcion,
-                 colRecepcionDetalleIdArticulo
+                 colRecepcionDetalleIdArticulo,
+                 colRecepcionDetallePrecioUnitario
             });
             dtRecepcionDetalle.PrimaryKey = new DataColumn[] { colRecepcionDetalleIdRecepcion, colRecepcionDetalleIdArticulo };
             ds.Tables.Add(dtRecepcionDetalle);

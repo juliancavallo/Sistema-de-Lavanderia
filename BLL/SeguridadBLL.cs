@@ -135,7 +135,8 @@ namespace BLL
                 Descripcion = "Lavanderia",
                 Direccion = "Av. Belgrano 1200",
                 TipoDeUbicacion = (int)Enums.TipoDeUbicacion.Lavanderia,
-                UbicacionPadre = null
+                UbicacionPadre = null,
+                ClienteExterno = false
             };
             ubicacionBLL.Alta(ubicacion);
 
@@ -144,7 +145,8 @@ namespace BLL
                 Descripcion = "Clinica Olivos",
                 Direccion = "Av. Maipú 1660",
                 TipoDeUbicacion = (int)Enums.TipoDeUbicacion.Clinica,
-                UbicacionPadre = null
+                UbicacionPadre = null,
+                ClienteExterno = true
             };
             ubicacionBLL.Alta(ubicacion);
 
@@ -153,7 +155,8 @@ namespace BLL
                 Descripcion = "Olivos Piso 1",
                 Direccion = "Av. Maipú 1660 - Piso 1",
                 TipoDeUbicacion = (int)Enums.TipoDeUbicacion.Clinica,
-                UbicacionPadre = ubicacionBLL.ObtenerTodos().First(x => x.Descripcion == "Clinica Olivos")
+                UbicacionPadre = ubicacionBLL.ObtenerTodos().First(x => x.Descripcion == "Clinica Olivos"),
+                ClienteExterno = true
             };
             ubicacionBLL.Alta(ubicacion);
 

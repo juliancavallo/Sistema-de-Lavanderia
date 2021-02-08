@@ -8,6 +8,7 @@ namespace Entidades
     {
         public int CantidadRecibida { get; set; }
         public int CantidadARecibir { get; set; }
+        public decimal PrecioUnitario { get; set; }
 
         #region Entidades
         public Recepcion Recepcion { get; set; }

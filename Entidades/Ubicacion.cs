@@ -12,6 +12,7 @@ namespace Entidades
         public string Direccion { get; set; }
         public int TipoDeUbicacion { get; set; }
         public bool EsUbicacionInterna { get { return this.UbicacionPadre != null; } }
+        public bool ClienteExterno { get; set; }
 
         #region Entidades
         public Ubicacion UbicacionPadre { get; set; }

@@ -7,6 +7,7 @@ namespace Entidades
     public class EnvioDetalle
     {
         public int Cantidad { get; set; }
+        public decimal PrecioUnitario { get; set; }
 
         #region Entidades
         public Articulo Articulo { get; set; }
