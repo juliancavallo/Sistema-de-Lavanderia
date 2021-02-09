@@ -17,5 +17,7 @@ namespace BLL.Vistas
         public string FechaDeCreacion { get; set; }
         public string Estado { get; set; }
         public string Usuario { get; set; }
+        [System.ComponentModel.DisplayName("Facturación Total")]
+        public string FacturacionTotal { get; set; }
     }
 }

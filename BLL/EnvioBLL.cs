@@ -13,6 +13,7 @@ namespace BLL
     {
         MapperEnvio mpp = new MapperEnvio();
         EstadoEnvioBLL estadoEnvioBLL = new EstadoEnvioBLL();
+        ParametroDelSistemaBLL parametroDelSistemaBLL = new ParametroDelSistemaBLL();
 
         public void Alta(Envio obj)
         {
@@ -188,8 +189,34 @@ namespace BLL
                 Usuario = envio.Usuario.NombreDeUsuario,
                 UbicacionOrigen = envio.UbicacionOrigen.Descripcion,
                 UbicacionDestino = envio.UbicacionDestino.Descripcion,
-                Estado = envio.Estado.Descripcion
+                Estado = envio.Estado.Descripcion,
+                FacturacionTotal = 
+                    (envio.UbicacionOrigen.TipoDeUbicacion == (int)TipoDeUbicacion.Lavanderia &&
+                    envio.UbicacionDestino.TipoDeUbicacion == (int)TipoDeUbicacion.Clinica) 
+                    ? this.ObtenerFacturacionTotal(envio).ToString() : "No aplica"
             };
+        }
+
+        public decimal ObtenerFacturacionTotal(Envio envio)
+        {
+            decimal precio = 0;
+            
+            if (envio.UbicacionOrigen.TipoDeUbicacion == (int)TipoDeUbicacion.Lavanderia &&
+                envio.UbicacionDestino.TipoDeUbicacion == (int)TipoDeUbicacion.Clinica)
+            {
+                envio.Detalle.ForEach(x => 
+                {
+                    precio += (x.PrecioUnitario * x.Cantidad);
+                });
+
+                if (!envio.UbicacionDestino.ClienteExterno)
+                {
+                    var descuento = decimal.Parse(parametroDelSistemaBLL.Obtener(Entidades.Enums.ParametroDelSistema.PorcentajeDescuentoDeEnvios).Valor);
+                    precio -= precio * descuento / 100;
+                }
+            }
+
+            return precio;
         }
 
     }

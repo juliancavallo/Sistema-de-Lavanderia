@@ -107,13 +107,13 @@ namespace Mappers
 
         private EnvioDetalle ConvertirDataRowAEntidad(DataRow row)
         {
-            var color = new EnvioDetalle()
+            var detalle = new EnvioDetalle()
             {
                 Cantidad = int.Parse(row["Cantidad"].ToString()),
                 Articulo = mppArticulo.Obtener(int.Parse(row["IdArticulo"].ToString())),
-                PrecioUnitario = int.Parse(row["PrecioUnitario"].ToString())
+                PrecioUnitario = decimal.Parse(row["PrecioUnitario"].ToString())
             };
-            return color;
+            return detalle;
         }
 
         private void ConvertirEntidadEnDataRow(EnvioDetalle obj, DataRow dr)

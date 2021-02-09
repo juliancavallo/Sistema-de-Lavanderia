@@ -203,6 +203,13 @@ namespace BLL
             };
             parametroBLL.Alta(parametro);
 
+            parametro = new ParametroDelSistema()
+            {
+                Nombre = "PorcentajeDescuentoDeEnvios",
+                Valor = "10,2"
+            };
+            parametroBLL.Alta(parametro);
+
             var estadoEnvio = new EstadoEnvio()
             {
                 Descripcion = Enums.EstadoEnvio.Generado

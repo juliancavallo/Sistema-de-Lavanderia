@@ -107,11 +107,11 @@ namespace Mappers
 
         private BultoCompuestoDetalle ConvertirDataRowAEntidad(DataRow row)
         {
-            var color = new BultoCompuestoDetalle()
+            var bultoCompuestoDetalle = new BultoCompuestoDetalle()
             {
-                TipoDePrenda = mapperTipoDePrenda.Obtener(int.Parse(row["IdArticulo"].ToString()))
+                TipoDePrenda = mapperTipoDePrenda.Obtener(int.Parse(row["IdTipoDePrenda"].ToString()))
             };
-            return color;
+            return bultoCompuestoDetalle;
         }
 
         private void ConvertirEntidadEnDataRow(BultoCompuestoDetalle obj, DataRow dr)

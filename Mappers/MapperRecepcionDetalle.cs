@@ -111,7 +111,7 @@ namespace Mappers
             {
                 CantidadARecibir = int.Parse(row["CantidadARecibir"].ToString()),
                 CantidadRecibida = int.Parse(row["CantidadRecibida"].ToString()),
-                PrecioUnitario = int.Parse(row["PrecioUnitario"].ToString()),
+                PrecioUnitario = decimal.Parse(row["PrecioUnitario"].ToString()),
                 Articulo = mppArticulo.Obtener(int.Parse(row["IdArticulo"].ToString()))
             };
             return color;

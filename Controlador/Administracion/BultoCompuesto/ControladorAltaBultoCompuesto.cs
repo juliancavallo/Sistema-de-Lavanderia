@@ -6,6 +6,7 @@ using System.Text;
 using System.Windows.Forms;
 using Servicios;
 using System.Xml;
+using System.Linq;
 
 namespace Controlador
 {
@@ -74,11 +75,13 @@ namespace Controlador
 
             if (idBultoCompuesto.HasValue)
             {
-                var color = bultoCompuestoBLL.Obtener(idBultoCompuesto.Value);
+                var bultoCompuesto = bultoCompuestoBLL.Obtener(idBultoCompuesto.Value);
 
-                if (color != null)
+                if (bultoCompuesto != null)
                 {
-                    ((TextBox)controles.Find(x => x.Name == "txtDescripcion")).Text = color.Descripcion;
+                    ((TextBox)controles.Find(x => x.Name == "txtDescripcion")).Text = bultoCompuesto.Descripcion;
+                    comboTipoDePrenda1.SelectedValue = bultoCompuesto.Detalle.First().TipoDePrenda.Id;
+                    comboTipoDePrenda2.SelectedValue = bultoCompuesto.Detalle.Last().TipoDePrenda.Id;
                 }
             }
         }
@@ -103,10 +106,10 @@ namespace Controlador
                     bultoCompuesto.Descripcion = ((TextBox)controles.Find(x => x.Name == "txtDescripcion")).Text;
 
                     var detalle = new List<BultoCompuestoDetalle>();
-                    var tipoDePrenda1 = (TipoDePrenda)((ComboBox)controles.Find(x => x.Name == "comboTipoDePrenda1")).SelectedValue;
-                    var tipoDePrenda2 = (TipoDePrenda)((ComboBox)controles.Find(x => x.Name == "comboTipoDePrenda2")).SelectedValue;
-                    detalle.Add(new BultoCompuestoDetalle() { TipoDePrenda = tipoDePrenda1 });
-                    detalle.Add(new BultoCompuestoDetalle() { TipoDePrenda = tipoDePrenda2 });
+                    var tipoDePrenda1 = (TipoDePrenda)((ComboBox)controles.Find(x => x.Name == "comboTipoDePrenda1")).SelectedItem;
+                    var tipoDePrenda2 = (TipoDePrenda)((ComboBox)controles.Find(x => x.Name == "comboTipoDePrenda2")).SelectedItem;
+                    detalle.Add(new BultoCompuestoDetalle() { TipoDePrenda = tipoDePrenda1, BultoCompuesto = bultoCompuesto });
+                    detalle.Add(new BultoCompuestoDetalle() { TipoDePrenda = tipoDePrenda2, BultoCompuesto = bultoCompuesto });
 
                     bultoCompuesto.Detalle = detalle;
 

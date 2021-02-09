@@ -38,11 +38,11 @@
             this.label1 = new System.Windows.Forms.Label();
             this.txtDescripcion = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
-            this.gridColores = new System.Windows.Forms.DataGridView();
+            this.gridBultoCompuesto = new System.Windows.Forms.DataGridView();
             this.tableLayoutPanel1.SuspendLayout();
             this.grpBusqueda.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gridColores)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridBultoCompuesto)).BeginInit();
             this.SuspendLayout();
             // 
             // lblTitulo
@@ -157,7 +157,7 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 5F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 90F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 5F));
-            this.tableLayoutPanel2.Controls.Add(this.gridColores, 1, 1);
+            this.tableLayoutPanel2.Controls.Add(this.gridBultoCompuesto, 1, 1);
             this.tableLayoutPanel2.Location = new System.Drawing.Point(6, 185);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 3;
@@ -167,15 +167,15 @@
             this.tableLayoutPanel2.Size = new System.Drawing.Size(606, 267);
             this.tableLayoutPanel2.TabIndex = 13;
             // 
-            // gridColores
+            // gridBultoCompuesto
             // 
-            this.gridColores.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.gridColores.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridColores.Location = new System.Drawing.Point(33, 16);
-            this.gridColores.Name = "gridColores";
-            this.gridColores.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
-            this.gridColores.Size = new System.Drawing.Size(539, 234);
-            this.gridColores.TabIndex = 0;
+            this.gridBultoCompuesto.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.gridBultoCompuesto.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gridBultoCompuesto.Location = new System.Drawing.Point(33, 16);
+            this.gridBultoCompuesto.Name = "gridBultoCompuesto";
+            this.gridBultoCompuesto.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
+            this.gridBultoCompuesto.Size = new System.Drawing.Size(539, 234);
+            this.gridBultoCompuesto.TabIndex = 0;
             // 
             // frmAdministracionBultoCompuesto
             // 
@@ -194,7 +194,7 @@
             this.grpBusqueda.ResumeLayout(false);
             this.grpBusqueda.PerformLayout();
             this.tableLayoutPanel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.gridColores)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridBultoCompuesto)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -212,6 +212,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtDescripcion;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
-        private System.Windows.Forms.DataGridView gridColores;
+        private System.Windows.Forms.DataGridView gridBultoCompuesto;
     }
 }

@@ -9,5 +9,6 @@ namespace Entidades.Enums
         public static string CorreoSoporte = "CorreoSoporte";
         public static string ContraseñaCorreoSoporte = "ContraseñaCorreoSoporte";
         public static string RolesAdministradoresDeUsuarios = "RolesAdministradoresDeUsuarios";
+        public static string PorcentajeDescuentoDeEnvios = "PorcentajeDescuentoDeEnvios";
     }
 }
