@@ -193,7 +193,7 @@ namespace BLL
                 FacturacionTotal = 
                     (envio.UbicacionOrigen.TipoDeUbicacion == (int)TipoDeUbicacion.Lavanderia &&
                     envio.UbicacionDestino.TipoDeUbicacion == (int)TipoDeUbicacion.Clinica) 
-                    ? this.ObtenerFacturacionTotal(envio).ToString() : "No aplica"
+                    ? $"${this.ObtenerFacturacionTotal(envio).ToString()}" : "No aplica"
             };
         }
 

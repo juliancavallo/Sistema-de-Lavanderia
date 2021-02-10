@@ -21,6 +21,7 @@ namespace Controlador.Procesos
         UbicacionBLL ubicacionBLL = new UbicacionBLL();
         EnvioBLL envioBLL = new EnvioBLL();
         StockBLL stockBLL = new StockBLL();
+        ParametroDelSistemaBLL parametroDelSistemaBLL = new ParametroDelSistemaBLL();
         #endregion
 
         #region Formulario
@@ -126,6 +127,7 @@ namespace Controlador.Procesos
                         var detalle = new EnvioDetalle();
                         detalle.Cantidad = cantidad;
                         detalle.Articulo = articuloBLL.Obtener(idArticulo);
+                        detalle.PrecioUnitario = articuloBLL.Obtener(idArticulo).PrecioUnitario;
 
                         if (articuloAgregado == null)
                             envioDetalle.Add(detalle);
@@ -188,6 +190,10 @@ namespace Controlador.Procesos
                         envioBLL.Alta(envio);
 
                         MessageBox.Show("El Envio fue creado exitosamente. Puede consultarlo en Reportes > Envios a Clinica", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        MessageBox.Show($"La facturación para este envío es de ${envioBLL.ObtenerFacturacionTotal(envio)}. " +
+                            $"{ (envio.UbicacionDestino.ClienteExterno ? string.Empty : $"Se aplicó un descuento de {parametroDelSistemaBLL.Obtener(Entidades.Enums.ParametroDelSistema.PorcentajeDescuentoDeEnvios).Valor}%.") }",
+                            "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         frm.Hide();
                     }
                     else 

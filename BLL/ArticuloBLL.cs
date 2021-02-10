@@ -126,7 +126,7 @@ namespace BLL
                     Color = x.Color.Descripcion,
                     Talle = x.Talle.Descripcion,
                     TipoDePrenda = x.TipoDePrenda.Descripcion,
-                    PrecioUnitario = x.PrecioUnitario
+                    PrecioUnitario = "$" + x.PrecioUnitario.ToString()
                 }).ToList();
             }
             catch (Exception ex)

@@ -13,6 +13,6 @@ namespace BLL.Vistas
         public string Color { get; set; }
         public string Talle { get; set; }
         [System.ComponentModel.DisplayName("Precio Unitario")]
-        public decimal PrecioUnitario { get; set; }
+        public string PrecioUnitario { get; set; }
     }
 }
