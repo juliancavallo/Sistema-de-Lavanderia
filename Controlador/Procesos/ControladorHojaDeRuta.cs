@@ -158,7 +158,7 @@ namespace Controlador.Procesos
                     hojaDeRutaBLL.Alta(hojaDeRuta);
 
 
-                    MessageBox.Show("La Auditoria fue creada exitosamente. Puede consultarla en Reportes > Auditorias", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("La Hoja de Ruta fue creada exitosamente. Puede consultarla en Reportes > Hojas de Ruta", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     frm.Hide();
                 }
             }
@@ -230,6 +230,7 @@ namespace Controlador.Procesos
 
         private void CargarEnvios(List<Envio> envios)
         {
+            envios = envios.OrderByDescending(x => x.Id).ToList();
             var comboEnvio = (ComboBox)controles.Find(x => x.Name == "comboEnvio");
 
             comboEnvio.DataSource = null;
