@@ -72,7 +72,7 @@
             this.groupBox1.Controls.Add(this.comboUbicacionOrigen);
             this.groupBox1.Location = new System.Drawing.Point(39, 30);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(610, 252);
+            this.groupBox1.Size = new System.Drawing.Size(610, 207);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Filtros";
@@ -80,7 +80,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(12, 83);
+            this.label6.Location = new System.Drawing.Point(13, 150);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(40, 13);
             this.label6.TabIndex = 12;
@@ -90,7 +90,7 @@
             // 
             this.comboEstado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboEstado.FormattingEnabled = true;
-            this.comboEstado.Location = new System.Drawing.Point(15, 99);
+            this.comboEstado.Location = new System.Drawing.Point(16, 166);
             this.comboEstado.Name = "comboEstado";
             this.comboEstado.Size = new System.Drawing.Size(164, 21);
             this.comboEstado.TabIndex = 11;
@@ -131,7 +131,7 @@
             // 
             // btnBuscar
             // 
-            this.btnBuscar.Location = new System.Drawing.Point(15, 199);
+            this.btnBuscar.Location = new System.Drawing.Point(444, 157);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(136, 36);
             this.btnBuscar.TabIndex = 6;
@@ -141,7 +141,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(306, 138);
+            this.label3.Location = new System.Drawing.Point(306, 92);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(66, 13);
             this.label3.TabIndex = 5;
@@ -149,7 +149,7 @@
             // 
             // dateTimeHasta
             // 
-            this.dateTimeHasta.Location = new System.Drawing.Point(309, 154);
+            this.dateTimeHasta.Location = new System.Drawing.Point(309, 106);
             this.dateTimeHasta.Name = "dateTimeHasta";
             this.dateTimeHasta.Size = new System.Drawing.Size(238, 20);
             this.dateTimeHasta.TabIndex = 4;
@@ -157,7 +157,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 138);
+            this.label2.Location = new System.Drawing.Point(12, 92);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(69, 13);
             this.label2.TabIndex = 3;
@@ -165,7 +165,7 @@
             // 
             // dateTimeDesde
             // 
-            this.dateTimeDesde.Location = new System.Drawing.Point(15, 154);
+            this.dateTimeDesde.Location = new System.Drawing.Point(15, 106);
             this.dateTimeDesde.Name = "dateTimeDesde";
             this.dateTimeDesde.Size = new System.Drawing.Size(238, 20);
             this.dateTimeDesde.TabIndex = 2;
@@ -198,23 +198,23 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 90F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 5F));
             this.tableLayoutPanel2.Controls.Add(this.gridEnvios, 1, 1);
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 288);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 243);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 3;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 90F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 5F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(684, 259);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(684, 304);
             this.tableLayoutPanel2.TabIndex = 18;
             // 
             // gridEnvios
             // 
             this.gridEnvios.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gridEnvios.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridEnvios.Location = new System.Drawing.Point(37, 15);
+            this.gridEnvios.Location = new System.Drawing.Point(37, 18);
             this.gridEnvios.Name = "gridEnvios";
             this.gridEnvios.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToDisplayedHeaders;
-            this.gridEnvios.Size = new System.Drawing.Size(609, 227);
+            this.gridEnvios.Size = new System.Drawing.Size(609, 267);
             this.gridEnvios.TabIndex = 0;
             // 
             // lblTitulo
