@@ -175,7 +175,9 @@ namespace BLL
             {
                 NombreDeUsuario = "admin",
                 Contraseña = "MQAyADMANAA1ADYANwA4AA==",
-                Nombre = "Administrador",
+                Nombre = "Usuario",
+                Apellido = "Administrador",
+                DNI = 12345678,
                 Rol = rolAdministrador,
                 Correo = "jcavallo11@gmail.com",
                 Ubicacion = ubicacionBLL.ObtenerTodos().First()
