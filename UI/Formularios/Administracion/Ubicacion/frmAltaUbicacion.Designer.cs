@@ -39,6 +39,8 @@
             this.label4 = new System.Windows.Forms.Label();
             this.comboTipo = new System.Windows.Forms.ComboBox();
             this.chkClienteExterno = new System.Windows.Forms.CheckBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.txtCapacidadTotal = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // label2
@@ -75,7 +77,7 @@
             // 
             // btnCancelar
             // 
-            this.btnCancelar.Location = new System.Drawing.Point(180, 325);
+            this.btnCancelar.Location = new System.Drawing.Point(180, 239);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(132, 46);
             this.btnCancelar.TabIndex = 11;
@@ -84,7 +86,7 @@
             // 
             // btnAceptar
             // 
-            this.btnAceptar.Location = new System.Drawing.Point(12, 325);
+            this.btnAceptar.Location = new System.Drawing.Point(12, 239);
             this.btnAceptar.Name = "btnAceptar";
             this.btnAceptar.Size = new System.Drawing.Size(132, 46);
             this.btnAceptar.TabIndex = 10;
@@ -95,7 +97,7 @@
             // 
             this.comboUbicacionPadre.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboUbicacionPadre.FormattingEnabled = true;
-            this.comboUbicacionPadre.Location = new System.Drawing.Point(38, 225);
+            this.comboUbicacionPadre.Location = new System.Drawing.Point(309, 112);
             this.comboUbicacionPadre.Name = "comboUbicacionPadre";
             this.comboUbicacionPadre.Size = new System.Drawing.Size(224, 21);
             this.comboUbicacionPadre.TabIndex = 13;
@@ -103,7 +105,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(38, 209);
+            this.label3.Location = new System.Drawing.Point(309, 96);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(86, 13);
             this.label3.TabIndex = 14;
@@ -112,7 +114,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(38, 155);
+            this.label4.Location = new System.Drawing.Point(309, 36);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(94, 13);
             this.label4.TabIndex = 16;
@@ -122,7 +124,7 @@
             // 
             this.comboTipo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboTipo.FormattingEnabled = true;
-            this.comboTipo.Location = new System.Drawing.Point(38, 171);
+            this.comboTipo.Location = new System.Drawing.Point(309, 52);
             this.comboTipo.Name = "comboTipo";
             this.comboTipo.Size = new System.Drawing.Size(224, 21);
             this.comboTipo.TabIndex = 15;
@@ -130,18 +132,36 @@
             // chkClienteExterno
             // 
             this.chkClienteExterno.AutoSize = true;
-            this.chkClienteExterno.Location = new System.Drawing.Point(41, 272);
+            this.chkClienteExterno.Location = new System.Drawing.Point(41, 171);
             this.chkClienteExterno.Name = "chkClienteExterno";
             this.chkClienteExterno.Size = new System.Drawing.Size(97, 17);
             this.chkClienteExterno.TabIndex = 17;
             this.chkClienteExterno.Text = "Cliente Externo";
             this.chkClienteExterno.UseVisualStyleBackColor = true;
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(309, 155);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(85, 13);
+            this.label5.TabIndex = 19;
+            this.label5.Text = "Capacidad Total";
+            // 
+            // txtCapacidadTotal
+            // 
+            this.txtCapacidadTotal.Location = new System.Drawing.Point(309, 171);
+            this.txtCapacidadTotal.Name = "txtCapacidadTotal";
+            this.txtCapacidadTotal.Size = new System.Drawing.Size(224, 20);
+            this.txtCapacidadTotal.TabIndex = 18;
+            // 
             // frmAltaUbicacion
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(324, 383);
+            this.ClientSize = new System.Drawing.Size(573, 297);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.txtCapacidadTotal);
             this.Controls.Add(this.chkClienteExterno);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.comboTipo);
@@ -173,5 +193,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox comboTipo;
         private System.Windows.Forms.CheckBox chkClienteExterno;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox txtCapacidadTotal;
     }
 }

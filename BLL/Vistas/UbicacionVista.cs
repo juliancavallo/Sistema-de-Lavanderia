@@ -13,5 +13,7 @@ namespace BLL.Vistas
         public string UbicacionPadre { get; set; }
         [System.ComponentModel.DisplayName("Tipo de Ubicacion")]
         public string TipoDeUbicacion { get; set; }
+        [System.ComponentModel.DisplayName("Capacidad Disponible")]
+        public string CapacidadDisponible { get; set; }
     }
 }

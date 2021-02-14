@@ -143,7 +143,8 @@ namespace BLL
                        Descripcion = x.Descripcion,
                        Direccion = x.Direccion,
                        UbicacionPadre = x.UbicacionPadre?.Descripcion,
-                       TipoDeUbicacion = ((Entidades.Enums.TipoDeUbicacion)x.TipoDeUbicacion).ToString()
+                       TipoDeUbicacion = ((Entidades.Enums.TipoDeUbicacion)x.TipoDeUbicacion).ToString(),
+                       CapacidadDisponible = x.CapacidadDisponible + " Kg"
                    }).ToList();
         }
 

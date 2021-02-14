@@ -42,6 +42,8 @@ namespace Controlador
 
         private bool DatosValidos()
         {
+            ServicioValidaciones.TextoCompleto((TextBox)controles.Find(x => x.Name == "txtCapacidadTotal"), "Capacidad Total");
+            ServicioValidaciones.FormatoDecimalValido((TextBox)controles.Find(x => x.Name == "txtCapacidadTotal"), "Capacidad Total");
             ServicioValidaciones.TextoCompleto((TextBox)controles.Find(x => x.Name == "txtDescripcion"), "Descripcion");
             ServicioValidaciones.TextoCompleto((TextBox)controles.Find(x => x.Name == "txtDireccion"), "Direccion");
             
@@ -72,6 +74,8 @@ namespace Controlador
                     ((TextBox)controles.Find(x => x.Name == "txtDescripcion")).Text = ubicacion.Descripcion;
                     ((TextBox)controles.Find(x => x.Name == "txtDireccion")).Text = ubicacion.Direccion;
                     ((CheckBox)controles.Find(x => x.Name == "chkClienteExterno")).Checked = ubicacion.ClienteExterno;
+                    ((TextBox)controles.Find(x => x.Name == "txtCapacidadTotal")).Text = ubicacion.CapacidadTotal.ToString();
+
                     comboTipo.SelectedValue = ubicacion.TipoDeUbicacion;
                     
                     this.ConfigurarComboUbicacionPadre(comboUbicacionPadre, ubicacionBLL.ObtenerSeleccionablesParaUbicacionPadre(idUbicacion).Where(x => x.TipoDeUbicacion == ubicacion.TipoDeUbicacion).ToList());
@@ -100,6 +104,7 @@ namespace Controlador
                     ubicacion.Descripcion = ((TextBox)controles.Find(x => x.Name == "txtDescripcion")).Text;
                     ubicacion.Direccion = ((TextBox)controles.Find(x => x.Name == "txtDireccion")).Text;
                     ubicacion.ClienteExterno = ((CheckBox)controles.Find(x => x.Name == "chkClienteExterno")).Checked;
+                    ubicacion.CapacidadTotal = decimal.Parse(((TextBox)controles.Find(x => x.Name == "txtCapacidadTotal")).Text);
 
                     string tipoDeUbicacion = ((ComboBox)controles.Find(x => x.Name == "comboTipo")).SelectedValue.ToString();
                     ubicacion.TipoDeUbicacion = int.Parse(tipoDeUbicacion);

@@ -11,6 +11,7 @@ namespace Mappers
     public class MapperUbicacion : IAdministrable<Ubicacion>
     {
         AccesoArchivo dal = new AccesoArchivo();
+        MapperArticulo mppArticulo = new MapperArticulo();
 
         #region IAdministrable
         public void Alta(Ubicacion obj)
@@ -113,7 +114,9 @@ namespace Mappers
                 Direccion = row["Direccion"].ToString(),
                 TipoDeUbicacion = int.Parse(row["TipoDeUbicacion"].ToString()),
                 UbicacionPadre = idUbicacionPadre.HasValue ? this.Obtener(idUbicacionPadre.Value) : null,
-                ClienteExterno = bool.Parse(row["ClienteExterno"].ToString())
+                ClienteExterno = bool.Parse(row["ClienteExterno"].ToString()),
+                CapacidadTotal = decimal.Parse(row["CapacidadTotal"].ToString()),
+                Stock = this.ObtenerStock(int.Parse(row["Id"].ToString()))
             };
             return ubicacion;
         }
@@ -125,6 +128,24 @@ namespace Mappers
             dr["TipoDeUbicacion"] = obj.TipoDeUbicacion;
             dr["IdUbicacionPadre"] = (object)obj.UbicacionPadre?.Id ?? DBNull.Value;
             dr["ClienteExterno"] = obj.ClienteExterno;
+            dr["CapacidadTotal"] = obj.CapacidadTotal;
+        }
+
+        private List<Stock> ObtenerStock(int idUbicacion)
+        {
+            var lista = new List<Stock>();
+            DataTable dt = dal.ObtenerTabla("Stock");
+            var stock = dt.Select("IdUbicacion = " + idUbicacion);
+            foreach (DataRow row in stock)
+            {
+                lista.Add(new Stock() 
+                {
+                    Id = int.Parse(row["Id"].ToString()),
+                    Cantidad = int.Parse(row["Cantidad"].ToString()),
+                    Articulo = mppArticulo.Obtener(int.Parse(row["IdArticulo"].ToString()))
+                });
+            }
+            return lista;
         }
     }
 }
