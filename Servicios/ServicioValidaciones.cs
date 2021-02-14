@@ -38,7 +38,7 @@ namespace Servicios
             decimal result;
             decimal.TryParse(txt.Text.Replace('.',','), out result);
 
-            if (result < 1)
+            if (result < 0)
                 throw new Exception(string.Format("El campo {0} debe ser un número decimal mayor a 0", nombreControl));
 
             return true;

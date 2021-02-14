@@ -288,6 +288,8 @@ namespace Servicios
             DataColumn colArticuloIdColor = new DataColumn("IdColor", Type.GetType("System.Int32"));
             DataColumn colArticuloIdTalle = new DataColumn("IdTalle", Type.GetType("System.Int32"));
             DataColumn colArticuloPrecioUnitario = new DataColumn("PrecioUnitario", Type.GetType("System.Decimal"));
+            DataColumn colArticuloPesoUnitario = new DataColumn("PesoUnitario", Type.GetType("System.Decimal"));
+
 
             dtArticulo.Columns.AddRange(new DataColumn[]
             {
@@ -296,7 +298,8 @@ namespace Servicios
                  colArticuloIdTipoDePrenda,
                  colArticuloIdColor,
                  colArticuloIdTalle,
-                 colArticuloPrecioUnitario
+                 colArticuloPrecioUnitario,
+                 colArticuloPesoUnitario
             });
 
             colArticuloId.AutoIncrement = true;
