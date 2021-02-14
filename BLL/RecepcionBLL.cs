@@ -181,6 +181,11 @@ namespace BLL
                     CantidadARecibir = x.CantidadARecibir
                 }).ToList();
         }
+        public bool ValidarCapacidadDestino(Ubicacion ubicacionDestino, List<RecepcionDetalle> detalles)
+        {
+            decimal pesoTotalEnEnvios = detalles.Sum(x => x.Articulo.PesoUnitario * x.CantidadRecibida);
 
+            return (ubicacionDestino.CapacidadDisponible - pesoTotalEnEnvios) > 0;
+        }
     }
 }

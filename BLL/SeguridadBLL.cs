@@ -177,14 +177,28 @@ namespace BLL
 
             var usuario = new Usuario()
             {
-                NombreDeUsuario = "admin",
+                NombreDeUsuario = "lavadero",
                 Contraseña = "MQAyADMANAA1ADYANwA4AA==",
-                Nombre = "Usuario",
-                Apellido = "Administrador",
+                Nombre = "Administrador",
+                Apellido = "Lavadero",
                 DNI = 12345678,
                 Rol = rolAdministrador,
                 Correo = "jcavallo11@gmail.com",
-                Ubicacion = ubicacionBLL.ObtenerTodos().First()
+                Ubicacion = ubicacionBLL.ObtenerTodos().Where(x => x.TipoDeUbicacion == (int)Enums.TipoDeUbicacion.Lavanderia).First()
+            };
+            usuarioBLL.Alta(usuario);
+
+
+            usuario = new Usuario()
+            {
+                NombreDeUsuario = "clinica",
+                Contraseña = "MQAyADMANAA1ADYANwA4AA==",
+                Nombre = "Administrador",
+                Apellido = "Lavadero",
+                DNI = 225658888,
+                Rol = rolAdministrador,
+                Correo = "jcavallo11@gmail.com",
+                Ubicacion = ubicacionBLL.ObtenerTodos().Where(x => x.TipoDeUbicacion == (int)Enums.TipoDeUbicacion.Clinica).First()
             };
             usuarioBLL.Alta(usuario);
 

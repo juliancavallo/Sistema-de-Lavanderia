@@ -11,8 +11,9 @@ namespace BLL
     public class UbicacionBLL : IAdministrable<Ubicacion>
     {
         MapperUbicacion mpp = new MapperUbicacion();
-        MapperStock mppStock = new MapperStock();
-        MapperAuditoria mppAuditoria = new MapperAuditoria();
+        StockBLL stockBLL = new StockBLL();
+        AuditoriaBLL auditoriaBLL = new AuditoriaBLL();
+        UsuarioBLL usuarioBLL = new UsuarioBLL();
 
         public void Alta(Ubicacion obj)
         {
@@ -33,11 +34,15 @@ namespace BLL
         {
             try
             {
-                if (mppStock.ObtenerTodos().Where(x => x.Ubicacion.Id == obj.Id).Count() > 0)
+                if (stockBLL.ObtenerTodos().Where(x => x.Ubicacion.Id == obj.Id).Count() > 0)
                     throw new Exception("La ubicación no se puede eliminar porque hay al menos una configuración de stock asociada al mismo");
 
-                if (mppAuditoria.ObtenerTodos().Where(x => x.Ubicacion.Id == obj.Id).Count() > 0)
+                if (auditoriaBLL.ObtenerTodos().Where(x => x.Ubicacion.Id == obj.Id).Count() > 0)
                     throw new Exception("La ubicación no se puede eliminar porque hay al menos una auditoria asociada al mismo");
+
+                if (usuarioBLL.ObtenerTodos().Where(x => x.Ubicacion.Id == obj.Id).Count() > 0)
+                    throw new Exception("La ubicación no se puede eliminar porque hay al menos un usuario asociado al mismo");
+
 
                 mpp.Baja(obj);
             }

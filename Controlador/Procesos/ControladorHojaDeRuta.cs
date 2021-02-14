@@ -93,7 +93,7 @@ namespace Controlador.Procesos
                 dgv.DataSource = null;
                 dgv.DataSource = envioBLL.ConvertirAVista(this.envios);
                 ServicioConfiguracionDeControles.ConfigurarGrilla(dgv);
-                ServicioConfiguracionDeControles.OcultarColumnasEnGrilla(dgv, "Id");
+                ServicioConfiguracionDeControles.OcultarColumnasEnGrilla(dgv, "Id", "FacturacionTotal");
             }
         }
         #endregion
@@ -149,17 +149,20 @@ namespace Controlador.Procesos
             {
                 if (DatosValidos(1))
                 {
-                    var hojaDeRuta = new HojaDeRuta();
-                    
-                    hojaDeRuta.Usuario = SeguridadBLL.usuarioLogueado;
-                    hojaDeRuta.FechaCreacion = DateTime.Now;
-                    hojaDeRuta.Envios = this.envios;
+                    if (this.ValidarCapacidadDestino())
+                    {
+                        var hojaDeRuta = new HojaDeRuta();
 
-                    hojaDeRutaBLL.Alta(hojaDeRuta);
+                        hojaDeRuta.Usuario = SeguridadBLL.usuarioLogueado;
+                        hojaDeRuta.FechaCreacion = DateTime.Now;
+                        hojaDeRuta.Envios = this.envios;
+
+                        hojaDeRutaBLL.Alta(hojaDeRuta);
 
 
-                    MessageBox.Show("La Hoja de Ruta fue creada exitosamente. Puede consultarla en Reportes > Hojas de Ruta", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    frm.Hide();
+                        MessageBox.Show("La Hoja de Ruta fue creada exitosamente. Puede consultarla en Reportes > Hojas de Ruta", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        frm.Hide();
+                    }
                 }
             }
             catch (Exception ex)
@@ -246,6 +249,21 @@ namespace Controlador.Procesos
 
             comboUbicacionOrigen.Enabled = !bloquear;
             comboUbicacionDestino.Enabled = !bloquear;
+        }
+
+        private bool ValidarCapacidadDestino()
+        {
+            var comboUbicacionDestino = (ComboBox)controles.Find(x => x.Name == "comboUbicacionDestino");
+            var ubicacionDestino = (Ubicacion)comboUbicacionDestino.SelectedItem;
+            
+            if (hojaDeRutaBLL.ValidarCapacidadDestino(ubicacionDestino, this.envios))
+                return true;
+            else
+            {
+                MessageBox.Show("La Hoja de Ruta no se puede crear ya que se está superando la capacidad disponible " +
+                    "en la ubicación destino.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;                       
+            }
         }
         #endregion
     }
