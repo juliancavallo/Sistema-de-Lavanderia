@@ -129,7 +129,7 @@ namespace Controlador.Procesos
                 if (DatosValidos(0))
                 {
                     var comboUbicacion = (ComboBox)controles.Find(x => x.Name == "comboUbicacion");
-                    var stock = stockBLL.ObtenerTodos(((Ubicacion)comboUbicacion.SelectedItem).Id, 0);
+                    var stock = stockBLL.ObtenerTodos(((Ubicacion)comboUbicacion.SelectedItem).Id);
                     var lista = stockBLL.ConvertirAVistaAjuste(stock);
                     this.CargarGrilla(lista);
                 }
@@ -177,16 +177,14 @@ namespace Controlador.Procesos
                     var dgv = (DataGridView)controles.Find(x => x.Name == "gridItems");
                     var lista = dgv.DataSource as List<AjusteStockVista>;
 
-                    stockBLL.AjustarPorAuditoria(lista);
-
+                    stockBLL.Ajustar(lista);
                     MessageBox.Show("El ajuste de stock fue creado exitosamente. Puede consultarlo en Reportes > Ajuste de Stock", "Ajuste de Stock", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
                     frm.Hide();
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

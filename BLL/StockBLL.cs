@@ -23,6 +23,10 @@ namespace BLL
                     x.Ubicacion.Id == obj.Ubicacion.Id))
                     throw new Exception("Ya existe un stock con la misma configuracion");
 
+                if (!this.ValidarCapacidad(obj))
+                    throw new Exception("El stock no se puede crear ya que se está superando la capacidad disponible " +
+                            "en la ubicación");
+
                 mpp.Alta(obj);
             }
             catch (Exception ex)
@@ -52,6 +56,10 @@ namespace BLL
                     x.Articulo.Id == obj.Articulo.Id &&
                     x.Ubicacion.Id == obj.Ubicacion.Id))
                     throw new Exception("Ya existe un stock con la misma configuracion");
+
+                if (!this.ValidarCapacidad(obj))
+                    throw new Exception("El stock no se puede crear ya que se está superando la capacidad disponible " +
+                            "en la ubicación");
 
                 mpp.Modificacion(obj);
             }
@@ -152,7 +160,6 @@ namespace BLL
             }
         }
 
-
         #region Obtencion
         public Stock Obtener(int id)
         {
@@ -190,7 +197,7 @@ namespace BLL
             }
         }
 
-        public List<Stock> ObtenerTodos(int idUbicacion, int idArticulo, List<int> ubicacionesPorDefecto = null )
+        public List<Stock> ObtenerTodos(int idUbicacion, int? idArticulo = null, List<int> ubicacionesPorDefecto = null )
         {
             try
             {
@@ -201,7 +208,7 @@ namespace BLL
                 else
                     lista = lista.Where(x => ubicacionesPorDefecto.Contains(x.Ubicacion.Id));
 
-                if (idArticulo > 0)
+                if (idArticulo.HasValue && idArticulo.Value > 0)
                     lista = lista.Where(x => x.Articulo.Id == idArticulo);
 
                 return lista.ToList();
@@ -297,9 +304,13 @@ namespace BLL
             return this.ConvertirAVistaAjuste(listaAjuste);
         }
 
-        public void AjustarPorAuditoria(List<AjusteStockVista> lista)
+        public void Ajustar(List<AjusteStockVista> lista)
         {
             var listaAjuste = this.ConvertirAAjusteStock(lista);
+
+            if (!this.ValidarCapacidad(listaAjuste))
+                throw new Exception("El ajuste no se puede realizar ya que se estaría sobrepasando la Capacidad Disponible de la ubicación");
+
             listaAjuste.ForEach(x =>
             {
                 x.FechaCreacion = DateTime.Now;
@@ -308,7 +319,7 @@ namespace BLL
 
             mpp.Alta(listaAjuste);
 
-            listaAjuste.ForEach(x => 
+            listaAjuste.ForEach(x =>
             {
                 var item = this.Obtener(x.Ubicacion.Id, x.Articulo.Id);
                 if (item != null)
@@ -389,5 +400,32 @@ namespace BLL
         }
 
         #endregion
+
+        public bool ValidarCapacidad(Stock stock)
+        {
+            decimal stockTotal = stock.Ubicacion.Stock
+                .Where(x => x.Articulo.Id != stock.Articulo.Id)
+                .Sum(x => x.Cantidad * x.Articulo.PesoUnitario);
+
+            stockTotal += (stock.Cantidad * stock.Articulo.PesoUnitario);
+
+            return (stock.Ubicacion.CapacidadTotal - stockTotal) > 0;
+        }
+
+        public bool ValidarCapacidad(List<AjusteStock> lista)
+        {
+            decimal stockTotal = 0;
+            var ubicacion = lista.First().Ubicacion;
+
+            foreach(var item in ubicacion.Stock)
+            {
+                if (lista.Select(l => l.Articulo.Id).Contains(item.Articulo.Id))
+                    stockTotal += lista.First(x => x.Articulo.Id == item.Articulo.Id).NuevaCantidad * item.Articulo.PesoUnitario;
+                else
+                    stockTotal += item.Cantidad * item.Articulo.PesoUnitario;
+            }
+            
+            return (ubicacion.CapacidadTotal - stockTotal) > 0;
+        }
     }
 }

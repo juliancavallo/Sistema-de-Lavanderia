@@ -24,6 +24,10 @@ namespace BLL
                 obj.UbicacionOrigen = obj.HojaDeRuta.Envios.First().UbicacionOrigen;
                 obj.UbicacionDestino = obj.HojaDeRuta.Envios.First().UbicacionDestino;
 
+                if (!this.ValidarCapacidadDestino(obj.UbicacionDestino, obj.Detalle))
+                    throw new Exception("La Recepción no se puede crear ya que se está superando la capacidad disponible " +
+                    "en la ubicación destino.");
+
                 stockBLL.Recibir(obj);
                 hojaDeRutaBLL.Recibir(obj.HojaDeRuta);
 

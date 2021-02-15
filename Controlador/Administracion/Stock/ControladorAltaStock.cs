@@ -97,7 +97,7 @@ namespace Controlador
 
                     stock.Ubicacion = ubicacion;
                     stock.Articulo = articulo;
-
+                    
                     if (idStock.HasValue)
                         stockBLL.Modificacion(stock);
                     else
@@ -108,7 +108,7 @@ namespace Controlador
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -144,6 +144,7 @@ namespace Controlador
             comboArticulo.DisplayMember = "Codigo";
 
         }
+
         #endregion
     }
 }

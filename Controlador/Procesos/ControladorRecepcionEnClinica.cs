@@ -170,7 +170,7 @@ namespace Controlador.Procesos
         {
             try
             {
-                if (DatosValidos(1) && ValidarCapacidadDestino())
+                if (DatosValidos(1))
                 {
                     if (articuloBLL.ValidarBultosCompuestos((DataGridView)controles.Find(x => x.Name == "gridItems")))
                     {
@@ -294,20 +294,6 @@ namespace Controlador.Procesos
             comboUbicacionDestino.Enabled = !bloquear;
         }
 
-        private bool ValidarCapacidadDestino()
-        {
-            var comboUbicacionDestino = (ComboBox)controles.Find(x => x.Name == "comboUbicacionDestino");
-            var ubicacionDestino = (Ubicacion)comboUbicacionDestino.SelectedItem;
-            
-            if (recepcionBLL.ValidarCapacidadDestino(ubicacionDestino, recepcionBLL.ConvertirVistaADetalle(this.recepcionDetalle)))
-                return true;
-            else
-            {
-                MessageBox.Show("La Recepción no se puede crear ya que se está superando la capacidad disponible " +
-                    "en la ubicación destino.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
-            }
-        }
         #endregion
     }
 }

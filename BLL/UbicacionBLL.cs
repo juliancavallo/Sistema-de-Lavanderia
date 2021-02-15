@@ -56,8 +56,13 @@ namespace BLL
         {
             try
             {
+                obj.Stock = stockBLL.ObtenerTodos(obj.Id);
+
                 if (ObtenerTodos().Any(x => x.Descripcion == obj.Descripcion && x.Id != obj.Id))
                     throw new Exception("Ya existe una ubicacion con la misma descripcion");
+
+                if(obj.CapacidadDisponible < 0)
+                    throw new Exception("La Capacidad Total es menor a la utilizada actualmente. Por favor modifique este valor por uno mayor");
 
                 mpp.Modificacion(obj);
             }

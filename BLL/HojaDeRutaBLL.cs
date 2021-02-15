@@ -20,6 +20,10 @@ namespace BLL
         {
             try
             {
+                if (!this.ValidarCapacidadDestino(obj.UbicacionDestino, obj.Envios))
+                    throw new Exception("La Hoja de Ruta no se puede crear ya que se está superando la capacidad disponible " +
+                    "en la ubicación destino.");
+
                 stockBLL.Enviar(obj.Envios);
 
                 obj.Estado = estadoHojaDeRutaBLL.Obtener(Entidades.Enums.EstadoHojaDeRuta.Generada);

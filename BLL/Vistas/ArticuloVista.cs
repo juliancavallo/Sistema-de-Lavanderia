@@ -14,5 +14,8 @@ namespace BLL.Vistas
         public string Talle { get; set; }
         [System.ComponentModel.DisplayName("Precio Unitario")]
         public string PrecioUnitario { get; set; }
+
+        [System.ComponentModel.DisplayName("Peso Unitario")]
+        public string PesoUnitario { get; set; }
     }
 }

@@ -19,7 +19,7 @@ namespace Entidades
         { 
             get 
             {
-                return this.CapacidadTotal - this.Stock.Select(x => x.Cantidad).Sum(); 
+                return this.CapacidadTotal - this.Stock.Sum(x => x.Cantidad * x.Articulo.PesoUnitario); 
             } 
         }
 
