@@ -178,15 +178,23 @@ namespace Controlador.Procesos
                     envio.FechaCreacion = DateTime.Now;
                     envio.Detalle = this.envioDetalle;
 
-                    envioBLL.Alta(envio);
-                    envioBLL.Enviar(envio, null);
-                    envioBLL.Recibir(envio);
+                    if (envioBLL.ValidarCapacidadDestino(envio.UbicacionDestino, envio.Detalle))
+                    {
+                        envioBLL.Alta(envio);
+                        envioBLL.Enviar(envio, null);
+                        envioBLL.Recibir(envio);
 
-                    stockBLL.Enviar(new List<Envio>() { envio });
-                    stockBLL.Recibir(envio);
+                        stockBLL.Enviar(new List<Envio>() { envio });
+                        stockBLL.Recibir(envio);
 
-                    MessageBox.Show("El Envio fue creado exitosamente. Puede consultarlo en Reportes > Envios a Lavadero", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    frm.Hide();
+                        MessageBox.Show("El Envio fue creado exitosamente. Puede consultarlo en Reportes > Envios a Lavadero", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        frm.Hide();
+                    }
+                    else
+                    {
+                        MessageBox.Show("La Recepción no se puede crear ya que se está superando la capacidad disponible " +
+                            "en la ubicación destino.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
             }
             catch (Exception ex)

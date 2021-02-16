@@ -401,7 +401,7 @@ namespace BLL
 
         #endregion
 
-        public bool ValidarCapacidad(Stock stock)
+        private bool ValidarCapacidad(Stock stock)
         {
             decimal stockTotal = stock.Ubicacion.Stock
                 .Where(x => x.Articulo.Id != stock.Articulo.Id)
@@ -412,7 +412,7 @@ namespace BLL
             return (stock.Ubicacion.CapacidadTotal - stockTotal) > 0;
         }
 
-        public bool ValidarCapacidad(List<AjusteStock> lista)
+        private bool ValidarCapacidad(List<AjusteStock> lista)
         {
             decimal stockTotal = 0;
             var ubicacion = lista.First().Ubicacion;

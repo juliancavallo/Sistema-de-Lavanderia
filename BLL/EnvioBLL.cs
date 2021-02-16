@@ -74,7 +74,6 @@ namespace BLL
                 throw ex;
             }
         }
-
         public List<Envio> ObtenerPorHojaDeRuta(int idHojaDeRuta)
         {
             try
@@ -217,6 +216,13 @@ namespace BLL
             }
 
             return precio;
+        }
+
+        public bool ValidarCapacidadDestino(Ubicacion ubicacionDestino, List<EnvioDetalle> detalles)
+        {
+            decimal pesoTotalEnEnvios = detalles.Sum(x => x.Articulo.PesoUnitario * x.Cantidad);
+
+            return (ubicacionDestino.CapacidadDisponible - pesoTotalEnEnvios) > 0;
         }
 
     }

@@ -189,7 +189,7 @@ namespace BLL
             };
         }
 
-        public bool ValidarCapacidadDestino(Ubicacion ubicacionDestino, List<Envio> envios)
+        private bool ValidarCapacidadDestino(Ubicacion ubicacionDestino, List<Envio> envios)
         { 
             decimal pesoTotalEnEnvios = envios.SelectMany(x => x.Detalle).Sum(x => x.Articulo.PesoUnitario * x.Cantidad);
 
