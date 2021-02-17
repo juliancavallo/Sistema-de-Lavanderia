@@ -153,7 +153,7 @@ namespace BLL
                 TipoDeUbicacion = tipoDeUbicacionBLL.Obtener((int)Enums.TipoDeUbicacion.Lavanderia),
                 UbicacionPadre = null,
                 ClienteExterno = false,
-                CapacidadTotal = 2000
+                CapacidadTotal = 18000
             };
             ubicacionBLL.Alta(ubicacion);
 
@@ -164,7 +164,7 @@ namespace BLL
                 TipoDeUbicacion = tipoDeUbicacionBLL.Obtener((int)Enums.TipoDeUbicacion.Clinica),
                 UbicacionPadre = null,
                 ClienteExterno = true,
-                CapacidadTotal = 2000
+                CapacidadTotal = 12000
             };
             ubicacionBLL.Alta(ubicacion);
 
@@ -186,7 +186,7 @@ namespace BLL
                 TipoDeUbicacion = tipoDeUbicacionBLL.Obtener((int)Enums.TipoDeUbicacion.Clinica),
                 UbicacionPadre = null,
                 ClienteExterno = false,
-                CapacidadTotal = 2000
+                CapacidadTotal = 8500
             };
             ubicacionBLL.Alta(ubicacion);
 
@@ -194,7 +194,7 @@ namespace BLL
             var usuario = new Usuario()
             {
                 NombreDeUsuario = "lavadero",
-                Contraseña = "MQAyADMANAA1ADYANwA4AA==",
+                Contraseña = servicioSeguridad.Encriptar("12345678"),
                 Nombre = "Administrador",
                 Apellido = "Lavadero",
                 DNI = 12345678,
@@ -208,7 +208,7 @@ namespace BLL
             usuario = new Usuario()
             {
                 NombreDeUsuario = "clinica",
-                Contraseña = "MQAyADMANAA1ADYANwA4AA==",
+                Contraseña = servicioSeguridad.Encriptar("12345678"),
                 Nombre = "Administrador",
                 Apellido = "Lavadero",
                 DNI = 225658888,
@@ -245,6 +245,14 @@ namespace BLL
                 Valor = "10,2"
             };
             parametroBLL.Alta(parametro);
+
+            parametro = new ParametroDelSistema()
+            {
+                Nombre = "CapacidadMaximaHojaDeRuta",
+                Valor = "5000"
+            };
+            parametroBLL.Alta(parametro);
+
 
             var estadoEnvio = new EstadoEnvio()
             {
