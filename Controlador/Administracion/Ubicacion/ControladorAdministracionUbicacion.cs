@@ -14,6 +14,7 @@ namespace Controlador
         #region Variables locales
 
         UbicacionBLL ubicacionBLL = new UbicacionBLL();
+        TipoDeUbicacionBLL tipoDeUbicacionBLL = new TipoDeUbicacionBLL();
         List<Control> controles = new List<Control>();
         Form formAlta;
         #endregion
@@ -174,8 +175,10 @@ namespace Controlador
 
             var tipos = new List<object>();
             tipos.Add(new { Id = 0, Descripcion = "Seleccionar..." });
-            tipos.Add(new { Id = (int)Entidades.Enums.TipoDeUbicacion.Lavanderia, Descripcion = "Lavanderia" });
-            tipos.Add(new { Id = (int)Entidades.Enums.TipoDeUbicacion.Clinica, Descripcion = "Clinica" });
+            tipoDeUbicacionBLL.ObtenerTodos().ForEach(x => 
+            { 
+                tipos.Add(new { x.Id, x.Descripcion });       
+            });
 
             combo.DataSource = tipos;
             combo.ValueMember = "Id";

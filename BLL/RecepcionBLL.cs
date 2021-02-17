@@ -73,11 +73,11 @@ namespace BLL
                 switch(tipo)
                 {
                     case 1:
-                        lista = lista.Where(x => x.UbicacionDestino.TipoDeUbicacion == tipo);
+                        lista = lista.Where(x => x.UbicacionDestino.TipoDeUbicacion.Id == tipo);
                         break;
 
                     case 2:
-                        lista = lista.Where(x => x.UbicacionDestino.TipoDeUbicacion == tipo);
+                        lista = lista.Where(x => x.UbicacionDestino.TipoDeUbicacion.Id == tipo);
                         break;
                 }
 

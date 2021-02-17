@@ -22,6 +22,7 @@ namespace BLL
         TipoDePrendaBLL tipoDePrendaBLL = new TipoDePrendaBLL();
         ArticuloBLL articuloBLL = new ArticuloBLL();
         CategoriaBLL categoriaBLL = new CategoriaBLL();
+        TipoDeUbicacionBLL tipoDeUbicacionBLL = new TipoDeUbicacionBLL();
 
         ServicioSeguridad servicioSeguridad = new ServicioSeguridad();
         ServicioMenus servicioMenus = new ServicioMenus();
@@ -130,11 +131,26 @@ namespace BLL
 
             rolBLL.Alta(rolAdministrador);
 
+            var tipoDeUbicacion = new TipoDeUbicacion()
+            {
+                Descripcion = "Lavanderia",
+                Id = 1
+            };
+            tipoDeUbicacionBLL.Alta(tipoDeUbicacion);
+
+
+            tipoDeUbicacion = new TipoDeUbicacion()
+            {
+                Descripcion = "Clinica",
+                Id = 2
+            };
+            tipoDeUbicacionBLL.Alta(tipoDeUbicacion);
+
             var ubicacion = new Ubicacion()
             {
                 Descripcion = "Lavanderia",
                 Direccion = "Av. Belgrano 1200",
-                TipoDeUbicacion = (int)Enums.TipoDeUbicacion.Lavanderia,
+                TipoDeUbicacion = tipoDeUbicacionBLL.Obtener((int)Enums.TipoDeUbicacion.Lavanderia),
                 UbicacionPadre = null,
                 ClienteExterno = false,
                 CapacidadTotal = 2000
@@ -145,7 +161,7 @@ namespace BLL
             {
                 Descripcion = "Clinica Olivos",
                 Direccion = "Av. Maipú 1660",
-                TipoDeUbicacion = (int)Enums.TipoDeUbicacion.Clinica,
+                TipoDeUbicacion = tipoDeUbicacionBLL.Obtener((int)Enums.TipoDeUbicacion.Clinica),
                 UbicacionPadre = null,
                 ClienteExterno = true,
                 CapacidadTotal = 2000
@@ -156,7 +172,7 @@ namespace BLL
             {
                 Descripcion = "Olivos Piso 1",
                 Direccion = "Av. Maipú 1660 - Piso 1",
-                TipoDeUbicacion = (int)Enums.TipoDeUbicacion.Clinica,
+                TipoDeUbicacion = tipoDeUbicacionBLL.Obtener((int)Enums.TipoDeUbicacion.Clinica),
                 UbicacionPadre = ubicacionBLL.ObtenerTodos().First(x => x.Descripcion == "Clinica Olivos"),
                 ClienteExterno = true,
                 CapacidadTotal = 2000
@@ -167,7 +183,7 @@ namespace BLL
             {
                 Descripcion = "Clinica Estrada",
                 Direccion = "Uriarte 1200",
-                TipoDeUbicacion = (int)Enums.TipoDeUbicacion.Clinica,
+                TipoDeUbicacion = tipoDeUbicacionBLL.Obtener((int)Enums.TipoDeUbicacion.Clinica),
                 UbicacionPadre = null,
                 ClienteExterno = false,
                 CapacidadTotal = 2000
@@ -184,7 +200,7 @@ namespace BLL
                 DNI = 12345678,
                 Rol = rolAdministrador,
                 Correo = "jcavallo11@gmail.com",
-                Ubicacion = ubicacionBLL.ObtenerTodos().Where(x => x.TipoDeUbicacion == (int)Enums.TipoDeUbicacion.Lavanderia).First()
+                Ubicacion = ubicacionBLL.ObtenerTodos().Where(x => x.TipoDeUbicacion.Id == (int)Enums.TipoDeUbicacion.Lavanderia).First()
             };
             usuarioBLL.Alta(usuario);
 
@@ -198,7 +214,7 @@ namespace BLL
                 DNI = 225658888,
                 Rol = rolAdministrador,
                 Correo = "jcavallo11@gmail.com",
-                Ubicacion = ubicacionBLL.ObtenerTodos().Where(x => x.TipoDeUbicacion == (int)Enums.TipoDeUbicacion.Clinica).First()
+                Ubicacion = ubicacionBLL.ObtenerTodos().Where(x => x.TipoDeUbicacion.Id == (int)Enums.TipoDeUbicacion.Clinica).First()
             };
             usuarioBLL.Alta(usuario);
 

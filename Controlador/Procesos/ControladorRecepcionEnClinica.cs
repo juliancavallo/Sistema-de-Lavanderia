@@ -268,7 +268,7 @@ namespace Controlador.Procesos
 
                 var ubicaciones = ubicacionBLL.ObtenerTodos(SeguridadBLL.usuarioLogueado.Ubicacion.Id).Where(x => 
                 !x.EsUbicacionInterna 
-                && x.TipoDeUbicacion == (int)Entidades.Enums.TipoDeUbicacion.Clinica)
+                && x.TipoDeUbicacion.Id == (int)Entidades.Enums.TipoDeUbicacion.Clinica)
                     .ToList();
 
                 ubicaciones.Add(new Ubicacion() { Id = 0, Descripcion = "Seleccionar..." });

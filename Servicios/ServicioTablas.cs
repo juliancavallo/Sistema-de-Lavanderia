@@ -245,6 +245,23 @@ namespace Servicios
             ds.Tables.Add(dtTalle);
 
 
+            //TipoDeUbicacion
+            DataTable dtTipoDeUbicacion = new DataTable();
+            dtTipoDeUbicacion.TableName = "TipoDeUbicacion";
+
+            DataColumn colTipoDeUbicacionId = new DataColumn("Id", Type.GetType("System.Int32"));
+            DataColumn colTipoDeUbicacionDescripcion = new DataColumn("Descripcion", Type.GetType("System.String"));
+
+            dtTipoDeUbicacion.Columns.AddRange(new DataColumn[]
+            {
+                 colTipoDeUbicacionId,
+                 colTipoDeUbicacionDescripcion
+            });
+
+            dtTipoDeUbicacion.PrimaryKey = new DataColumn[] { colTipoDeUbicacionId };
+            ds.Tables.Add(dtTipoDeUbicacion);
+
+
             //Ubicacion
             DataTable dtUbicacion = new DataTable();
             dtUbicacion.TableName = "Ubicacion";
@@ -252,7 +269,7 @@ namespace Servicios
             DataColumn colUbicacionId = new DataColumn("Id", Type.GetType("System.Int32"));
             DataColumn colUbicacionDescripcion = new DataColumn("Descripcion", Type.GetType("System.String"));
             DataColumn colUbicacionDireccion = new DataColumn("Direccion", Type.GetType("System.String"));
-            DataColumn colUbicacionTipoDeUbicacion = new DataColumn("TipoDeUbicacion", Type.GetType("System.Int32"));
+            DataColumn colUbicacionIdTipoDeUbicacion = new DataColumn("IdTipoDeUbicacion", Type.GetType("System.Int32"));
             DataColumn colUbicacionIdUbicacionPadre = new DataColumn("IdUbicacionPadre", Type.GetType("System.Int32"));
             DataColumn colUbicacionClienteExterno = new DataColumn("ClienteExterno", Type.GetType("System.Boolean"));
             DataColumn colUbicacionCapacidadTotal = new DataColumn("CapacidadTotal", Type.GetType("System.Decimal"));
@@ -262,7 +279,7 @@ namespace Servicios
                  colUbicacionId,
                  colUbicacionDescripcion,
                  colUbicacionDireccion,
-                 colUbicacionTipoDeUbicacion,
+                 colUbicacionIdTipoDeUbicacion,
                  colUbicacionIdUbicacionPadre,
                  colUbicacionClienteExterno,
                  colUbicacionCapacidadTotal
@@ -278,7 +295,13 @@ namespace Servicios
                 ds.Tables["Ubicacion"].Columns["Id"],
                 ds.Tables["Usuario"].Columns["IdUbicacion"]);
 
+            DataRelation FKTipoDeUbicacion_Ubicacion = new DataRelation(
+                "FKTipoDeUbicacion_Ubicacion",
+                ds.Tables["TipoDeUbicacion"].Columns["Id"],
+                ds.Tables["Ubicacion"].Columns["IdTipoDeUbicacion"]);
+
             ds.Relations.Add(FKUbicacion_Usuario);
+            ds.Relations.Add(FKTipoDeUbicacion_Ubicacion);
 
             //Articulo
             DataTable dtArticulo = new DataTable();

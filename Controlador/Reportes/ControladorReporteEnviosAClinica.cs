@@ -74,7 +74,7 @@ namespace Controlador
             controlFechaDesde.Value = DateTime.Today.AddDays(-7);
             controlFechaHasta.Value = DateTime.Today;
 
-            var ubicacionesPorDefecto = ubicacionBLL.ObtenerTodos(SeguridadBLL.usuarioLogueado.Ubicacion.Id).Where(x => !x.EsUbicacionInterna && x.TipoDeUbicacion == (int)Entidades.Enums.TipoDeUbicacion.Lavanderia).ToList();
+            var ubicacionesPorDefecto = ubicacionBLL.ObtenerTodos(SeguridadBLL.usuarioLogueado.Ubicacion.Id).Where(x => !x.EsUbicacionInterna && x.TipoDeUbicacion.Id == (int)Entidades.Enums.TipoDeUbicacion.Lavanderia).ToList();
 
             CargarGrilla(envioBLL.ObtenerTodosParaVista(ubicacionesPorDefecto.Select(x => x.Id).ToList(),
                 fechaDesde: controlFechaDesde.Value,
@@ -100,7 +100,7 @@ namespace Controlador
                     var fechaHasta = ((DateTimePicker)controles.Find(x => x.Name == "dateTimeHasta")).Value;
                     fechaHasta = fechaHasta.AddDays(1); //se agrega 1 dia para que se busquen resultados incluidos en el mismo dia
 
-                    var ubicacionesPorDefecto = ubicacionBLL.ObtenerTodos(SeguridadBLL.usuarioLogueado.Ubicacion.Id).Where(x => !x.EsUbicacionInterna && x.TipoDeUbicacion == (int)Entidades.Enums.TipoDeUbicacion.Lavanderia).ToList();
+                    var ubicacionesPorDefecto = ubicacionBLL.ObtenerTodos(SeguridadBLL.usuarioLogueado.Ubicacion.Id).Where(x => !x.EsUbicacionInterna && x.TipoDeUbicacion.Id == (int)Entidades.Enums.TipoDeUbicacion.Lavanderia).ToList();
 
                     CargarGrilla(envioBLL.ObtenerTodosParaVista(ubicacionesPorDefecto.Select(x => x.Id).ToList(),
                         int.Parse(idUbicacionOrigen), int.Parse(idUbicacionDestino),
@@ -140,7 +140,7 @@ namespace Controlador
             var comboUbicacionOrigen = (ComboBox)controles.Find(x => x.Name == "comboUbicacionOrigen");
             var comboUbicacionDestino = (ComboBox)controles.Find(x => x.Name == "comboUbicacionDestino");
 
-            var ubicacionesOrigen = ubicacionBLL.ObtenerTodos(SeguridadBLL.usuarioLogueado.Ubicacion.Id).Where(x => !x.EsUbicacionInterna && x.TipoDeUbicacion == (int)Entidades.Enums.TipoDeUbicacion.Lavanderia).ToList();
+            var ubicacionesOrigen = ubicacionBLL.ObtenerTodos(SeguridadBLL.usuarioLogueado.Ubicacion.Id).Where(x => !x.EsUbicacionInterna && x.TipoDeUbicacion.Id == (int)Entidades.Enums.TipoDeUbicacion.Lavanderia).ToList();
             ubicacionesOrigen.Add(new Ubicacion() { Id = 0, Descripcion = "Seleccionar..." });
             ubicacionesOrigen = ubicacionesOrigen.OrderBy(x => x.Id).ToList();
 
@@ -150,7 +150,7 @@ namespace Controlador
             comboUbicacionOrigen.DisplayMember = "Descripcion";
             comboUbicacionOrigen.SelectedValue = 0;
 
-            var ubicacionesDestino = ubicacionBLL.ObtenerTodos().Where(x => !x.EsUbicacionInterna && x.TipoDeUbicacion == (int)Entidades.Enums.TipoDeUbicacion.Clinica).ToList();
+            var ubicacionesDestino = ubicacionBLL.ObtenerTodos().Where(x => !x.EsUbicacionInterna && x.TipoDeUbicacion.Id == (int)Entidades.Enums.TipoDeUbicacion.Clinica).ToList();
             ubicacionesDestino.Add(new Ubicacion() { Id = 0, Descripcion = "Seleccionar..." });
             ubicacionesDestino = ubicacionesDestino.OrderBy(x => x.Id).ToList();
 

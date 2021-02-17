@@ -125,14 +125,14 @@ namespace BLL
                     lista = lista.Where(x => x.Direccion.ToLower().Contains(direccion.ToLower()));
 
                 if (tipoDeUbicacion > 0)
-                    lista = lista.Where(x => x.TipoDeUbicacion == tipoDeUbicacion);
+                    lista = lista.Where(x => x.TipoDeUbicacion.Id == tipoDeUbicacion);
 
                 if (idUbicacionPadre > -1)
                 {
                     if (idUbicacionPadre == 0)
                         lista = lista.Where(x => x.UbicacionPadre == null);
                     else
-                        lista = lista.Where(x => x.UbicacionPadre.Id == idUbicacionPadre);
+                        lista = lista.Where(x => x.EsUbicacionInterna && x.UbicacionPadre.Id == idUbicacionPadre);
                 }
 
                 return lista.ToList();
@@ -153,7 +153,7 @@ namespace BLL
                        Descripcion = x.Descripcion,
                        Direccion = x.Direccion,
                        UbicacionPadre = x.UbicacionPadre?.Descripcion,
-                       TipoDeUbicacion = ((Entidades.Enums.TipoDeUbicacion)x.TipoDeUbicacion).ToString(),
+                       TipoDeUbicacion = x.TipoDeUbicacion.Descripcion,
                        CapacidadDisponible = x.CapacidadDisponible + " Kg"
                    }).ToList();
         }

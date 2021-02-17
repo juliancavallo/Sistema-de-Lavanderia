@@ -227,12 +227,12 @@ namespace Controlador.Procesos
             comboArticulo.DisplayMember = "Codigo";
 
             comboUbicacionOrigen.DataSource = null;
-            comboUbicacionOrigen.DataSource = ubicacionBLL.ObtenerTodos(SeguridadBLL.usuarioLogueado.Ubicacion.Id).Where(x => x.TipoDeUbicacion == (int)TipoDeUbicacion.Lavanderia && !x.EsUbicacionInterna).ToList();
+            comboUbicacionOrigen.DataSource = ubicacionBLL.ObtenerTodos(SeguridadBLL.usuarioLogueado.Ubicacion.Id).Where(x => x.TipoDeUbicacion.Id == (int)Entidades.Enums.TipoDeUbicacion.Lavanderia && !x.EsUbicacionInterna).ToList();
             comboUbicacionOrigen.ValueMember = "Id";
             comboUbicacionOrigen.DisplayMember = "Descripcion";
 
             comboUbicacionDestino.DataSource = null;
-            comboUbicacionDestino.DataSource = ubicacionBLL.ObtenerTodos().Where(x => x.TipoDeUbicacion == (int)TipoDeUbicacion.Clinica && !x.EsUbicacionInterna).ToList();
+            comboUbicacionDestino.DataSource = ubicacionBLL.ObtenerTodos().Where(x => x.TipoDeUbicacion.Id == (int)Entidades.Enums.TipoDeUbicacion.Clinica && !x.EsUbicacionInterna).ToList();
             comboUbicacionDestino.ValueMember = "Id";
             comboUbicacionDestino.DisplayMember = "Descripcion";
         }

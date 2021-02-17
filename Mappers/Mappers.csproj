@@ -54,6 +54,7 @@
     <Compile Include="MapperBultoCompuesto.cs" />
     <Compile Include="MapperHojaDeRuta.cs" />
     <Compile Include="MapperMenu.cs" />
+    <Compile Include="MapperTipoDeUbicacion.cs" />
     <Compile Include="MapperParametroDelSistema.cs" />
     <Compile Include="MapperRecepcion.cs" />
     <Compile Include="MapperRecepcionDetalle.cs" />

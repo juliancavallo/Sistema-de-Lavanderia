@@ -72,6 +72,7 @@
     <Compile Include="Stock.cs" />
     <Compile Include="Talle.cs" />
     <Compile Include="Categoria.cs" />
+    <Compile Include="TipoDeUbicacion.cs" />
     <Compile Include="TipoDePrenda.cs" />
     <Compile Include="Ubicacion.cs" />
     <Compile Include="Usuario.cs" />

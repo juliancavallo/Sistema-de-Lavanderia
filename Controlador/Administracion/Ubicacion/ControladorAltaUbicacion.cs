@@ -16,6 +16,8 @@ namespace Controlador
         Form frm;
         List<Control> controles = new List<Control>();
         UbicacionBLL ubicacionBLL = new UbicacionBLL();
+        TipoDeUbicacionBLL tipoDeUbicacionBLL = new TipoDeUbicacionBLL();
+
         int? idUbicacion = null;
         #endregion
 
@@ -62,7 +64,7 @@ namespace Controlador
 
             int tipo = (int)comboTipo.SelectedValue;
             ComboBox comboUbicacionPadre = (ComboBox)controles.Find(x => x.Name == "comboUbicacionPadre");
-            this.ConfigurarComboUbicacionPadre(comboUbicacionPadre, ubicacionBLL.ObtenerSeleccionablesParaUbicacionPadre(idUbicacion).Where(x=> x.TipoDeUbicacion == tipo).ToList());
+            this.ConfigurarComboUbicacionPadre(comboUbicacionPadre, ubicacionBLL.ObtenerSeleccionablesParaUbicacionPadre(idUbicacion).Where(x=> x.TipoDeUbicacion.Id == tipo).ToList());
 
 
             if (idUbicacion.HasValue)
@@ -76,9 +78,9 @@ namespace Controlador
                     ((CheckBox)controles.Find(x => x.Name == "chkClienteExterno")).Checked = ubicacion.ClienteExterno;
                     ((TextBox)controles.Find(x => x.Name == "txtCapacidadTotal")).Text = ubicacion.CapacidadTotal.ToString();
 
-                    comboTipo.SelectedValue = ubicacion.TipoDeUbicacion;
+                    comboTipo.SelectedValue = ubicacion.TipoDeUbicacion.Id;
                     
-                    this.ConfigurarComboUbicacionPadre(comboUbicacionPadre, ubicacionBLL.ObtenerSeleccionablesParaUbicacionPadre(idUbicacion).Where(x => x.TipoDeUbicacion == ubicacion.TipoDeUbicacion).ToList());
+                    this.ConfigurarComboUbicacionPadre(comboUbicacionPadre, ubicacionBLL.ObtenerSeleccionablesParaUbicacionPadre(idUbicacion).Where(x => x.TipoDeUbicacion.Id == ubicacion.TipoDeUbicacion.Id).ToList());
                     comboUbicacionPadre.SelectedValue = ubicacion.UbicacionPadre != null ? ubicacion.UbicacionPadre.Id : 0;
                 }
             }
@@ -107,7 +109,7 @@ namespace Controlador
                     ubicacion.CapacidadTotal = decimal.Parse(((TextBox)controles.Find(x => x.Name == "txtCapacidadTotal")).Text);
 
                     string tipoDeUbicacion = ((ComboBox)controles.Find(x => x.Name == "comboTipo")).SelectedValue.ToString();
-                    ubicacion.TipoDeUbicacion = int.Parse(tipoDeUbicacion);
+                    ubicacion.TipoDeUbicacion = tipoDeUbicacionBLL.Obtener(int.Parse(tipoDeUbicacion));
 
                     string idUbicacionPadre = ((ComboBox)controles.Find(x => x.Name == "comboUbicacionPadre")).SelectedValue.ToString();
                     ubicacion.UbicacionPadre = ubicacionBLL.Obtener(int.Parse(idUbicacionPadre));
@@ -138,7 +140,7 @@ namespace Controlador
 
             this.ConfigurarComboUbicacionPadre(comboUbicacionPadre,
                 ubicacionBLL.ObtenerSeleccionablesParaUbicacionPadre(idUbicacion)
-                .Where(x => x.TipoDeUbicacion == tipo).ToList());
+                .Where(x => x.TipoDeUbicacion.Id == tipo).ToList());
         }
 
         #endregion

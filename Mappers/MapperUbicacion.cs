@@ -12,6 +12,7 @@ namespace Mappers
     {
         AccesoArchivo dal = new AccesoArchivo();
         MapperArticulo mppArticulo = new MapperArticulo();
+        MapperTipoDeUbicacion mapperTipoDeUbicacion = new MapperTipoDeUbicacion();
 
         #region IAdministrable
         public void Alta(Ubicacion obj)
@@ -112,7 +113,7 @@ namespace Mappers
                 Id = int.Parse(row["Id"].ToString()),
                 Descripcion = row["Descripcion"].ToString(),
                 Direccion = row["Direccion"].ToString(),
-                TipoDeUbicacion = int.Parse(row["TipoDeUbicacion"].ToString()),
+                TipoDeUbicacion = mapperTipoDeUbicacion.Obtener(int.Parse(row["IdTipoDeUbicacion"].ToString())),
                 UbicacionPadre = idUbicacionPadre.HasValue ? this.Obtener(idUbicacionPadre.Value) : null,
                 ClienteExterno = bool.Parse(row["ClienteExterno"].ToString()),
                 CapacidadTotal = decimal.Parse(row["CapacidadTotal"].ToString()),
@@ -125,7 +126,7 @@ namespace Mappers
         {
             dr["Descripcion"] = obj.Descripcion;
             dr["Direccion"] = obj.Direccion;
-            dr["TipoDeUbicacion"] = obj.TipoDeUbicacion;
+            dr["IdTipoDeUbicacion"] = obj.TipoDeUbicacion.Id;
             dr["IdUbicacionPadre"] = (object)obj.UbicacionPadre?.Id ?? DBNull.Value;
             dr["ClienteExterno"] = obj.ClienteExterno;
             dr["CapacidadTotal"] = obj.CapacidadTotal;

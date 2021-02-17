@@ -38,7 +38,7 @@ namespace Servicios
             dgv.AllowUserToDeleteRows = false;
             dgv.AllowUserToResizeRows = false;
             dgv.AllowUserToOrderColumns = false;
-            dgv.AllowUserToResizeColumns = false;
+            dgv.AllowUserToResizeColumns = true;
             dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgv.ReadOnly = true;
             

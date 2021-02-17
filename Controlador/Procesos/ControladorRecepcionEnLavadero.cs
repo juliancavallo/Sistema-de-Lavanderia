@@ -255,7 +255,7 @@ namespace Controlador.Procesos
 
                 var comboUbicacionDestino = (ComboBox)controles.Find(x => x.Name == "comboUbicacionDestino");
 
-                var ubicaciones = ubicacionBLL.ObtenerTodos(SeguridadBLL.usuarioLogueado.Ubicacion.Id).Where(x => !x.EsUbicacionInterna && x.TipoDeUbicacion == (int)Entidades.Enums.TipoDeUbicacion.Lavanderia).ToList();
+                var ubicaciones = ubicacionBLL.ObtenerTodos(SeguridadBLL.usuarioLogueado.Ubicacion.Id).Where(x => !x.EsUbicacionInterna && x.TipoDeUbicacion.Id == (int)Entidades.Enums.TipoDeUbicacion.Lavanderia).ToList();
                 ubicaciones.Add(new Ubicacion() { Id = 0, Descripcion = "Seleccionar..." });
                 ubicaciones = ubicaciones.OrderBy(x => x.Id).ToList();
 

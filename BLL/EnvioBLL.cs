@@ -109,13 +109,13 @@ namespace BLL
                     case (int)TipoDeEnvio.ALavadero:
                         lista = lista.Where(x => !x.UbicacionDestino.EsUbicacionInterna 
                         && !x.UbicacionOrigen.EsUbicacionInterna
-                        && x.UbicacionDestino.TipoDeUbicacion == (int)TipoDeUbicacion.Lavanderia);
+                        && x.UbicacionDestino.TipoDeUbicacion.Id == (int)Entidades.Enums.TipoDeUbicacion.Lavanderia);
                         break;
 
                     case (int)TipoDeEnvio.AClinica:
                         lista = lista.Where(x => !x.UbicacionDestino.EsUbicacionInterna
                         && !x.UbicacionOrigen.EsUbicacionInterna
-                        && x.UbicacionDestino.TipoDeUbicacion == (int)TipoDeUbicacion.Clinica);
+                        && x.UbicacionDestino.TipoDeUbicacion.Id == (int)Entidades.Enums.TipoDeUbicacion.Clinica);
                         break;
 
                     case (int)TipoDeEnvio.Interno:
@@ -190,8 +190,8 @@ namespace BLL
                 UbicacionDestino = envio.UbicacionDestino.Descripcion,
                 Estado = envio.Estado.Descripcion,
                 FacturacionTotal = 
-                    (envio.UbicacionOrigen.TipoDeUbicacion == (int)TipoDeUbicacion.Lavanderia &&
-                    envio.UbicacionDestino.TipoDeUbicacion == (int)TipoDeUbicacion.Clinica) 
+                    (envio.UbicacionOrigen.TipoDeUbicacion.Id == (int)Entidades.Enums.TipoDeUbicacion.Lavanderia &&
+                    envio.UbicacionDestino.TipoDeUbicacion.Id == (int)Entidades.Enums.TipoDeUbicacion.Clinica) 
                     ? $"${this.ObtenerFacturacionTotal(envio).ToString()}" : "No aplica"
             };
         }
@@ -200,8 +200,8 @@ namespace BLL
         {
             decimal precio = 0;
             
-            if (envio.UbicacionOrigen.TipoDeUbicacion == (int)TipoDeUbicacion.Lavanderia &&
-                envio.UbicacionDestino.TipoDeUbicacion == (int)TipoDeUbicacion.Clinica)
+            if (envio.UbicacionOrigen.TipoDeUbicacion.Id == (int)Entidades.Enums.TipoDeUbicacion.Lavanderia &&
+                envio.UbicacionDestino.TipoDeUbicacion.Id == (int)Entidades.Enums.TipoDeUbicacion.Clinica)
             {
                 envio.Detalle.ForEach(x => 
                 {
