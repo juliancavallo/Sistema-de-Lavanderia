@@ -54,6 +54,39 @@ namespace Mappers
             }
         }
 
+        public void Baja(EnvioDetalle obj)
+        {
+            try
+            {
+                DataTable dt = dal.ObtenerTabla("EnvioDetalle");
+                var envioDetalle = dt.Select("IdEnvio = " + obj.Envio.Id + " AND IdArticulo = " + obj.Articulo.Id ).FirstOrDefault();
+                dt.Rows.Remove(envioDetalle);
+
+                dal.ActualizarDataSet();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public void Modificacion(EnvioDetalle obj)
+        {
+            try
+            {
+                DataTable dt = dal.ObtenerTabla("EnvioDetalle");
+                var envioDetalle = dt.Select("IdEnvio = " + obj.Envio.Id + " AND IdArticulo = " + obj.Articulo.Id).FirstOrDefault();
+
+                this.ConvertirEntidadEnDataRow(obj, envioDetalle);
+
+                dal.ActualizarDataSet();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
         public EnvioDetalle Obtener(int id)
         {
             try

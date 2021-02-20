@@ -24,7 +24,7 @@ namespace BLL
                 obj.UbicacionOrigen = obj.HojaDeRuta.Envios.First().UbicacionOrigen;
                 obj.UbicacionDestino = obj.HojaDeRuta.Envios.First().UbicacionDestino;
 
-                if (!this.ValidarCapacidadDestino(obj.UbicacionDestino, obj.Detalle))
+                if (!this.ValidarCapacidadDestino(obj.UbicacionDestino, obj.PesoTotal))
                     throw new Exception("La Recepción no se puede crear ya que se está superando la capacidad disponible " +
                     "en la ubicación destino.");
 
@@ -185,11 +185,9 @@ namespace BLL
                     CantidadARecibir = x.CantidadARecibir
                 }).ToList();
         }
-        private bool ValidarCapacidadDestino(Ubicacion ubicacionDestino, List<RecepcionDetalle> detalles)
+        private bool ValidarCapacidadDestino(Ubicacion ubicacionDestino, decimal pesoTotal)
         {
-            decimal pesoTotalEnEnvios = detalles.Sum(x => x.Articulo.PesoUnitario * x.CantidadRecibida);
-
-            return (ubicacionDestino.CapacidadDisponible - pesoTotalEnEnvios) > 0;
+            return (ubicacionDestino.CapacidadDisponible - pesoTotal) > 0;
         }
     }
 }

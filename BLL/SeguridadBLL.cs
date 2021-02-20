@@ -249,7 +249,7 @@ namespace BLL
             parametro = new ParametroDelSistema()
             {
                 Nombre = "CapacidadMaximaHojaDeRuta",
-                Valor = "5000"
+                Valor = "200"
             };
             parametroBLL.Alta(parametro);
 

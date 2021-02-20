@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Entidades
@@ -10,6 +11,13 @@ namespace Entidades
         public DateTime FechaCreacion { get; set; }
         public DateTime? FechaEnvio { get; set; }
         public DateTime? FechaRecepcion { get; set; }
+        public decimal PesoTotal 
+        { 
+            get
+            {
+                return this.Detalle.Sum(x => x.Cantidad * x.Articulo.PesoUnitario);
+            } 
+        }
 
         #region Entidades
         public List<EnvioDetalle> Detalle { get; set; }

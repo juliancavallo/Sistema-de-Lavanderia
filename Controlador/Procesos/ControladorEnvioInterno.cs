@@ -178,7 +178,7 @@ namespace Controlador.Procesos
                     envio.FechaCreacion = DateTime.Now;
                     envio.Detalle = this.envioDetalle;
 
-                    if (envioBLL.ValidarCapacidadDestino(envio.UbicacionDestino, envio.Detalle))
+                    if (envioBLL.ValidarCapacidadDestino(envio.UbicacionDestino, envio.PesoTotal))
                     {
                         envioBLL.Alta(envio);
                         envioBLL.Enviar(envio, null);

@@ -12,6 +12,7 @@ namespace BLL
     public class EnvioBLL : IProcesable<Envio>
     {
         MapperEnvio mpp = new MapperEnvio();
+        MapperEnvioDetalle mapperEnvioDetalle = new MapperEnvioDetalle();
         EstadoEnvioBLL estadoEnvioBLL = new EstadoEnvioBLL();
         ParametroDelSistemaBLL parametroDelSistemaBLL = new ParametroDelSistemaBLL();
 
@@ -218,11 +219,120 @@ namespace BLL
             return precio;
         }
 
-        public bool ValidarCapacidadDestino(Ubicacion ubicacionDestino, List<EnvioDetalle> detalles)
+        public bool ValidarCapacidadDestino(Ubicacion ubicacionDestino, decimal pesoTotal)
         {
-            decimal pesoTotalEnEnvios = detalles.Sum(x => x.Articulo.PesoUnitario * x.Cantidad);
+            return (ubicacionDestino.CapacidadDisponible - pesoTotal) > 0;
+        }
 
-            return (ubicacionDestino.CapacidadDisponible - pesoTotalEnEnvios) > 0;
+        public List<Envio> DividirParaCapacidadMaxima(Envio envio)
+        {
+            //Se divide el envio en envios que no superen la capacidad maxima
+            decimal capacidadMax = decimal.Parse(parametroDelSistemaBLL.Obtener(Entidades.Enums.ParametroDelSistema.CapacidadMaximaHojaDeRuta).Valor);
+            var envios = new List<Envio>();
+
+            var nuevosEnvios = this.DividirSinCapacidadMaxima(envio);
+            envios.AddRange(nuevosEnvios.Where(x => x.PesoTotal <= capacidadMax));
+
+            while (nuevosEnvios.Any(x => x.PesoTotal > capacidadMax))
+            {
+                nuevosEnvios = this.DividirSinCapacidadMaxima(nuevosEnvios.Where(x => x.PesoTotal > capacidadMax).First());
+                envios.AddRange(nuevosEnvios.Where(x => x.PesoTotal <= capacidadMax));
+            }
+
+            return envios;
+        }
+
+        public List<Envio> DividirSinCapacidadMaxima(Envio envio)
+        {
+            //Se divide el envio en dos: el primero no supera la capacidad maxima, y el otro si
+            decimal capacidadMax = decimal.Parse(parametroDelSistemaBLL.Obtener(Entidades.Enums.ParametroDelSistema.CapacidadMaximaHojaDeRuta).Valor);
+            
+            decimal peso = 0;
+            var listaEnvios = new List<Envio>() { envio };
+            var detallesValidados = new List<Tuple<int, Articulo, int>>(); //Id, Articulo, Cantidad
+            
+            var detallePorBulto = this.SepararDetallePorBulto(envio.Detalle);
+
+            foreach (var item in detallePorBulto)
+            {
+                peso += item.Item3 * item.Item2.PesoUnitario;
+                if(peso > capacidadMax)
+                {
+                    var detalleSobranteTupla = detallePorBulto.Where(x => detallesValidados.All(d => d.Item1 != x.Item1)).ToList();
+                    var detalleSobranteEntidad = detalleSobranteTupla
+                        .GroupBy(x => x.Item2)
+                        .Select(x => new EnvioDetalle()
+                        {
+                            Articulo = x.Key,
+                            Cantidad = detalleSobranteTupla.Where(d => d.Item2 == x.Key).Sum(d => d.Item3),
+                            PrecioUnitario = x.Key.PrecioUnitario
+                        }).ToList();
+
+
+                    listaEnvios.Add(this.CrearEnvioConDetalleSobrante(envio, detalleSobranteEntidad));
+                    this.EliminarDetalleSobrante(envio, detalleSobranteEntidad);
+                    break;
+                }
+                else
+                    detallesValidados.Add(item);
+            }
+
+            return listaEnvios;
+        }
+
+        private List<Tuple<int, Articulo, int>> SepararDetallePorBulto(List<EnvioDetalle> envioDetalle)
+        {
+            var detallePorBulto = new List<Tuple<int, Articulo, int>>(); //Id, Articulo, Peso
+            int id = 0;
+            foreach (var detalle in envioDetalle)
+            {
+                for (int i = 0; i < detalle.Cantidad; i += detalle.Articulo.TipoDePrenda.CortePorBulto)
+                {
+                    id++;
+                    detallePorBulto.Add(new Tuple<int, Articulo, int>(id, detalle.Articulo, detalle.Articulo.TipoDePrenda.CortePorBulto));
+                }
+            }
+
+            return detallePorBulto;
+        }
+
+        private Envio CrearEnvioConDetalleSobrante(Envio envio, List<EnvioDetalle> detalleSobrante)
+        {
+            var nuevoEnvio = new Envio()
+            {
+                FechaCreacion = DateTime.Now,
+                UbicacionOrigen = envio.UbicacionOrigen,
+                UbicacionDestino = envio.UbicacionDestino,
+                Usuario = SeguridadBLL.usuarioLogueado
+            };
+            nuevoEnvio.Detalle = detalleSobrante;
+
+            return nuevoEnvio;
+        }
+
+        private void EliminarDetalleSobrante(Envio envio, List<EnvioDetalle> detalleSobrante)
+        {
+            foreach(var detalle in detalleSobrante)
+            {
+                //Se resta la cantidad sobrante al detalle del envio original
+                envio.Detalle.Find(x => x.Articulo.Id == detalle.Articulo.Id).Cantidad -= detalle.Cantidad;
+                if (envio.Detalle.Find(x => x.Articulo.Id == detalle.Articulo.Id).Cantidad == 0)
+                    envio.Detalle.Remove(envio.Detalle.Find(x => x.Articulo.Id == detalle.Articulo.Id));
+            }
+
+            /*
+            if (envio.Id > 0)
+            {
+                foreach (var detalle in envio.Detalle)
+                {
+                    //Se elimina o modifica el detalle segun corresponda
+                    if (detalle.Cantidad <= 0)
+                        mapperEnvioDetalle.Baja(detalle);
+                    else
+                        mapperEnvioDetalle.Modificacion(detalle);
+                }
+            }*/
+           
         }
 
     }

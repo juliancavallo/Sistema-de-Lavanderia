@@ -12,9 +12,9 @@ namespace BLL
     {
         MapperHojaDeRuta mpp = new MapperHojaDeRuta();
         StockBLL stockBLL = new StockBLL();
-        
         EstadoHojaDeRutaBLL estadoHojaDeRutaBLL = new EstadoHojaDeRutaBLL();
         EnvioBLL envioBLL = new EnvioBLL();
+        ParametroDelSistemaBLL parametroDelSistemaBLL = new ParametroDelSistemaBLL();
 
         public void Alta(HojaDeRuta obj)
         {
@@ -23,6 +23,8 @@ namespace BLL
                 if (!this.ValidarCapacidadDestino(obj.UbicacionDestino, obj.Envios))
                     throw new Exception("La Hoja de Ruta no se puede crear ya que se está superando la capacidad disponible " +
                     "en la ubicación destino.");
+
+                var hojasDeRuta = this.Dividir(obj);
 
                 stockBLL.Enviar(obj.Envios);
 
@@ -39,6 +41,28 @@ namespace BLL
                 throw ex;
             }
         }
+
+        private List<HojaDeRuta> Dividir(HojaDeRuta obj)
+        {
+            //En la hoja de ruta original, dejar los envíos que lleguen hasta 
+            //completar la cantidad maxima
+            //Con el resto de los envios, crear nuevas hojas de ruta
+            decimal capacidadMax = decimal.Parse(parametroDelSistemaBLL.Obtener(Entidades.Enums.ParametroDelSistema.CapacidadMaximaHojaDeRuta).Valor);
+            decimal pesoTotalEnEnvios = obj.Envios.Sum(x => x.PesoTotal);
+            var envios = new List<Envio>();
+
+            if(pesoTotalEnEnvios > capacidadMax)
+            {
+                foreach(var envio in obj.Envios)
+                {
+                    //Se dividen los envios que superen la capacidad max en HR
+                    envios = envioBLL.DividirParaCapacidadMaxima(envio);
+                }
+            }
+
+            return null;
+        }
+
         public void Recibir(HojaDeRuta obj)
         {
             try
@@ -191,7 +215,7 @@ namespace BLL
 
         private bool ValidarCapacidadDestino(Ubicacion ubicacionDestino, List<Envio> envios)
         { 
-            decimal pesoTotalEnEnvios = envios.SelectMany(x => x.Detalle).Sum(x => x.Articulo.PesoUnitario * x.Cantidad);
+            decimal pesoTotalEnEnvios = envios.Sum(x => x.PesoTotal);
 
             return (ubicacionDestino.CapacidadDisponible - pesoTotalEnEnvios) > 0;
         }
