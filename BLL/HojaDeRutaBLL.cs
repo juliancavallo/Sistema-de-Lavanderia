@@ -26,41 +26,20 @@ namespace BLL
 
                 var hojasDeRuta = this.Dividir(obj);
 
-                stockBLL.Enviar(obj.Envios);
+                hojasDeRuta.ForEach(h => 
+                { 
+                    stockBLL.Enviar(h.Envios);
+                    h.Estado = estadoHojaDeRutaBLL.Obtener(Entidades.Enums.EstadoHojaDeRuta.Generada);
 
-                obj.Estado = estadoHojaDeRutaBLL.Obtener(Entidades.Enums.EstadoHojaDeRuta.Generada);
-                mpp.Alta(obj);
+                    mpp.Alta(h);
 
-                foreach (var envio in obj.Envios)
-                {
-                    envioBLL.Enviar(envio, obj);
-                }
+                    h.Envios.ForEach(e => envioBLL.Enviar(e, h));
+                });
             }
             catch (Exception ex)
             {
                 throw ex;
             }
-        }
-
-        private List<HojaDeRuta> Dividir(HojaDeRuta obj)
-        {
-            //En la hoja de ruta original, dejar los envíos que lleguen hasta 
-            //completar la cantidad maxima
-            //Con el resto de los envios, crear nuevas hojas de ruta
-            decimal capacidadMax = decimal.Parse(parametroDelSistemaBLL.Obtener(Entidades.Enums.ParametroDelSistema.CapacidadMaximaHojaDeRuta).Valor);
-            decimal pesoTotalEnEnvios = obj.Envios.Sum(x => x.PesoTotal);
-            var envios = new List<Envio>();
-
-            if(pesoTotalEnEnvios > capacidadMax)
-            {
-                foreach(var envio in obj.Envios)
-                {
-                    //Se dividen los envios que superen la capacidad max en HR
-                    envios = envioBLL.DividirPorCapacidadMaxima(envio);
-                }
-            }
-
-            return null;
         }
 
         public void Recibir(HojaDeRuta obj)
@@ -79,6 +58,7 @@ namespace BLL
             }
         }
 
+        #region Obtener
         public HojaDeRuta Obtener(int id)
         {
             try
@@ -212,6 +192,7 @@ namespace BLL
                 UbicacionDestino = obj.UbicacionDestino.Descripcion
             };
         }
+        #endregion
 
         private bool ValidarCapacidadDestino(Ubicacion ubicacionDestino, List<Envio> envios)
         { 
@@ -219,5 +200,70 @@ namespace BLL
 
             return (ubicacionDestino.CapacidadDisponible - pesoTotalEnEnvios) > 0;
         }
+
+        #region Dividir
+
+        private List<HojaDeRuta> Dividir(HojaDeRuta obj)
+        {
+            //En la hoja de ruta original, dejar los envíos que lleguen hasta 
+            //completar la cantidad maxima
+            //Con el resto de los envios, crear nuevas hojas de ruta
+            decimal capacidadMax = decimal.Parse(parametroDelSistemaBLL.Obtener(Entidades.Enums.ParametroDelSistema.CapacidadMaximaHojaDeRuta).Valor);
+            decimal pesoTotalEnEnvios = obj.Envios.Sum(x => x.PesoTotal);
+            var hojasDeRuta = new List<HojaDeRuta>() { obj };
+
+            if (pesoTotalEnEnvios > capacidadMax)
+            {
+                var envios = this.DividirEnvios(obj);
+                hojasDeRuta = this.RepartirEnviosEnHojasDeRuta(envios, obj);
+            }
+
+            return hojasDeRuta;
+        }
+
+        private List<HojaDeRuta> RepartirEnviosEnHojasDeRuta(List<Envio> envios, HojaDeRuta hojaDeRutaOriginal)
+        {
+            decimal capacidadMax = decimal.Parse(parametroDelSistemaBLL.Obtener(Entidades.Enums.ParametroDelSistema.CapacidadMaximaHojaDeRuta).Valor);
+            decimal peso = 0;
+
+            var hojasDeRuta = new List<HojaDeRuta>();
+            var enviosParaHojaDeRuta = new List<Envio>();
+            foreach (var envio in envios)
+            {
+                peso += envio.PesoTotal;
+                if (peso > capacidadMax)
+                {
+                    hojasDeRuta.Add(new HojaDeRuta()
+                    {
+                        Envios = enviosParaHojaDeRuta,
+                        FechaCreacion = DateTime.Now,
+                        Usuario = hojaDeRutaOriginal.Usuario
+                    });
+
+                    peso = envio.PesoTotal;
+                }
+                enviosParaHojaDeRuta.Add(envio);
+            }
+            return hojasDeRuta;
+        }
+
+        private List<Envio> DividirEnvios(HojaDeRuta obj)
+        {
+            var envios = new List<Envio>();
+            foreach (var envio in obj.Envios)
+            {
+                //Se dividen los envios que superen la capacidad max en HR
+                envios = envioBLL.DividirPorCapacidadMaxima(envio);
+                envios.ForEach(x =>
+                {
+                    if (x.Id > 0)
+                        envioBLL.Modificar(envio);
+                    else
+                        envioBLL.Alta(envio);
+                });
+            }
+            return envios;
+        }
+        #endregion
     }
 }

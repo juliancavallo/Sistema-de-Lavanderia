@@ -12,7 +12,6 @@ namespace BLL
     public class EnvioBLL : IProcesable<Envio>
     {
         MapperEnvio mpp = new MapperEnvio();
-        MapperEnvioDetalle mapperEnvioDetalle = new MapperEnvioDetalle();
         EstadoEnvioBLL estadoEnvioBLL = new EstadoEnvioBLL();
         ParametroDelSistemaBLL parametroDelSistemaBLL = new ParametroDelSistemaBLL();
 
@@ -28,6 +27,19 @@ namespace BLL
                 throw ex;
             }
         }
+        public void Modificar(Envio envio)
+        {
+            try
+            {
+                mpp.Modificacion(envio);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
         public void Enviar(Envio obj, HojaDeRuta hojaDeRuta)
         {
             try
@@ -47,6 +59,7 @@ namespace BLL
                 throw;
             }
         }
+
         public void Recibir(Envio obj)
         {
             try
@@ -64,6 +77,7 @@ namespace BLL
             }
         }
 
+        #region Obtencion
         public Envio Obtener(int id)
         {
             try
@@ -75,6 +89,7 @@ namespace BLL
                 throw ex;
             }
         }
+
         public List<Envio> ObtenerPorHojaDeRuta(int idHojaDeRuta)
         {
             try
@@ -86,6 +101,7 @@ namespace BLL
                 throw ex;
             }
         }
+
         public List<Envio> ObtenerTodos()
         {
             try
@@ -97,6 +113,7 @@ namespace BLL
                 throw ex;
             }
         }
+
         public List<Envio> ObtenerTodos(List<int> ubicacionesPorDefecto, 
             int idUbicacionOrigen, int idUbicacionDestino, 
             DateTime? fechaDesde, DateTime? fechaHasta, int numero, int idEstado, int tipo)
@@ -175,10 +192,12 @@ namespace BLL
                 Talle = x.Articulo.Talle.Descripcion
             }).ToList();
         }
+
         public List<EnvioVista> ConvertirAVista(List<Envio> envios)
         {
             return envios.Select(x => ConvertirAVista(x)).ToList();
         }
+
         public EnvioVista ConvertirAVista(Envio envio)
         {
             return new EnvioVista()
@@ -196,6 +215,7 @@ namespace BLL
                     ? $"${this.ObtenerFacturacionTotal(envio).ToString()}" : "No aplica"
             };
         }
+        #endregion
 
         public decimal ObtenerFacturacionTotal(Envio envio)
         {
@@ -224,8 +244,7 @@ namespace BLL
             return (ubicacionDestino.CapacidadDisponible - pesoTotal) > 0;
         }
 
-
-
+        #region Division
         public List<Envio> DividirPorCapacidadMaxima(Envio envio)
         {
             //Se divide el envio en dos: el primero no supera la capacidad maxima, y el otro si
@@ -305,8 +324,9 @@ namespace BLL
             {
                 //Se resta la cantidad sobrante al detalle del envio original
                 envio.Detalle.Find(x => x.Articulo.Id == detalle.Articulo.Id).Cantidad -= detalle.Cantidad;
-                if (envio.Detalle.Find(x => x.Articulo.Id == detalle.Articulo.Id).Cantidad == 0)
-                    envio.Detalle.Remove(envio.Detalle.Find(x => x.Articulo.Id == detalle.Articulo.Id));
+                
+                /*if (envio.Detalle.Find(x => x.Articulo.Id == detalle.Articulo.Id).Cantidad == 0)
+                    envio.Detalle.Remove(envio.Detalle.Find(x => x.Articulo.Id == detalle.Articulo.Id));*/
             }
           
         }
@@ -322,6 +342,6 @@ namespace BLL
                             PrecioUnitario = x.Key.PrecioUnitario
                         }).ToList();
         }
-
+        #endregion
     }
 }

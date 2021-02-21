@@ -50,6 +50,16 @@ namespace Mappers
 
             this.ConvertirEntidadEnDataRow(obj, envio);
 
+            obj.Detalle.ForEach(x => 
+            {
+                if (x.Cantidad > 0)
+                    mppEnvioDetalle.Modificacion(x);
+                else
+                    mppEnvioDetalle.Baja(x);
+
+            });
+            
+
             dal.ActualizarDataSet();
         }
 
@@ -124,6 +134,8 @@ namespace Mappers
                 UbicacionOrigen = mppUbicacion.Obtener(int.Parse(row["IdUbicacionOrigen"].ToString())),
                 UbicacionDestino = mppUbicacion.Obtener(int.Parse(row["IdUbicacionDestino"].ToString()))
             };
+
+            envio.Detalle.ForEach(x => x.Envio = envio);
             return envio;
         }
 
