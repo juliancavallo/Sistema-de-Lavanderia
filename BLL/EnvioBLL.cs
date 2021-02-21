@@ -224,57 +224,43 @@ namespace BLL
             return (ubicacionDestino.CapacidadDisponible - pesoTotal) > 0;
         }
 
-        public List<Envio> DividirParaCapacidadMaxima(Envio envio)
-        {
-            //Se divide el envio en envios que no superen la capacidad maxima
-            decimal capacidadMax = decimal.Parse(parametroDelSistemaBLL.Obtener(Entidades.Enums.ParametroDelSistema.CapacidadMaximaHojaDeRuta).Valor);
-            var envios = new List<Envio>();
 
-            var nuevosEnvios = this.DividirSinCapacidadMaxima(envio);
-            envios.AddRange(nuevosEnvios.Where(x => x.PesoTotal <= capacidadMax));
 
-            while (nuevosEnvios.Any(x => x.PesoTotal > capacidadMax))
-            {
-                nuevosEnvios = this.DividirSinCapacidadMaxima(nuevosEnvios.Where(x => x.PesoTotal > capacidadMax).First());
-                envios.AddRange(nuevosEnvios.Where(x => x.PesoTotal <= capacidadMax));
-            }
-
-            return envios;
-        }
-
-        public List<Envio> DividirSinCapacidadMaxima(Envio envio)
+        public List<Envio> DividirPorCapacidadMaxima(Envio envio)
         {
             //Se divide el envio en dos: el primero no supera la capacidad maxima, y el otro si
             decimal capacidadMax = decimal.Parse(parametroDelSistemaBLL.Obtener(Entidades.Enums.ParametroDelSistema.CapacidadMaximaHojaDeRuta).Valor);
-            
             decimal peso = 0;
+            int contadorEnvios = 0;
+
             var listaEnvios = new List<Envio>() { envio };
             var detallesValidados = new List<Tuple<int, Articulo, int>>(); //Id, Articulo, Cantidad
-            
+            var detallesParaNuevoEnvio = new List<Tuple<int, Articulo, int>>(); 
+
             var detallePorBulto = this.SepararDetallePorBulto(envio.Detalle);
 
             foreach (var item in detallePorBulto)
             {
-                peso += item.Item3 * item.Item2.PesoUnitario;
-                if(peso > capacidadMax)
+                
+                if (peso >= capacidadMax)
                 {
-                    var detalleSobranteTupla = detallePorBulto.Where(x => detallesValidados.All(d => d.Item1 != x.Item1)).ToList();
-                    var detalleSobranteEntidad = detalleSobranteTupla
-                        .GroupBy(x => x.Item2)
-                        .Select(x => new EnvioDetalle()
-                        {
-                            Articulo = x.Key,
-                            Cantidad = detalleSobranteTupla.Where(d => d.Item2 == x.Key).Sum(d => d.Item3),
-                            PrecioUnitario = x.Key.PrecioUnitario
-                        }).ToList();
-
-
-                    listaEnvios.Add(this.CrearEnvioConDetalleSobrante(envio, detalleSobranteEntidad));
-                    this.EliminarDetalleSobrante(envio, detalleSobranteEntidad);
-                    break;
+                    if (contadorEnvios == 0)
+                    {
+                        var detalleSobranteTupla = detallePorBulto.Where(x => detallesValidados.All(d => d.Item1 != x.Item1)).ToList();
+                        var detalleSobranteEntidad = this.ConvertirTuplaAEntidad(detalleSobranteTupla);
+                        this.EliminarDetalleSobrante(envio, detalleSobranteEntidad);
+                    }
+                    else
+                        listaEnvios.Add(this.CrearEnvioConDetalle(envio, this.ConvertirTuplaAEntidad(detallesParaNuevoEnvio)));
+                    
+                    detallesParaNuevoEnvio.Clear();
+                    contadorEnvios++;
+                    peso = 0;
                 }
-                else
-                    detallesValidados.Add(item);
+
+                detallesParaNuevoEnvio.Add(item);
+                detallesValidados.Add(item);
+                peso += item.Item3 * item.Item2.PesoUnitario;
             }
 
             return listaEnvios;
@@ -296,7 +282,7 @@ namespace BLL
             return detallePorBulto;
         }
 
-        private Envio CrearEnvioConDetalleSobrante(Envio envio, List<EnvioDetalle> detalleSobrante)
+        private Envio CrearEnvioConDetalle(Envio envio, List<EnvioDetalle> detalleSobrante)
         {
             var nuevoEnvio = new Envio()
             {
@@ -319,20 +305,19 @@ namespace BLL
                 if (envio.Detalle.Find(x => x.Articulo.Id == detalle.Articulo.Id).Cantidad == 0)
                     envio.Detalle.Remove(envio.Detalle.Find(x => x.Articulo.Id == detalle.Articulo.Id));
             }
+          
+        }
 
-            /*
-            if (envio.Id > 0)
-            {
-                foreach (var detalle in envio.Detalle)
-                {
-                    //Se elimina o modifica el detalle segun corresponda
-                    if (detalle.Cantidad <= 0)
-                        mapperEnvioDetalle.Baja(detalle);
-                    else
-                        mapperEnvioDetalle.Modificacion(detalle);
-                }
-            }*/
-           
+        private List<EnvioDetalle> ConvertirTuplaAEntidad(List<Tuple<int, Articulo, int>> detalleTupla)
+        {
+            return detalleTupla
+                        .GroupBy(x => x.Item2)
+                        .Select(x => new EnvioDetalle()
+                        {
+                            Articulo = x.Key,
+                            Cantidad = detalleTupla.Where(d => d.Item2 == x.Key).Sum(d => d.Item3),
+                            PrecioUnitario = x.Key.PrecioUnitario
+                        }).ToList();
         }
 
     }

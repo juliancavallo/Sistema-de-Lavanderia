@@ -56,7 +56,7 @@ namespace BLL
                 foreach(var envio in obj.Envios)
                 {
                     //Se dividen los envios que superen la capacidad max en HR
-                    envios = envioBLL.DividirParaCapacidadMaxima(envio);
+                    envios = envioBLL.DividirPorCapacidadMaxima(envio);
                 }
             }
 
