@@ -234,19 +234,23 @@ namespace BLL
             int contadorEnvios = 0;
 
             var listaEnvios = new List<Envio>() { envio };
-            var detallesValidados = new List<Tuple<int, Articulo, int>>(); //Id, Articulo, Cantidad
             var detallesParaNuevoEnvio = new List<Tuple<int, Articulo, int>>(); 
 
             var detallePorBulto = this.SepararDetallePorBulto(envio.Detalle);
 
             foreach (var item in detallePorBulto)
             {
-                
-                if (peso >= capacidadMax)
+                bool ultimoItem = item.Item1 == detallePorBulto.Last().Item1;
+                peso += item.Item3 * item.Item2.PesoUnitario;
+             
+                if (peso > capacidadMax || ultimoItem)
                 {
+                    if(ultimoItem)
+                        detallesParaNuevoEnvio.Add(item);
+
                     if (contadorEnvios == 0)
                     {
-                        var detalleSobranteTupla = detallePorBulto.Where(x => detallesValidados.All(d => d.Item1 != x.Item1)).ToList();
+                        var detalleSobranteTupla = detallePorBulto.Where(x => detallesParaNuevoEnvio.All(d => d.Item1 != x.Item1)).ToList();
                         var detalleSobranteEntidad = this.ConvertirTuplaAEntidad(detalleSobranteTupla);
                         this.EliminarDetalleSobrante(envio, detalleSobranteEntidad);
                     }
@@ -255,12 +259,11 @@ namespace BLL
                     
                     detallesParaNuevoEnvio.Clear();
                     contadorEnvios++;
-                    peso = 0;
+                    
+                    peso = item.Item3 * item.Item2.PesoUnitario;
                 }
-
+                
                 detallesParaNuevoEnvio.Add(item);
-                detallesValidados.Add(item);
-                peso += item.Item3 * item.Item2.PesoUnitario;
             }
 
             return listaEnvios;
