@@ -284,6 +284,12 @@ namespace BLL
             };
             estadoHojaDeRutaBLL.Alta(estadoHojaDeRuta);
 
+            estadoHojaDeRuta = new EstadoHojaDeRuta()
+            {
+                Descripcion = Enums.EstadoHojaDeRuta.Replanificada
+            };
+            estadoHojaDeRutaBLL.Alta(estadoHojaDeRuta);
+
             //Accesorios
             var categoria = new Categoria()
             {

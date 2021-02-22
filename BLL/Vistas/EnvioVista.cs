@@ -19,5 +19,7 @@ namespace BLL.Vistas
         public string Usuario { get; set; }
         [System.ComponentModel.DisplayName("Facturación Total")]
         public string FacturacionTotal { get; set; }
+        [System.ComponentModel.DisplayName("Peso Total")]
+        public string PesoTotal { get; set; }
     }
 }

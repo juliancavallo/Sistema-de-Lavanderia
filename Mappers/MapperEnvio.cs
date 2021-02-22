@@ -56,8 +56,9 @@ namespace Mappers
                     mppEnvioDetalle.Modificacion(x);
                 else
                     mppEnvioDetalle.Baja(x);
-
             });
+
+            obj.Detalle.RemoveAll(x => x.Cantidad == 0);
             
 
             dal.ActualizarDataSet();
