@@ -189,7 +189,7 @@ namespace Controlador.Procesos
 
                         envioBLL.Alta(envio);
 
-                        MessageBox.Show("El Envio fue creado exitosamente. Puede consultarlo en Reportes > Envios a Clinica", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show($"El Envio fue creado exitosamente con el número {envio.Id}. Puede consultarlo en Reportes > Envios a Clinica", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                         MessageBox.Show($"La facturación para este envío es de ${envioBLL.ObtenerFacturacionTotal(envio)}. " +
                             $"{ (envio.UbicacionDestino.ClienteExterno ? string.Empty : $"Se aplicó un descuento de {parametroDelSistemaBLL.Obtener(Entidades.Enums.ParametroDelSistema.PorcentajeDescuentoDeEnvios).Valor}%.") }",

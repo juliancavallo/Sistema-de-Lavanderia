@@ -25,6 +25,7 @@ namespace Mappers
 
                 dt.Rows.Add(dr);
                 dal.ActualizarDataSet();
+
             }
             catch (Exception ex)
             {

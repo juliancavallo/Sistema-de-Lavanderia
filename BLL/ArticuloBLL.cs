@@ -14,6 +14,7 @@ namespace BLL
         MapperArticulo mpp = new MapperArticulo();
         MapperStock mppStock = new MapperStock();
         MapperAuditoria mppAuditoria = new MapperAuditoria();
+        ParametroDelSistemaBLL parametroDelSistemaBLL = new ParametroDelSistemaBLL();
         BultoCompuestoBLL bultoCompuestoBLL = new BultoCompuestoBLL();
 
         public void Alta(Articulo obj)
@@ -22,6 +23,10 @@ namespace BLL
             {
                 if (ObtenerTodos().Any(x => x.Codigo == obj.Codigo))
                     throw new Exception("Ya existe un articulo con el mismo codigo");
+
+                decimal capacidadMaxima = decimal.Parse(parametroDelSistemaBLL.Obtener(Entidades.Enums.ParametroDelSistema.CapacidadMaximaHojaDeRuta).Valor);
+                if(obj.PesoUnitario > capacidadMaxima)
+                    throw new Exception($"El peso del articulo supera la capacidad máxima que se puede enviar ({capacidadMaxima} kg)");
 
                 mpp.Alta(obj);
             }
@@ -55,6 +60,10 @@ namespace BLL
             {
                 if (ObtenerTodos().Any(x => x.Codigo == obj.Codigo && x.Id != obj.Id))
                     throw new Exception("Ya existe un articulo con el mismo codigo");
+                
+                decimal capacidadMaxima = decimal.Parse(parametroDelSistemaBLL.Obtener(Entidades.Enums.ParametroDelSistema.CapacidadMaximaHojaDeRuta).Valor);
+                if (obj.PesoUnitario > capacidadMaxima)
+                    throw new Exception($"El peso del articulo supera la capacidad máxima que se puede enviar ({capacidadMaxima} kg)");
 
                 mpp.Modificacion(obj);
             }

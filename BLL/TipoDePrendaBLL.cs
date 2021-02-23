@@ -19,6 +19,9 @@ namespace BLL
                 if (ObtenerTodos().Any(x => x.Descripcion == obj.Descripcion))
                     throw new Exception("Ya existe un tipo de prenda con la misma descripcion");
 
+                if (!obj.UsaCortePorBulto)
+                    obj.CortePorBulto = 1;
+
                 mpp.Alta(obj);
             }
             catch (Exception ex)
@@ -48,6 +51,9 @@ namespace BLL
             {
                 if (ObtenerTodos().Any(x => x.Descripcion == obj.Descripcion && x.Id != obj.Id))
                     throw new Exception("Ya existe un tipo de prenda con la misma descripcion");
+
+                if (!obj.UsaCortePorBulto)
+                    obj.CortePorBulto = 1;
 
                 mpp.Modificacion(obj);
             }

@@ -32,6 +32,7 @@ namespace Mappers
 
                 obj.Detalle.ForEach(x => x.Auditoria = obj);
                 mppAuditoriaDetalle.Alta(obj.Detalle);
+
             }
             catch (Exception ex)
             {

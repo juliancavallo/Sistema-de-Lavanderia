@@ -59,6 +59,8 @@ namespace Controlador.Procesos
 
             DataGridView dgv = (DataGridView)controles.Find(x => x.Name == "gridItems");
             dgv.DataSource = null;
+
+            this.envios.Clear();
         }
 
         private bool DatosValidos(int accion)
@@ -155,10 +157,21 @@ namespace Controlador.Procesos
                     hojaDeRuta.FechaCreacion = DateTime.Now;
                     hojaDeRuta.Envios = this.envios;
 
-                    hojaDeRutaBLL.Alta(hojaDeRuta);
+                    var resultado = hojaDeRutaBLL.AltaConDivisionPorCapacidad(hojaDeRuta);
+
+                    if (resultado.Count == 1)
+                        MessageBox.Show($"La Hoja de Ruta fue creada exitosamente con el número {resultado.First().Id}. " +
+                            $"Puede consultarla en Reportes > Hojas de Ruta", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    else
+                    {
+                        MessageBox.Show($"La Hoja de Ruta se dividió en {resultado.Count} ya que se estaba superando la capacidad máxima permitida. " +
+                            $"Los números de las nuevas hojas son: {string.Join(" - ", resultado.Select(x => x.Id))} " +
+                            $"Puede consultarla en Reportes > Hojas de Ruta " +
+                            $"Los envios son: {string.Join(" - ", resultado.SelectMany(x => x.Envios.Select(y => y.Id)))}", 
+                            "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
 
 
-                    MessageBox.Show("La Hoja de Ruta fue creada exitosamente. Puede consultarla en Reportes > Hojas de Ruta", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     frm.Hide();
                 }
             }

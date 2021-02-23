@@ -24,20 +24,43 @@ namespace BLL
                     throw new Exception("La Hoja de Ruta no se puede crear ya que se está superando la capacidad disponible " +
                     "en la ubicación destino.");
 
+                stockBLL.Enviar(obj.Envios);
+
+                obj.Estado = estadoHojaDeRutaBLL.Obtener(Entidades.Enums.EstadoHojaDeRuta.Generada);
+                mpp.Alta(obj);
+
+                foreach (var envio in obj.Envios)
+                {
+                    envioBLL.Enviar(envio, obj);
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public List<HojaDeRuta> AltaConDivisionPorCapacidad(HojaDeRuta obj)
+        {
+            try
+            {
+                if (!this.ValidarCapacidadDestino(obj.UbicacionDestino, obj.Envios))
+                    throw new Exception("La Hoja de Ruta no se puede crear ya que se está superando la capacidad disponible " +
+                    "en la ubicación destino.");
+
                 var hojasDeRuta = this.Dividir(obj);
 
                 hojasDeRuta.ForEach(h => 
                 { 
                     stockBLL.Enviar(h.Envios);
-                    if (h.Estado == null)
-                    { 
-                        h.Estado = estadoHojaDeRutaBLL.Obtener(Entidades.Enums.EstadoHojaDeRuta.Generada); 
-                    }
+                    h.Estado = estadoHojaDeRutaBLL.Obtener(Entidades.Enums.EstadoHojaDeRuta.Generada); 
 
                     mpp.Alta(h);
 
                     h.Envios.ForEach(e => envioBLL.Enviar(e, h));
                 });
+
+                return hojasDeRuta;
             }
             catch (Exception ex)
             {
@@ -213,13 +236,15 @@ namespace BLL
             //Con el resto de los envios, crear nuevas hojas de ruta
             decimal capacidadMax = decimal.Parse(parametroDelSistemaBLL.Obtener(Entidades.Enums.ParametroDelSistema.CapacidadMaximaHojaDeRuta).Valor);
             decimal pesoTotalEnEnvios = obj.Envios.Sum(x => x.PesoTotal);
-            var hojasDeRuta = new List<HojaDeRuta>() { obj };
+            var hojasDeRuta = new List<HojaDeRuta>() { };
 
             if (pesoTotalEnEnvios > capacidadMax)
             {
                 var envios = this.DividirEnvios(obj);
                 hojasDeRuta = this.RepartirEnviosEnHojasDeRuta(envios, obj);
             }
+            else
+                hojasDeRuta.Add(obj);
 
             return hojasDeRuta;
         }
@@ -228,34 +253,34 @@ namespace BLL
         {
             decimal capacidadMax = decimal.Parse(parametroDelSistemaBLL.Obtener(Entidades.Enums.ParametroDelSistema.CapacidadMaximaHojaDeRuta).Valor);
 
-            var hojasDeRuta = new List<HojaDeRuta>();
-            var enviosActuales = new List<Envio>();
+            var hojasDeRuta = new List<HojaDeRuta>() { };
+            var enviosParaHojaDeRuta = new List<Envio>();
             foreach(var envio in envios)
             {
-                if (enviosActuales.Sum(x => x.PesoTotal) + envio.PesoTotal > capacidadMax)
+                if (enviosParaHojaDeRuta.Sum(x => x.PesoTotal) + envio.PesoTotal > capacidadMax)
                 {
                     hojasDeRuta.Add(new HojaDeRuta()
                     {
-                        Envios = enviosActuales.ToList(),
+                        Envios = enviosParaHojaDeRuta.ToList(),
                         FechaCreacion = DateTime.Now,
                         Usuario = hojaDeRutaOriginal.Usuario
                     });
-                    enviosActuales.Clear();
+                    enviosParaHojaDeRuta.Clear();
                 }
-                enviosActuales.Add(envio);
+                enviosParaHojaDeRuta.Add(envio);
                 
             }
-            if (enviosActuales.Count != 0)
+
+            //Si sobraron envios, se agregan en una hoja de ruta
+            if (enviosParaHojaDeRuta.Count != 0)
             {
                 hojasDeRuta.Add(new HojaDeRuta()
                 {
-                    Envios = enviosActuales,
+                    Envios = enviosParaHojaDeRuta,
                     FechaCreacion = DateTime.Now,
                     Usuario = hojaDeRutaOriginal.Usuario
                 });
             }
-            hojaDeRutaOriginal.Envios.Clear();
-            hojaDeRutaOriginal.Estado = estadoHojaDeRutaBLL.Obtener(Entidades.Enums.EstadoHojaDeRuta.Replanificada);
 
             return hojasDeRuta;
         }
@@ -277,6 +302,7 @@ namespace BLL
             }
             return envios;
         }
+
         #endregion
     }
 }

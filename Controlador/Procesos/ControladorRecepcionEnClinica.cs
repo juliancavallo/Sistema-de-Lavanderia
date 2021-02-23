@@ -185,7 +185,7 @@ namespace Controlador.Procesos
 
                         recepcionBLL.Alta(recepcion);
 
-                        MessageBox.Show("La Recepcion fue creada exitosamente. Puede consultarla en Reportes > Recepciones en Clinica", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show($"La Recepción fue creada exitosamente con el número {recepcion.Id}. Puede consultarla en Reportes > Recepciones en Clinica", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         frm.Hide();
                     }
                     else

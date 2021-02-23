@@ -284,12 +284,6 @@ namespace BLL
             };
             estadoHojaDeRutaBLL.Alta(estadoHojaDeRuta);
 
-            estadoHojaDeRuta = new EstadoHojaDeRuta()
-            {
-                Descripcion = Enums.EstadoHojaDeRuta.Replanificada
-            };
-            estadoHojaDeRutaBLL.Alta(estadoHojaDeRuta);
-
             //Accesorios
             var categoria = new Categoria()
             {
@@ -310,7 +304,7 @@ namespace BLL
             tipoDePrenda = new TipoDePrenda()
             {
                 Descripcion = "Barbijo",
-                CortePorBulto = 0,
+                CortePorBulto = 1,
                 UsaCortePorBulto = false,
                 Categoria = categoria
             };

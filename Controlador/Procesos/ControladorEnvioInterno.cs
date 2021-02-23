@@ -187,7 +187,7 @@ namespace Controlador.Procesos
                         stockBLL.Enviar(new List<Envio>() { envio });
                         stockBLL.Recibir(envio);
 
-                        MessageBox.Show("El Envio fue creado exitosamente. Puede consultarlo en Reportes > Envios a Lavadero", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show($"El Envio fue creado exitosamente con el número {envio.Id}. Puede consultarlo en Reportes > Envios a Lavadero", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         frm.Hide();
                     }
                     else

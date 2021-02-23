@@ -160,17 +160,7 @@ namespace Controlador.Procesos
 
                     auditoriaBLL.Alta(auditoria);
 
-                    MessageBox.Show("La Auditoria fue creada exitosamente. Puede consultarla en Reportes > Auditorias", "Auditoría", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                    /*if(DialogResult.Yes == MessageBox.Show(
-                        "¿Desea actualizar el stock de la ubicación con los datos de la auditoría?",
-                        "Actualización de Stock", 
-                        MessageBoxButtons.YesNo,
-                        MessageBoxIcon.Question))
-                    {
-                        auditoriaBLL.ActualizarStock(auditoria);
-                        MessageBox.Show("El stock se actualizó correctamente", "Actualización de Stock", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }*/
+                    MessageBox.Show($"La Auditoría fue creada exitosamente con el número { auditoria.Id}. Puede consultarla en Reportes > Auditorias", "Auditoría", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     frm.Hide();
                 }
