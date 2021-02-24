@@ -291,6 +291,7 @@ namespace BLL
 
         private List<Tuple<int, Articulo, int>> SepararDetallePorBulto(List<EnvioDetalle> envioDetalle)
         {
+            //Aplicar alguna logica para las prendas compuestas.
             var detallePorBulto = new List<Tuple<int, Articulo, int>>(); //Id, Articulo, Peso
             int id = 0;
             foreach (var detalle in envioDetalle)

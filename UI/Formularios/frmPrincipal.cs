@@ -18,6 +18,7 @@ using UI.Formularios.Reportes.EnviosALavadero;
 using UI.Formularios.Reportes.EnviosInternos;
 using UI.Formularios.Reportes.HojasDeRuta;
 using UI.Formularios.Reportes.RecepcionEnLavadero;
+using UI.Formularios.Seguridad;
 using UI.Formularios.Seguridad.Roles;
 using UI.Formularios.Seguridad.Usuarios;
 
@@ -60,6 +61,8 @@ namespace UI.Formularios
 
             menus.Add(new frmAdministracionRoles());
             menus.Add(new frmAdministracionUsuarios());
+
+            menus.Add(new frmParametrosDelSistema());
 
             this.BackgroundImage = Properties.Resources.fondo;
             this.BackgroundImageLayout = ImageLayout.Stretch;

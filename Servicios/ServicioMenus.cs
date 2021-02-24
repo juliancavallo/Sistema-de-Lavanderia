@@ -256,6 +256,14 @@ namespace Servicios
                 Codigo = Entidades.Enums.CodigoMenu.BultoCompuesto,
                 MenuPadre = menuAdministracion
             };
+            var menuParametros = new MenuSimple()
+            {
+                Id = 32,
+                Nombre = Entidades.Enums.NombreMenu.Parametros,
+                Descripcion = "Parámetros del Sistema",
+                Codigo = Entidades.Enums.CodigoMenu.Parametros,
+                MenuPadre = menuSeguridad
+            };
 
 
             return new List<Entidades.Menu>() 
@@ -290,7 +298,8 @@ namespace Servicios
                 menuAjusteStock,
                 menuReporteAjusteStock,
                 menuCategoria,
-                menuBultoCompuesto
+                menuBultoCompuesto,
+                menuParametros
             };
         }
     }

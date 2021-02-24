@@ -41,6 +41,8 @@ namespace Entidades.Enums
         public static string Roles = "menuRoles";
         public static string Usuarios = "menuUsuarios";
 
+        public static string Parametros = "menuParametros";
+
         public static string Inicio = "menuInicio";
         public static string CerrarSesion = "menuCerrarSesion";
     }

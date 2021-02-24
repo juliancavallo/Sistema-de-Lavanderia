@@ -38,6 +38,7 @@
             this.menuUbicaciones = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStock = new System.Windows.Forms.ToolStripMenuItem();
             this.menuCategoria = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuBultosCompuestos = new System.Windows.Forms.ToolStripMenuItem();
             this.menuProcesos = new System.Windows.Forms.ToolStripMenuItem();
             this.menuAuditorias = new System.Windows.Forms.ToolStripMenuItem();
             this.menuEnviosAClinica = new System.Windows.Forms.ToolStripMenuItem();
@@ -61,7 +62,7 @@
             this.menuRoles = new System.Windows.Forms.ToolStripMenuItem();
             this.menuUsuarios = new System.Windows.Forms.ToolStripMenuItem();
             this.menuCerrarSesion = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuBultosCompuestos = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuParametros = new System.Windows.Forms.ToolStripMenuItem();
             this.menuPrincipal.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -105,51 +106,58 @@
             // menuTiposDePrenda
             // 
             this.menuTiposDePrenda.Name = "menuTiposDePrenda";
-            this.menuTiposDePrenda.Size = new System.Drawing.Size(180, 22);
+            this.menuTiposDePrenda.Size = new System.Drawing.Size(177, 22);
             this.menuTiposDePrenda.Tag = "S1";
             this.menuTiposDePrenda.Text = "Tipos de Prenda";
             // 
             // menuColores
             // 
             this.menuColores.Name = "menuColores";
-            this.menuColores.Size = new System.Drawing.Size(180, 22);
+            this.menuColores.Size = new System.Drawing.Size(177, 22);
             this.menuColores.Tag = "S3";
             this.menuColores.Text = "Colores";
             // 
             // menuTalles
             // 
             this.menuTalles.Name = "menuTalles";
-            this.menuTalles.Size = new System.Drawing.Size(180, 22);
+            this.menuTalles.Size = new System.Drawing.Size(177, 22);
             this.menuTalles.Tag = "S4";
             this.menuTalles.Text = "Talles";
             // 
             // menuArticulos
             // 
             this.menuArticulos.Name = "menuArticulos";
-            this.menuArticulos.Size = new System.Drawing.Size(180, 22);
+            this.menuArticulos.Size = new System.Drawing.Size(177, 22);
             this.menuArticulos.Tag = "S2";
             this.menuArticulos.Text = "Articulos";
             // 
             // menuUbicaciones
             // 
             this.menuUbicaciones.Name = "menuUbicaciones";
-            this.menuUbicaciones.Size = new System.Drawing.Size(180, 22);
+            this.menuUbicaciones.Size = new System.Drawing.Size(177, 22);
             this.menuUbicaciones.Tag = "S16";
             this.menuUbicaciones.Text = "Ubicaciones";
             // 
             // menuStock
             // 
             this.menuStock.Name = "menuStock";
-            this.menuStock.Size = new System.Drawing.Size(180, 22);
+            this.menuStock.Size = new System.Drawing.Size(177, 22);
             this.menuStock.Tag = "S12";
             this.menuStock.Text = "Stock";
             // 
             // menuCategoria
             // 
             this.menuCategoria.Name = "menuCategoria";
-            this.menuCategoria.Size = new System.Drawing.Size(180, 22);
+            this.menuCategoria.Size = new System.Drawing.Size(177, 22);
             this.menuCategoria.Tag = "S26";
             this.menuCategoria.Text = "Categoría";
+            // 
+            // menuBultosCompuestos
+            // 
+            this.menuBultosCompuestos.Name = "menuBultosCompuestos";
+            this.menuBultosCompuestos.Size = new System.Drawing.Size(177, 22);
+            this.menuBultosCompuestos.Tag = "S27";
+            this.menuBultosCompuestos.Text = "Bultos Compuestos";
             // 
             // menuProcesos
             // 
@@ -307,7 +315,8 @@
             // 
             this.menuSeguridad.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuRoles,
-            this.menuUsuarios});
+            this.menuUsuarios,
+            this.menuParametros});
             this.menuSeguridad.Name = "menuSeguridad";
             this.menuSeguridad.Size = new System.Drawing.Size(72, 20);
             this.menuSeguridad.Tag = "C4";
@@ -316,14 +325,14 @@
             // menuRoles
             // 
             this.menuRoles.Name = "menuRoles";
-            this.menuRoles.Size = new System.Drawing.Size(119, 22);
+            this.menuRoles.Size = new System.Drawing.Size(197, 22);
             this.menuRoles.Tag = "S13";
             this.menuRoles.Text = "Roles";
             // 
             // menuUsuarios
             // 
             this.menuUsuarios.Name = "menuUsuarios";
-            this.menuUsuarios.Size = new System.Drawing.Size(119, 22);
+            this.menuUsuarios.Size = new System.Drawing.Size(197, 22);
             this.menuUsuarios.Tag = "S14";
             this.menuUsuarios.Text = "Usuarios";
             // 
@@ -333,12 +342,12 @@
             this.menuCerrarSesion.Size = new System.Drawing.Size(88, 20);
             this.menuCerrarSesion.Text = "Cerrar Sesion";
             // 
-            // menuBultosCompuestos
+            // menuParametros
             // 
-            this.menuBultosCompuestos.Name = "menuBultosCompuestos";
-            this.menuBultosCompuestos.Size = new System.Drawing.Size(180, 22);
-            this.menuBultosCompuestos.Tag = "S27";
-            this.menuBultosCompuestos.Text = "Bultos Compuestos";
+            this.menuParametros.Name = "menuParametros";
+            this.menuParametros.Size = new System.Drawing.Size(197, 22);
+            this.menuParametros.Tag = "S28";
+            this.menuParametros.Text = "Parametros del Sistema";
             // 
             // frmPrincipal
             // 
@@ -396,6 +405,7 @@
         private System.Windows.Forms.ToolStripMenuItem menuReporteAjusteStock;
         private System.Windows.Forms.ToolStripMenuItem menuCategoria;
         private System.Windows.Forms.ToolStripMenuItem menuBultosCompuestos;
+        private System.Windows.Forms.ToolStripMenuItem menuParametros;
     }
 }
 

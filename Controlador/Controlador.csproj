@@ -81,6 +81,7 @@
     <Compile Include="Reportes\ControladorReporteRecepcionDetalle.cs" />
     <Compile Include="Reportes\ControladorReporteRecepcionesEnClinica.cs" />
     <Compile Include="Reportes\ControladorReporteRecepcionesEnLavadero.cs" />
+    <Compile Include="Seguridad\ControladorParametros.cs" />
     <Compile Include="Seguridad\ControladorLogin.cs" />
     <Compile Include="Seguridad\Rol\ControladorAdministracionRoles.cs" />
     <Compile Include="Seguridad\Rol\ControladorAltaRol.cs" />

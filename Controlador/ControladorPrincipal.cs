@@ -80,6 +80,7 @@ namespace Controlador
             //Seguridad
             controles.Find(x => x.Name == NombreMenu.Roles).Click += delegate(object sender, EventArgs e) { ClickMenu("frmAdministracionRoles", CodigoMenu.Roles); };
             controles.Find(x => x.Name == NombreMenu.Usuarios).Click += delegate (object sender, EventArgs e) { ClickMenu("frmAdministracionUsuarios", CodigoMenu.Usuarios); }; ;
+            controles.Find(x => x.Name == NombreMenu.Parametros).Click += delegate (object sender, EventArgs e) { ClickMenu("frmParametrosDelSistema", CodigoMenu.Parametros); }; ;
 
             //General
             controles.Find(x => x.Name == NombreMenu.Inicio).Click += ClickMenuPrincipal;

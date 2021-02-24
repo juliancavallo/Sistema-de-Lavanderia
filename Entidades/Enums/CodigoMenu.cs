@@ -38,6 +38,7 @@ namespace Entidades.Enums
         public static string ReporteAjusteStock = "S25";
         public static string Categoria = "S26";
         public static string BultoCompuesto = "S27";
+        public static string Parametros = "S28";
 
     }
 }
