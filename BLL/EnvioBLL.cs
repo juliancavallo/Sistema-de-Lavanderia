@@ -254,20 +254,15 @@ namespace BLL
             int contadorEnvios = 0;
 
             var listaEnvios = new List<Envio>() { envio };
-            var detallesParaNuevoEnvio = new List<Tuple<int, Articulo, int>>(); 
+            var detallesParaNuevoEnvio = new List<Tuple<int, Articulo, int>>();  //Id, Articulo, Corte por Bulto
 
             var detallePorBulto = this.SepararDetallePorBulto(envio.Detalle);
 
             foreach (var item in detallePorBulto)
             {
-                bool ultimoItem = item.Item1 == detallePorBulto.Last().Item1;
-                peso += item.Item3 * item.Item2.PesoUnitario;
-             
-                if (peso > capacidadMax || ultimoItem)
+                decimal pesoEnvioActual = detallesParaNuevoEnvio.Sum(d => d.Item3 * item.Item2.PesoUnitario);
+                if (pesoEnvioActual + (item.Item3 * item.Item2.PesoUnitario) > capacidadMax)
                 {
-                    if(ultimoItem)
-                        detallesParaNuevoEnvio.Add(item);
-
                     if (contadorEnvios == 0)
                     {
                         var detalleSobranteTupla = detallePorBulto.Where(x => detallesParaNuevoEnvio.All(d => d.Item1 != x.Item1)).ToList();
@@ -279,8 +274,6 @@ namespace BLL
                     
                     detallesParaNuevoEnvio.Clear();
                     contadorEnvios++;
-                    
-                    peso = item.Item3 * item.Item2.PesoUnitario;
                 }
                 
                 detallesParaNuevoEnvio.Add(item);
@@ -292,7 +285,7 @@ namespace BLL
         private List<Tuple<int, Articulo, int>> SepararDetallePorBulto(List<EnvioDetalle> envioDetalle)
         {
             //Aplicar alguna logica para las prendas compuestas.
-            var detallePorBulto = new List<Tuple<int, Articulo, int>>(); //Id, Articulo, Peso
+            var detallePorBulto = new List<Tuple<int, Articulo, int>>(); //Id, Articulo, Corte por Bulto
             int id = 0;
             foreach (var detalle in envioDetalle)
             {

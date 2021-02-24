@@ -16,6 +16,7 @@ namespace BLL
         EnvioBLL envioBLL = new EnvioBLL();
         ParametroDelSistemaBLL parametroDelSistemaBLL = new ParametroDelSistemaBLL();
 
+
         public void Alta(HojaDeRuta obj)
         {
             try
@@ -240,7 +241,7 @@ namespace BLL
 
             if (pesoTotalEnEnvios > capacidadMax)
             {
-                var envios = this.DividirEnvios(obj);
+                var envios = this.DividirEnvios(obj.Envios);
                 hojasDeRuta = this.RepartirEnviosEnHojasDeRuta(envios, obj);
             }
             else
@@ -285,20 +286,24 @@ namespace BLL
             return hojasDeRuta;
         }
 
-        private List<Envio> DividirEnvios(HojaDeRuta obj)
+        private List<Envio> DividirEnvios(List<Envio> enviosEnHojaDeRuta)
         {
+            decimal capacidadMax = decimal.Parse(parametroDelSistemaBLL.Obtener(Entidades.Enums.ParametroDelSistema.CapacidadMaximaHojaDeRuta).Valor);
             var envios = new List<Envio>();
-            foreach (var envio in obj.Envios)
+            foreach (var envio in enviosEnHojaDeRuta)
             {
-                //Se dividen los envios que superen la capacidad max en HR
-                envios = envioBLL.DividirPorCapacidadMaxima(envio);
-                envios.ForEach(x =>
+                if (envio.PesoTotal > capacidadMax)
                 {
-                    if (x.Id > 0)
-                        envioBLL.Modificar(x);
-                    else
-                        envioBLL.Alta(x);
-                });
+                    //Se dividen los envios que superen la capacidad max en HR
+                    envios = envioBLL.DividirPorCapacidadMaxima(envio);
+                    envios.ForEach(x =>
+                    {
+                        if (x.Id > 0)
+                            envioBLL.Modificar(x);
+                        else
+                            envioBLL.Alta(x);
+                    });
+                }
             }
             return envios;
         }
