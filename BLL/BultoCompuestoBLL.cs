@@ -19,6 +19,9 @@ namespace BLL
                 if (ObtenerTodos().Any(x => x.Descripcion == obj.Descripcion))
                     throw new Exception("Ya existe un bulto con la misma descripcion");
 
+                if (ObtenerTodos().Any(x => x.Detalle.Any(d => obj.Detalle.Select(y => y.TipoDePrenda.Id).Contains(d.TipoDePrenda.Id))))
+                    throw new Exception("Ya existe un bulto con alguno de los tipos de prenda indicados");
+
                 mpp.Alta(obj);
             }
             catch (Exception ex)
@@ -62,6 +65,18 @@ namespace BLL
             try
             {
                 return mpp.Obtener(id);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public BultoCompuesto ObtenerPorTipoDePrenda(int tipoDePrendaId)
+        {
+            try
+            {
+                return mpp.ObtenerTodos().First(x => x.Detalle.Any(d => d.TipoDePrenda.Id == tipoDePrendaId));
             }
             catch (Exception ex)
             {
