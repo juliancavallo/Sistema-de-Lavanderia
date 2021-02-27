@@ -176,7 +176,7 @@ namespace Controlador.Procesos
             {
                 if (DatosValidos(1))
                 {
-                    if (articuloBLL.ValidarBultosCompuestos(this.envioDetalle.ToList<IDetalle>()))
+                    if (articuloBLL.ValidarBultosCompuestos(this.envioDetalle.ToList<Detalle>()))
                     {
                         var envio = new Envio();
 

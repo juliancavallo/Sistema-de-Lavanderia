@@ -60,7 +60,7 @@
     <Compile Include="EstadoHojaDeRuta.cs" />
     <Compile Include="BultoCompuesto.cs" />
     <Compile Include="HojaDeRuta.cs" />
-    <Compile Include="Interfaces\IDetalle.cs" />
+    <Compile Include="Clases Padre\Detalle.cs" />
     <Compile Include="Menu.cs" />
     <Compile Include="MenuCompuesto.cs" />
     <Compile Include="MenuSimple.cs" />

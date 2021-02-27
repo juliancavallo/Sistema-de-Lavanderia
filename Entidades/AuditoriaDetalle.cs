@@ -5,12 +5,9 @@ using System.Text;
 
 namespace Entidades
 {
-    public class AuditoriaDetalle : IDetalle
+    public class AuditoriaDetalle : Detalle
     {
-        public int Cantidad { get; set; }
-
         #region Entidades
-        public Articulo Articulo { get; set; }
         public Auditoria Auditoria { get; set; }
         #endregion
     }

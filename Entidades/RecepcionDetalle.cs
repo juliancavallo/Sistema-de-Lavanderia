@@ -5,15 +5,13 @@ using System.Text;
 
 namespace Entidades
 {
-    public class RecepcionDetalle : IDetalle
+    public class RecepcionDetalle : Detalle
     {
-        public int Cantidad { get; set; }
         public int CantidadARecibir { get; set; }
         public decimal PrecioUnitario { get; set; }
 
         #region Entidades
         public Recepcion Recepcion { get; set; }
-        public Articulo Articulo { get; set; }
         #endregion
     }
 }

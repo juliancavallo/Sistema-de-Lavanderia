@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Entidades.Interfaces
 {
-    public interface IDetalle
+    public class Detalle
     {
-        Articulo Articulo { get; set; }
-        int Cantidad { get; set; }
+        public Articulo Articulo { get; set; }
+        public int Cantidad { get; set; }
     }
 }

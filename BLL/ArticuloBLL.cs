@@ -158,7 +158,7 @@ namespace BLL
             return true;
         }
 
-        public bool ValidarBultosCompuestos(List<IDetalle> detalles)
+        public bool ValidarBultosCompuestos(List<Detalle> detalles)
         {
             var result = true;
             var articulos = detalles.Select(x => x.Articulo);

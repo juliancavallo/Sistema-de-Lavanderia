@@ -46,7 +46,7 @@ namespace Controlador
                 ((TextBox)controles.Find(x => x.Name == "txtCorreoSoporte")).Text = correoSoporte;
                 ((TextBox)controles.Find(x => x.Name == "txtDescuentoEnvios")).Text = descuentoEnvios + " %";
             }
-            catch(Exception ex)
+            catch(Exception)
             {
 
             }

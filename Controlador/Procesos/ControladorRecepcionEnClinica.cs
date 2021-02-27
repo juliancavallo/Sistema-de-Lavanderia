@@ -173,7 +173,7 @@ namespace Controlador.Procesos
             {
                 if (DatosValidos(1))
                 {
-                    if (articuloBLL.ValidarBultosCompuestos(recepcionBLL.ConvertirVistaADetalle(this.recepcionDetalle).ToList<IDetalle>()))
+                    if (articuloBLL.ValidarBultosCompuestos(recepcionBLL.ConvertirVistaADetalle(this.recepcionDetalle).ToList<Detalle>()))
                     {
                         var comboHojaDeRuta = (ComboBox)controles.Find(x => x.Name == "comboHojaDeRuta");
 
