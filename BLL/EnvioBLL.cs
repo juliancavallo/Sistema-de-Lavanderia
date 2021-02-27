@@ -261,28 +261,11 @@ namespace BLL
             foreach (var item in detallePorBulto)
             {
                 decimal pesoEnvioAcumulado = detallesParaNuevoEnvio.Sum(d => d.Item3 * d.Item2.PesoUnitario);
-
                 decimal pesoBultoActual = item.Item3 * item.Item2.PesoUnitario;
-                /*Si es una prenda compuesta, verificar si en detalleParaNuevoEnvio existe 
-                 * el detalle complementario del bulto. Si existe, agregar la prenda. 
-                 * Si no, verificar si un nuevo bulto compuesto completo sobrepasaria la 
-                 * capacidad maxima*/
-                
+
                 if (item.Item2.TipoDePrenda.Categoria.EsCompuesta)
-                {
-                    var bultoCompuesto = bultoCompuestoBLL.ObtenerPorTipoDePrenda(item.Item2.TipoDePrenda.Id);
-                    //Si es el primer id del detalle, quiere decir que se está agregando un bulto nuevo.
-                    //En ese caso, validar si hay espacio para un bulto compuesto completo
-                    //Si no es la primer id del detalle, agregar la prenda directo, porque se supone que ya se valido el espacio
-                    if(item.Item2.TipoDePrenda.Id == bultoCompuesto.Detalle.First().TipoDePrenda.Id)
-                    {
-                        var detallesProximos = detallePorBulto.Where(x => x.Item1 >= item.Item1).Take(bultoCompuesto.Detalle.Count).ToList();
-
-                        pesoBultoActual = bultoCompuesto.Detalle.Sum(c => c.TipoDePrenda.CortePorBulto * detallesProximos.First(x => x.Item2.TipoDePrenda.Id == c.TipoDePrenda.Id).Item2.PesoUnitario);
-                    }
-                }
+                    this.ValidarEspacioParaBultoCompuesto(item, detallePorBulto, ref pesoBultoActual);
                 
-
 
                 if ((pesoEnvioAcumulado + pesoBultoActual) > capacidadMax)
                 {
@@ -311,69 +294,12 @@ namespace BLL
 
         private List<Tuple<int, Articulo, int>> SepararDetallePorBulto(List<EnvioDetalle> envioDetalle)
         {
-            var detallePorBulto = new List<Tuple<int, Articulo, int>>(); //Id, Articulo, Corte por Bulto
-            int id = 0;
+            //Id, Articulo, Corte por Bulto
+            var detallePorBulto = this.ConvertirEntidadEnTupla(envioDetalle.Where(x => !x.Articulo.TipoDePrenda.Categoria.EsCompuesta).ToList());
 
-            foreach (var detalle in envioDetalle.Where(x => !x.Articulo.TipoDePrenda.Categoria.EsCompuesta))
-            {
-                for (int i = 0; i < detalle.Cantidad; i += detalle.Articulo.TipoDePrenda.CortePorBulto)
-                {
-                    id++;
-                    detallePorBulto.Add(new Tuple<int, Articulo, int>(id, detalle.Articulo, detalle.Articulo.TipoDePrenda.CortePorBulto));
-                }
-            }
-
-            this.ReordenarBultosCompuestos(envioDetalle, id, detallePorBulto);
+            this.ReordenarBultosCompuestos(envioDetalle, detallePorBulto.LastOrDefault()?.Item1 ?? 0, detallePorBulto);
 
             return detallePorBulto;
-        }
-
-        private void ReordenarBultosCompuestos(List<EnvioDetalle> envioDetalle, int id, List<Tuple<int, Articulo, int>> detallePorBulto)
-        {
-
-            //Ordenar las prendas compuestas de manera intercalada: CHAQUETA, PANTALON, CHAQUETA, PANTALON, en lugar de CHAQUETA, CHAQUETA, PANTALON, PANTALON
-            var bultosCompuestosOriginal = envioDetalle.Where(x => x.Articulo.TipoDePrenda.Categoria.EsCompuesta);
-            var bultosUsados = new List<BultoCompuesto>(); //Ambo
-
-            bultosCompuestosOriginal
-                .Select(x => x.Articulo.TipoDePrenda.Id)
-                .ToList()
-                .ForEach(x =>
-                {
-                    if (!bultosUsados.Contains(bultoCompuestoBLL.ObtenerPorTipoDePrenda(x)))
-                        bultosUsados.Add(bultoCompuestoBLL.ObtenerPorTipoDePrenda(x));
-                });
-
-            //Se obtiene el primer id de tipo de prenda de cada bulto compuesto
-            var idsParaComparar = bultosUsados.Select(x => x.Detalle.First().TipoDePrenda.Id).ToList();
-
-            //En el detalle de envio original se dejan solo los primeros tipos de prenda de cada bulto compuesto
-            var bultosCompuestosFiltrados = bultosCompuestosOriginal.Where(x => idsParaComparar.Contains(x.Articulo.TipoDePrenda.Id));
-            var bultosCompuestosComplementarios = bultosCompuestosOriginal.Where(x => !idsParaComparar.Contains(x.Articulo.TipoDePrenda.Id)).ToList();
-
-            foreach (var detalle in bultosCompuestosFiltrados)
-            {
-                for (int i = 0; i < detalle.Cantidad; i += detalle.Articulo.TipoDePrenda.CortePorBulto)
-                {
-                    var bultoCompuesto = bultoCompuestoBLL.ObtenerPorTipoDePrenda(detalle.Articulo.TipoDePrenda.Id);
-
-                    foreach (var itemCompuesto in bultoCompuesto.Detalle)
-                    {
-                        id++;
-
-                        if (itemCompuesto.TipoDePrenda.Id == detalle.Articulo.TipoDePrenda.Id)
-                            detallePorBulto.Add(new Tuple<int, Articulo, int>(id, detalle.Articulo, detalle.Articulo.TipoDePrenda.CortePorBulto));
-                        else
-                        {
-                            var elemento = bultosCompuestosComplementarios
-                                .FirstOrDefault(x => x.Articulo.TipoDePrenda.Id == itemCompuesto.TipoDePrenda.Id);
-
-                            detallePorBulto.Add(new Tuple<int, Articulo, int>(id, elemento.Articulo, elemento.Articulo.TipoDePrenda.CortePorBulto));
-
-                        }
-                    }
-                }
-            }
         }
 
         private Envio CrearEnvioConDetalle(Envio envio, List<EnvioDetalle> detalleSobrante)
@@ -412,6 +338,98 @@ namespace BLL
                             PrecioUnitario = x.Key.PrecioUnitario
                         }).ToList();
         }
+
+        private List<Tuple<int, Articulo, int>> ConvertirEntidadEnTupla(List<EnvioDetalle> detalle)
+        {
+            var detallePorBulto = new List<Tuple<int, Articulo, int>>(); //Id, Articulo, Corte por Bulto
+            int id = 0;
+
+            foreach (var item in detalle)
+            {
+                for (int i = 0; i < item.Cantidad; i += item.Articulo.TipoDePrenda.CortePorBulto)
+                {
+                    id++;
+                    detallePorBulto.Add(new Tuple<int, Articulo, int>(id, item.Articulo, item.Articulo.TipoDePrenda.CortePorBulto));
+                }
+            }
+
+            return detallePorBulto;
+        }
+
+        #region Bultos Compuestos
+        private void ReordenarBultosCompuestos(List<EnvioDetalle> envioDetalle, int id, List<Tuple<int, Articulo, int>> detallePorBulto)
+        {
+
+            //Ordenar las prendas compuestas de manera intercalada: CHAQUETA, PANTALON, CHAQUETA, PANTALON, en lugar de CHAQUETA, CHAQUETA, PANTALON, PANTALON
+            var bultosCompuestosOriginal = envioDetalle.Where(x => x.Articulo.TipoDePrenda.Categoria.EsCompuesta);
+            var bultosUsados = new List<BultoCompuesto>(); //Ambo
+
+            bultosCompuestosOriginal
+                .Select(x => x.Articulo.TipoDePrenda.Id)
+                .ToList()
+                .ForEach(x =>
+                {
+                    if (!bultosUsados.Contains(bultoCompuestoBLL.ObtenerPorTipoDePrenda(x)))
+                        bultosUsados.Add(bultoCompuestoBLL.ObtenerPorTipoDePrenda(x));
+                });
+
+            //Se obtiene el primer id de tipo de prenda de cada bulto compuesto
+            var idsParaComparar = bultosUsados.Select(x => x.Detalle.First().TipoDePrenda.Id).ToList();
+
+            //En el detalle de envio original se dejan solo los primeros tipos de prenda de cada bulto compuesto
+            var bultosCompuestosFiltrados = bultosCompuestosOriginal.Where(x => idsParaComparar.Contains(x.Articulo.TipoDePrenda.Id));
+            var bultosCompuestosComplementarios = bultosCompuestosOriginal.Where(x => !idsParaComparar.Contains(x.Articulo.TipoDePrenda.Id)).ToList();
+            var bultosCompuestosComplementariosPorBulto = this.ConvertirEntidadEnTupla(bultosCompuestosComplementarios);
+
+            foreach (var detalle in bultosCompuestosFiltrados)
+            {
+                //Se hace i += CortePorbulto, porque 
+                for (int i = 0; i < detalle.Cantidad; i += detalle.Articulo.TipoDePrenda.CortePorBulto)
+                {
+                    var bultoCompuesto = bultoCompuestoBLL.ObtenerPorTipoDePrenda(detalle.Articulo.TipoDePrenda.Id);
+
+                    foreach (var itemCompuesto in bultoCompuesto.Detalle)
+                    {
+                        id++;
+
+                        if (itemCompuesto.TipoDePrenda.Id == detalle.Articulo.TipoDePrenda.Id)
+                        {
+                            //Es la prenda principal
+                            detallePorBulto.Add(new Tuple<int, Articulo, int>(id, detalle.Articulo, detalle.Articulo.TipoDePrenda.CortePorBulto));
+                        }
+                        else
+                        {
+                            //Es prenda complementaria
+                            var elemento = bultosCompuestosComplementariosPorBulto
+                                .FirstOrDefault(x => x.Item2.TipoDePrenda.Id == itemCompuesto.TipoDePrenda.Id);
+
+                            //Se elimina el elemento porque se necesita tener el primer articulo disponible
+                            //A medida que se van eliminando, se va obteniendo con First() el siguiente articulo de ese tipo de prenda
+                            bultosCompuestosComplementariosPorBulto.Remove(elemento);
+
+                            detallePorBulto.Add(new Tuple<int, Articulo, int>(id, elemento.Item2, elemento.Item2.TipoDePrenda.CortePorBulto));
+
+                        }
+                    }
+                }
+            }
+        }
+
+        private void ValidarEspacioParaBultoCompuesto(Tuple<int, Articulo, int> itemCompuesto, List<Tuple<int, Articulo, int>> detallePorBulto, ref decimal pesoBultoActual)
+        {
+            var bultoCompuesto = bultoCompuestoBLL.ObtenerPorTipoDePrenda(itemCompuesto.Item2.TipoDePrenda.Id);
+            //Si es el primer id del detalle, quiere decir que se está agregando un bulto nuevo.
+            //En ese caso, validar si hay espacio para un bulto compuesto completo
+            //Si no es la primer id del detalle, agregar la prenda directo, porque se supone que ya se valido el espacio
+            if (itemCompuesto.Item2.TipoDePrenda.Id == bultoCompuesto.Detalle.First().TipoDePrenda.Id)
+            {
+                var detallesProximos = detallePorBulto.Where(x => x.Item1 >= itemCompuesto.Item1).Take(bultoCompuesto.Detalle.Count).ToList();
+
+                pesoBultoActual = bultoCompuesto.Detalle.Sum(c => c.TipoDePrenda.CortePorBulto * detallesProximos.First(x => x.Item2.TipoDePrenda.Id == c.TipoDePrenda.Id).Item2.PesoUnitario);
+            }
+        }
+        #endregion
+
         #endregion
     }
 }

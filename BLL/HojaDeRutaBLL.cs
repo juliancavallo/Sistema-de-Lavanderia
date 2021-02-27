@@ -283,6 +283,9 @@ namespace BLL
                 });
             }
 
+            if (hojasDeRuta.Count == 0)
+                hojasDeRuta.Add(hojaDeRutaOriginal);
+
             return hojasDeRuta;
         }
 
@@ -292,9 +295,9 @@ namespace BLL
             var envios = new List<Envio>();
             foreach (var envio in enviosEnHojaDeRuta)
             {
+                //Se dividen los envios que superen la capacidad max en HR
                 if (envio.PesoTotal > capacidadMax)
                 {
-                    //Se dividen los envios que superen la capacidad max en HR
                     envios = envioBLL.DividirPorCapacidadMaxima(envio);
                     envios.ForEach(x =>
                     {
