@@ -178,7 +178,7 @@ namespace BLL
                 var cantidadDeBultos = new List<int>();
                 bulto.Detalle.ForEach(detalle =>
                 {
-                    int cantidadTotal = detalles.First(x => x.Articulo.TipoDePrenda.Id == detalle.TipoDePrenda.Id).Cantidad;
+                    int cantidadTotal = detalles.Where(x => x.Articulo.TipoDePrenda.Id == detalle.TipoDePrenda.Id).Sum(x => x.Cantidad);
                     cantidadDeBultos.Add(cantidadTotal / detalle.TipoDePrenda.CortePorBulto);
                 });
 
