@@ -80,7 +80,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(14, 146);
+            this.label6.Location = new System.Drawing.Point(13, 150);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(40, 13);
             this.label6.TabIndex = 12;
@@ -90,7 +90,7 @@
             // 
             this.comboEstado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboEstado.FormattingEnabled = true;
-            this.comboEstado.Location = new System.Drawing.Point(17, 162);
+            this.comboEstado.Location = new System.Drawing.Point(16, 166);
             this.comboEstado.Name = "comboEstado";
             this.comboEstado.Size = new System.Drawing.Size(164, 21);
             this.comboEstado.TabIndex = 11;
@@ -131,7 +131,7 @@
             // 
             // btnBuscar
             // 
-            this.btnBuscar.Location = new System.Drawing.Point(444, 147);
+            this.btnBuscar.Location = new System.Drawing.Point(444, 157);
             this.btnBuscar.Name = "btnBuscar";
             this.btnBuscar.Size = new System.Drawing.Size(136, 36);
             this.btnBuscar.TabIndex = 6;
@@ -141,7 +141,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(308, 90);
+            this.label3.Location = new System.Drawing.Point(306, 90);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(66, 13);
             this.label3.TabIndex = 5;
@@ -149,7 +149,7 @@
             // 
             // dateTimeHasta
             // 
-            this.dateTimeHasta.Location = new System.Drawing.Point(311, 104);
+            this.dateTimeHasta.Location = new System.Drawing.Point(309, 106);
             this.dateTimeHasta.Name = "dateTimeHasta";
             this.dateTimeHasta.Size = new System.Drawing.Size(238, 20);
             this.dateTimeHasta.TabIndex = 4;
@@ -157,7 +157,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(14, 90);
+            this.label2.Location = new System.Drawing.Point(12, 90);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(69, 13);
             this.label2.TabIndex = 3;
@@ -165,7 +165,7 @@
             // 
             // dateTimeDesde
             // 
-            this.dateTimeDesde.Location = new System.Drawing.Point(17, 104);
+            this.dateTimeDesde.Location = new System.Drawing.Point(15, 106);
             this.dateTimeDesde.Name = "dateTimeDesde";
             this.dateTimeDesde.Size = new System.Drawing.Size(238, 20);
             this.dateTimeDesde.TabIndex = 2;

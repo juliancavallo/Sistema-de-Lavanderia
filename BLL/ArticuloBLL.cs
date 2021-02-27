@@ -1,6 +1,6 @@
 ﻿using BLL.Vistas;
 using Entidades;
-using Entidades.Interfaces;
+using Entidades.Clases_Padre;
 using Mappers;
 using Servicios;
 using System;

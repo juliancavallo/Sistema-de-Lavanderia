@@ -61,7 +61,7 @@ namespace BLL
             new Movimiento()
             {
                 Descripcion = "Auditoria",
-                FechaCreacion = x.FechaDeCreacion,
+                FechaCreacion = x.FechaCreacion,
                 Numero = x.Id.ToString(),
                 Usuario = x.Usuario,
                 UbicacionDestino = x.Ubicacion,

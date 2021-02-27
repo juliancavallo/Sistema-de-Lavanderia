@@ -1,4 +1,4 @@
-﻿using Entidades.Interfaces;
+﻿using Entidades.Clases_Padre;
 using System;
 using System.Collections.Generic;
 using System.Text;

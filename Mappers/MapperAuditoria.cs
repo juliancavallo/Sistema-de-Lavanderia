@@ -79,7 +79,7 @@ namespace Mappers
             var color = new Auditoria()
             {
                 Id = int.Parse(row["Id"].ToString()),
-                FechaDeCreacion = Convert.ToDateTime(row["FechaDeCreacion"].ToString()),
+                FechaCreacion = Convert.ToDateTime(row["FechaCreacion"].ToString()),
                 Usuario = mppUsuario.Obtener(int.Parse(row["IdUsuario"].ToString())),
                 Ubicacion = mppUbicacion.Obtener(int.Parse(row["IdUbicacion"].ToString())),
                 Detalle = mppAuditoriaDetalle.ObtenerTodos(int.Parse(row["Id"].ToString()))
@@ -91,7 +91,7 @@ namespace Mappers
         {
             dr["IdUbicacion"] = obj.Ubicacion.Id;
             dr["IdUsuario"] = obj.Usuario.Id;
-            dr["FechaDeCreacion"] = obj.FechaDeCreacion;
+            dr["FechaCreacion"] = obj.FechaCreacion;
         }
     }
 }

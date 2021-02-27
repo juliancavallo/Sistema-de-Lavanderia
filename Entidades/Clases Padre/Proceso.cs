@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Entidades.Clases_Padre
 {
-    public class Detalle
+    public class Proceso
     {
-        public Articulo Articulo { get; set; }
-        public int Cantidad { get; set; }
+        public DateTime FechaCreacion { get; set; }
+        public Usuario Usuario { get; set; }
     }
 }

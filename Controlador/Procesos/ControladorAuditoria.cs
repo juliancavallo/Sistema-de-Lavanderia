@@ -155,7 +155,7 @@ namespace Controlador.Procesos
                     string idUbicacion = ((ComboBox)controles.Find(x => x.Name == "comboUbicacion")).SelectedValue.ToString();
                     auditoria.Ubicacion = ubicacionBLL.Obtener(int.Parse(idUbicacion));
                     auditoria.Usuario = SeguridadBLL.usuarioLogueado;
-                    auditoria.FechaDeCreacion = DateTime.Now;
+                    auditoria.FechaCreacion = DateTime.Now;
                     auditoria.Detalle = this.auditoriaDetalle;
 
                     auditoriaBLL.Alta(auditoria);

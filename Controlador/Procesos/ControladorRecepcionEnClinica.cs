@@ -1,7 +1,7 @@
 ﻿using BLL;
 using BLL.Vistas;
 using Entidades;
-using Entidades.Interfaces;
+using Entidades.Clases_Padre;
 using Servicios;
 using System;
 using System.Collections.Generic;

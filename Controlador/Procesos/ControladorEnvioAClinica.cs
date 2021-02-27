@@ -1,7 +1,7 @@
 ﻿using BLL;
 using Entidades;
 using Entidades.Enums;
-using Entidades.Interfaces;
+using Entidades.Clases_Padre;
 using Servicios;
 using System;
 using System.Collections.Generic;

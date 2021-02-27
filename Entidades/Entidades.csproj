@@ -46,6 +46,7 @@
     <Compile Include="Auditoria.cs" />
     <Compile Include="AuditoriaDetalle.cs" />
     <Compile Include="BultoCompuestoDetalle.cs" />
+    <Compile Include="Clases Padre\Proceso.cs" />
     <Compile Include="Color.cs" />
     <Compile Include="Enums\CodigoMenu.cs" />
     <Compile Include="Enums\EstadoEnvio.cs" />

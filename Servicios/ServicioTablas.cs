@@ -395,14 +395,14 @@ namespace Servicios
             DataColumn colAuditoriaId = new DataColumn("Id", Type.GetType("System.Int32"));
             DataColumn colAuditoriaIdUbicacion = new DataColumn("IdUbicacion", Type.GetType("System.Int32"));
             DataColumn colAuditoriaIdUsuario = new DataColumn("IdUsuario", Type.GetType("System.Int32"));
-            DataColumn colAuditoriaFechaDeCreacion = new DataColumn("FechaDeCreacion", Type.GetType("System.DateTime"));
+            DataColumn colAuditoriaFechaCreacion = new DataColumn("FechaCreacion", Type.GetType("System.DateTime"));
 
             dtAuditoria.Columns.AddRange(new DataColumn[]
             {
                  colAuditoriaId,
                  colAuditoriaIdUbicacion,
                  colAuditoriaIdUsuario,
-                 colAuditoriaFechaDeCreacion
+                 colAuditoriaFechaCreacion
             });
 
             colAuditoriaId.AutoIncrement = true;

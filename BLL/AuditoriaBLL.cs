@@ -63,10 +63,10 @@ namespace BLL
                     lista = lista.Where(x => x.Ubicacion.Id == idUbicacion);
 
                 if (fechaDesde.HasValue)
-                    lista = lista.Where(x => x.FechaDeCreacion > fechaDesde);
+                    lista = lista.Where(x => x.FechaCreacion > fechaDesde);
 
                 if (fechaHasta.HasValue)
-                    lista = lista.Where(x => x.FechaDeCreacion < fechaHasta);
+                    lista = lista.Where(x => x.FechaCreacion < fechaHasta);
 
 
                 return lista.ToList();
@@ -85,7 +85,7 @@ namespace BLL
             new AuditoriaVista() 
             { 
                 Id = x.Id,
-                Fecha = x.FechaDeCreacion.ToString(),
+                Fecha = x.FechaCreacion.ToString(),
                 Numero = x.Id.ToString(),
                 Ubicacion = x.Ubicacion.Descripcion,
                 Usuario = x.Usuario.NombreDeUsuario
