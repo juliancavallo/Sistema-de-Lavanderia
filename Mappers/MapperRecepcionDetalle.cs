@@ -110,7 +110,7 @@ namespace Mappers
             var color = new RecepcionDetalle()
             {
                 CantidadARecibir = int.Parse(row["CantidadARecibir"].ToString()),
-                CantidadRecibida = int.Parse(row["CantidadRecibida"].ToString()),
+                Cantidad = int.Parse(row["Cantidad"].ToString()),
                 PrecioUnitario = decimal.Parse(row["PrecioUnitario"].ToString()),
                 Articulo = mppArticulo.Obtener(int.Parse(row["IdArticulo"].ToString()))
             };
@@ -122,7 +122,7 @@ namespace Mappers
             dr["IdRecepcion"] = obj.Recepcion.Id;
             dr["IdArticulo"] = obj.Articulo.Id;
             dr["CantidadARecibir"] = obj.CantidadARecibir;
-            dr["CantidadRecibida"] = obj.CantidadRecibida;
+            dr["Cantidad"] = obj.Cantidad;
             dr["PrecioUnitario"] = obj.Articulo.PrecioUnitario;
         }
     }

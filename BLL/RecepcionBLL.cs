@@ -168,7 +168,7 @@ namespace BLL
                     TipoDePrenda = x.Articulo.TipoDePrenda.Descripcion,
                     Talle = x.Articulo.Talle.Descripcion,
                     Color = x.Articulo.Color.Descripcion,
-                    CantidadRecibida = x.CantidadRecibida
+                    Cantidad = x.Cantidad
                 };
                 lista.Add(vista);
             }
@@ -180,7 +180,7 @@ namespace BLL
             return vista.Select(x => 
                 new RecepcionDetalle() 
                 {
-                    CantidadRecibida = x.CantidadRecibida,
+                    Cantidad = x.Cantidad,
                     Articulo = articuloBLL.Obtener(x.IdArticulo),
                     CantidadARecibir = x.CantidadARecibir
                 }).ToList();

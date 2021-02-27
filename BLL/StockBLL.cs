@@ -119,7 +119,7 @@ namespace BLL
             foreach (var detalle in recepcion.Detalle)
             {
                 int idArticulo = detalle.Articulo.Id;
-                int cantidad = detalle.CantidadRecibida;
+                int cantidad = detalle.Cantidad;
 
                 var stock = this.Obtener(recepcion.UbicacionDestino.Id, idArticulo);
                 if (stock == null)

@@ -1,6 +1,7 @@
 ﻿using BLL;
 using Entidades;
 using Entidades.Enums;
+using Entidades.Interfaces;
 using Servicios;
 using System;
 using System.Collections.Generic;
@@ -175,7 +176,7 @@ namespace Controlador.Procesos
             {
                 if (DatosValidos(1))
                 {
-                    if (articuloBLL.ValidarBultosCompuestos((DataGridView)controles.Find(x => x.Name == "gridItems")))
+                    if (articuloBLL.ValidarBultosCompuestos(this.envioDetalle.ToList<IDetalle>()))
                     {
                         var envio = new Envio();
 
@@ -198,7 +199,8 @@ namespace Controlador.Procesos
                     }
                     else 
                         MessageBox.Show("Se leyó una prenda con categoría compuesta, pero no se leyó el bulto compuesto completo. " +
-                            "Puede revisar su configuración en Administración de Bultos Compuestos", "Bulto compuesto", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            Environment.NewLine + "Recuerde leer la misma cantidad de bultos de cada prenda." +
+                            Environment.NewLine + "Puede revisar su configuración en Administración de Bultos Compuestos", "Bulto compuesto", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
             catch (Exception ex)

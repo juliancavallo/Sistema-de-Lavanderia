@@ -116,21 +116,21 @@ namespace Controlador.Procesos
                     int idArticulo = int.Parse(((ComboBox)controles.Find(x => x.Name == "comboArticulo")).SelectedValue.ToString());
                     
                     var articuloAgregado = recepcionDetalle.Find(x => x.IdArticulo == idArticulo);
-                    cantidad += articuloAgregado != null ? articuloAgregado.CantidadRecibida : 0;
+                    cantidad += articuloAgregado != null ? articuloAgregado.Cantidad : 0;
 
                     if (articuloAgregado == null)
                     {
                         var nuevoDetalle = new RecepcionDetalle();
                         nuevoDetalle.Articulo = articuloBLL.Obtener(idArticulo);
                         nuevoDetalle.CantidadARecibir = 0;
-                        nuevoDetalle.CantidadRecibida = cantidad;
+                        nuevoDetalle.Cantidad = cantidad;
 
                         var nuevoDetalleVista = recepcionBLL.ConvertirDetalleAVista(new List<RecepcionDetalle>() { nuevoDetalle }).FirstOrDefault();
 
                         recepcionDetalle.Add(nuevoDetalleVista);
                     }
                     else
-                        articuloAgregado.CantidadRecibida = cantidad;
+                        articuloAgregado.Cantidad = cantidad;
 
                     ServicioConfiguracionDeControles.LimpiarControles(this.controles);
                     this.CargarGrilla();
@@ -151,7 +151,7 @@ namespace Controlador.Procesos
                 {
                     int articuloSeleccionado = int.Parse(grilla.CurrentRow.Cells["IdArticulo"].Value.ToString());
 
-                    recepcionDetalle.Find(x => x.IdArticulo == articuloSeleccionado).CantidadRecibida = 0;
+                    recepcionDetalle.Find(x => x.IdArticulo == articuloSeleccionado).Cantidad = 0;
 
                     this.CargarGrilla();
                 }

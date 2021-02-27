@@ -16,6 +16,6 @@ namespace BLL.Vistas
         [System.ComponentModel.DisplayName("Cantidad a recibir")]
         public int CantidadARecibir { get; set; }
         [System.ComponentModel.DisplayName("Cantidad recibida")]
-        public int CantidadRecibida { get; set; }
+        public int Cantidad { get; set; }
     }
 }

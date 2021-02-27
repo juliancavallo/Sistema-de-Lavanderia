@@ -1,5 +1,6 @@
 ﻿using BLL.Vistas;
 using Entidades;
+using Entidades.Interfaces;
 using Mappers;
 using Servicios;
 using System;
@@ -157,38 +158,34 @@ namespace BLL
             return true;
         }
 
-        public bool ValidarBultosCompuestos(DataGridView dgv)
+        public bool ValidarBultosCompuestos(List<IDetalle> detalles)
         {
             var result = true;
-            var articulos = new List<Articulo>();
-            foreach (DataGridViewRow item in dgv.Rows)
-            {
-                int idArticulo = int.Parse(item.Cells["IdArticulo"].Value.ToString());
-                articulos.Add(this.Obtener(idArticulo));
-            }
+            var articulos = detalles.Select(x => x.Articulo);
 
-            var articulosCompuestos = articulos.Where(x => x.TipoDePrenda.Categoria.EsCompuesta).ToList();
-            foreach (var articuloCompuesto in articulosCompuestos)
-            {
-                var bultos = bultoCompuestoBLL.ObtenerTodos(articuloCompuesto.TipoDePrenda.Id);
 
-                if (bultos.Count > 0)
+            var tiposDePrendaCompuestos = articulos.Select(x => x.TipoDePrenda).Where(x => x.Categoria.EsCompuesta).ToList();
+            var bultosUsados = new List<BultoCompuesto>();
+            tiposDePrendaCompuestos.ForEach(x => 
+            {
+                var bultoAAgregar = bultoCompuestoBLL.ObtenerPorTipoDePrenda(x.Id);
+                if (!bultosUsados.Any(b => b.Id == bultoAAgregar.Id))
+                    bultosUsados.Add(bultoAAgregar);
+            });
+
+            foreach(var bulto in bultosUsados) 
+            {
+                var cantidadDeBultos = new List<int>();
+                bulto.Detalle.ForEach(detalle =>
                 {
-                    foreach (var bulto in bultos)
-                    {
-                        var detalleComplementario = bulto.Detalle.Select(x => x.TipoDePrenda)
-                            .Where(x => x.Id != articuloCompuesto.TipoDePrenda.Id).ToList();
+                    int cantidadTotal = detalles.First(x => x.Articulo.TipoDePrenda.Id == detalle.TipoDePrenda.Id).Cantidad;
+                    cantidadDeBultos.Add(cantidadTotal / detalle.TipoDePrenda.CortePorBulto);
+                });
 
-                        foreach (var tipoDePrenda in detalleComplementario)
-                        {
-                            if (!articulosCompuestos.Select(x => x.TipoDePrenda.Id).Contains(tipoDePrenda.Id))
-                                return false;
-                        }
-                    }
-                }
-                else
+                if (cantidadDeBultos.Distinct().Count() > 1)
                     return false;
-            }
+            };
+
 
             return result;
         }

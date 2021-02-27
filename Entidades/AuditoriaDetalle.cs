@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Entidades.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Entidades
 {
-    public class AuditoriaDetalle
+    public class AuditoriaDetalle : IDetalle
     {
         public int Cantidad { get; set; }
 

@@ -42,8 +42,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IAdministrable.cs" />
-    <Compile Include="IProcesable.cs" />
+    <Compile Include="Interfaces\IAdministrable.cs" />
+    <Compile Include="Interfaces\IProcesable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServicioConfiguracionDeControles.cs" />
     <Compile Include="ServicioMail.cs" />

@@ -689,7 +689,7 @@ namespace Servicios
             dtRecepcionDetalle.TableName = "RecepcionDetalle";
 
             DataColumn colRecepcionDetalleCantidadARecibir = new DataColumn("CantidadARecibir", Type.GetType("System.Int32"));
-            DataColumn colRecepcionDetalleCantidadRecibida = new DataColumn("CantidadRecibida", Type.GetType("System.Int32"));
+            DataColumn colRecepcionDetalleCantidad = new DataColumn("Cantidad", Type.GetType("System.Int32"));
             DataColumn colRecepcionDetalleIdRecepcion = new DataColumn("IdRecepcion", Type.GetType("System.Int32"));
             DataColumn colRecepcionDetalleIdArticulo = new DataColumn("IdArticulo", Type.GetType("System.Int32"));
             DataColumn colRecepcionDetallePrecioUnitario = new DataColumn("PrecioUnitario", Type.GetType("System.Decimal"));
@@ -698,7 +698,7 @@ namespace Servicios
             dtRecepcionDetalle.Columns.AddRange(new DataColumn[]
             {
                  colRecepcionDetalleCantidadARecibir,
-                 colRecepcionDetalleCantidadRecibida,
+                 colRecepcionDetalleCantidad,
                  colRecepcionDetalleIdRecepcion,
                  colRecepcionDetalleIdArticulo,
                  colRecepcionDetallePrecioUnitario

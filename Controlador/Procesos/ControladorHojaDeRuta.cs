@@ -165,10 +165,10 @@ namespace Controlador.Procesos
                     else
                     {
                         MessageBox.Show($"La Hoja de Ruta se dividió en {resultado.Count} ya que se estaba superando la capacidad máxima permitida. " +
-                            $"Los números de las nuevas hojas son: {string.Join(" - ", resultado.Select(x => x.Id))} " +
-                            $"Puede consultarla en Reportes > Hojas de Ruta " +
-                            $"Los envios son: {string.Join(" - ", resultado.SelectMany(x => x.Envios.Select(y => y.Id)))}", 
-                            "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            $"{Environment.NewLine}Los números de las nuevas hojas son: {string.Join(" - ", resultado.Select(x => x.Id))} " +
+                            $"{Environment.NewLine}Puede consultarla en Reportes > Hojas de Ruta " +
+                            $"{Environment.NewLine}Los envios son: {string.Join(" - ", resultado.SelectMany(x => x.Envios.Select(y => y.Id)))}", 
+                            "Hoja de Ruta", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
 
 

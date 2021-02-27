@@ -13,7 +13,7 @@ namespace Entidades
         {
             get
             {
-                return this.Detalle.Sum(x => x.CantidadRecibida * x.Articulo.PesoUnitario);
+                return this.Detalle.Sum(x => x.Cantidad * x.Articulo.PesoUnitario);
             }
         }
 

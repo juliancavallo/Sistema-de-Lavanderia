@@ -1,12 +1,13 @@
-﻿using System;
+﻿using Entidades.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Entidades
 {
-    public class RecepcionDetalle
+    public class RecepcionDetalle : IDetalle
     {
-        public int CantidadRecibida { get; set; }
+        public int Cantidad { get; set; }
         public int CantidadARecibir { get; set; }
         public decimal PrecioUnitario { get; set; }
 
