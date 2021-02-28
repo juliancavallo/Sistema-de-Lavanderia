@@ -21,6 +21,7 @@ namespace Controlador.Procesos
         UbicacionBLL ubicacionBLL = new UbicacionBLL();
         EnvioBLL envioBLL = new EnvioBLL();
         StockBLL stockBLL = new StockBLL();
+        ParametroDelSistemaBLL parametroDelSistemaBLL = new ParametroDelSistemaBLL();
         #endregion
 
         #region Formulario
@@ -181,6 +182,17 @@ namespace Controlador.Procesos
                     envioBLL.Alta(envio);
 
                     MessageBox.Show($"El Envio fue creado exitosamente con el número {envio.Id}. Puede consultarlo en Reportes > Envios a Lavadero", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    var descuento = parametroDelSistemaBLL.Obtener(Entidades.Enums.ParametroDelSistema.PorcentajeDescuentoDeEnvios).Valor;
+                    var capacidadMaxima = parametroDelSistemaBLL.Obtener(Entidades.Enums.ParametroDelSistema.CapacidadMaximaHojaDeRuta).Valor;
+
+                    if (envio.PesoTotal > decimal.Parse(capacidadMaxima))
+                    {
+                        MessageBox.Show(
+                            "Importante: El envío supera la capacidad máxima aceptada para enviar en una hoja de ruta, por lo que será dividido en más envíos al momento de enviarlo. La facturación total será la suma de los nuevos envíos al momento de hacer la hoja de ruta",
+                            "Información", MessageBoxButtons.OK, MessageBoxIcon.Information); 
+                    }
+
                     frm.Hide();
                 }
             }
