@@ -194,10 +194,15 @@ namespace BLL
         public List<Tuple<int, Articulo, int>> SepararDetallePorBulto(List<EnvioDetalle> envioDetalle)
         {
             //Id, Articulo, Corte por Bulto
-            var detallePorBulto = this.ConvertirEntidadEnTupla(envioDetalle.Where(x => !x.Articulo.TipoDePrenda.Categoria.EsCompuesta).ToList());
-
-            this.ReordenarBultosCompuestos(envioDetalle, detallePorBulto.LastOrDefault()?.Item1 ?? 0, detallePorBulto);
-
+            var detallePorBulto = new List<Tuple<int, Articulo, int>>();
+            
+            if (envioDetalle.First().Envio.UbicacionOrigen.TipoDeUbicacion.Id == (int)Entidades.Enums.TipoDeUbicacion.Clinica)
+                detallePorBulto = this.ConvertirEntidadEnTupla(envioDetalle);
+            else
+            {
+                detallePorBulto = this.ConvertirEntidadEnTupla(envioDetalle.Where(x => !x.Articulo.TipoDePrenda.Categoria.EsCompuesta).ToList());
+                this.ReordenarBultosCompuestos(envioDetalle, detallePorBulto.LastOrDefault()?.Item1 ?? 0, detallePorBulto);
+            }
             return detallePorBulto;
         }
 

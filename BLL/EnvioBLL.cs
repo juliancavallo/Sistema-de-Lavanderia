@@ -264,7 +264,8 @@ namespace BLL
                 decimal pesoEnvioAcumulado = detallesParaNuevoEnvio.Sum(d => d.Item3 * d.Item2.PesoUnitario);
                 decimal pesoBultoActual = item.Item3 * item.Item2.PesoUnitario;
 
-                if (item.Item2.TipoDePrenda.Categoria.EsCompuesta)
+                if (envio.UbicacionOrigen.TipoDeUbicacion.Id == (int)Entidades.Enums.TipoDeUbicacion.Lavanderia 
+                    && item.Item2.TipoDePrenda.Categoria.EsCompuesta)
                     this.ValidarEspacioParaBultoCompuesto(item, detallePorBulto, ref pesoBultoActual);
                 
 
