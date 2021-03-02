@@ -210,13 +210,17 @@ namespace BLL
         {
             var detallePorBulto = new List<Tuple<int, Articulo, int>>(); //Id, Articulo, Corte por Bulto
             int id = 0;
+            var esEnvioALavadero = detalle.First().Envio.UbicacionOrigen.TipoDeUbicacion.Id == (int)Entidades.Enums.TipoDeUbicacion.Clinica;
 
             foreach (var item in detalle)
             {
-                for (int i = 0; i < item.Cantidad; i += item.Articulo.TipoDePrenda.CortePorBulto)
+                //Si es envio a lavadero no se respeta el corte bulto, por lo que se toma 1
+                int cortePorBulto = esEnvioALavadero ? 1 : item.Articulo.TipoDePrenda.CortePorBulto;
+
+                for (int i = 0; i < item.Cantidad; i += cortePorBulto)
                 {
                     id++;
-                    detallePorBulto.Add(new Tuple<int, Articulo, int>(id, item.Articulo, item.Articulo.TipoDePrenda.CortePorBulto));
+                    detallePorBulto.Add(new Tuple<int, Articulo, int>(id, item.Articulo, cortePorBulto));
                 }
             }
 
