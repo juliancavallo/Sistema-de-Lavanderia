@@ -17,5 +17,7 @@ namespace BLL.Vistas
         [System.ComponentModel.DisplayName("Hoja de Ruta")]
         public string HojaDeRuta { get; set; }
         public string Usuario { get; set; }
+        [System.ComponentModel.DisplayName("Peso Total")]
+        public string PesoTotal { get; set; }
     }
 }

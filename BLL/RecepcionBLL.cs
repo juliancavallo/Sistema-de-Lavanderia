@@ -151,7 +151,8 @@ namespace BLL
                 HojaDeRuta = obj.HojaDeRuta.Id.ToString(),
                 Usuario = obj.Usuario.NombreDeUsuario,
                 UbicacionOrigen = obj.UbicacionOrigen.Descripcion,
-                UbicacionDestino = obj.UbicacionDestino.Descripcion
+                UbicacionDestino = obj.UbicacionDestino.Descripcion,
+                PesoTotal = obj.PesoTotal.ToString() + " Kg"
             };
         }
         public List<RecepcionDetalleVista> ConvertirDetalleAVista(List<RecepcionDetalle> detalle)

@@ -215,7 +215,7 @@ namespace BLL
                     (envio.UbicacionOrigen.TipoDeUbicacion.Id == (int)Entidades.Enums.TipoDeUbicacion.Lavanderia &&
                     envio.UbicacionDestino.TipoDeUbicacion.Id == (int)Entidades.Enums.TipoDeUbicacion.Clinica) 
                     ? $"${this.ObtenerFacturacionTotal(envio).ToString()}" : "No aplica",
-                PesoTotal = envio.PesoTotal.ToString()
+                PesoTotal = envio.PesoTotal.ToString() + " Kg"
             };
         }
         #endregion
