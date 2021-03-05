@@ -41,10 +41,19 @@ namespace Controlador
 
             frmAbm.Activated += FormLoad;
             frmAbm.VisibleChanged += VisibleChanged;
-            ((Button)controles.Find(x => x.Name == "btnAlta")).Click += ClickAlta;
-            ((Button)controles.Find(x => x.Name == "btnModificacion")).Click += ClickModificacion;
-            ((Button)controles.Find(x => x.Name == "btnBaja")).Click += ClickBaja;
+
+            var btnAlta = ((Button)controles.Find(x => x.Name == "btnAlta"));
+            var btnModificacion = ((Button)controles.Find(x => x.Name == "btnModificacion"));
+            var btnBaja = ((Button)controles.Find(x => x.Name == "btnBaja"));
+
+            btnAlta.Click += ClickAlta;
+            btnModificacion.Click += ClickModificacion;
+            btnBaja.Click += ClickBaja;
             ((Button)controles.Find(x => x.Name == "btnBuscar")).Click += ClickBuscar;
+
+            btnAlta.Visible = false;
+            btnModificacion.Visible = false;
+            btnBaja.Visible = false;
         }
 
         private void VisibleChanged(object sender, EventArgs e)
