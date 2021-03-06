@@ -235,7 +235,7 @@ namespace BLL
             parametro = new ParametroDelSistema()
             {
                 Nombre = "RolesAdministradoresDeUsuarios",
-                Valor = "Administrador,Coordinador de Lavadero,Coordinador de Clinica"
+                Valor = "Coordinador Lavadero,Coordinador Clinica"
             };
             parametroBLL.Alta(parametro);
 
