@@ -41,10 +41,12 @@ namespace Controlador
                 string capacidadHojaDeRuta = parametroDelSistemaBLL.Obtener(Entidades.Enums.ParametroDelSistema.CapacidadMaximaHojaDeRuta).Valor;
                 string correoSoporte = parametroDelSistemaBLL.Obtener(Entidades.Enums.ParametroDelSistema.CorreoSoporte).Valor;
                 string descuentoEnvios = parametroDelSistemaBLL.Obtener(Entidades.Enums.ParametroDelSistema.PorcentajeDescuentoDeEnvios).Valor;
+                string rolAdmin = parametroDelSistemaBLL.Obtener(Entidades.Enums.ParametroDelSistema.RolesAdministradoresDeUsuarios).Valor;
 
                 ((TextBox)controles.Find(x => x.Name == "txtCapacidadMaxima")).Text = capacidadHojaDeRuta + " Kg";
                 ((TextBox)controles.Find(x => x.Name == "txtCorreoSoporte")).Text = correoSoporte;
                 ((TextBox)controles.Find(x => x.Name == "txtDescuentoEnvios")).Text = descuentoEnvios + " %";
+                ((TextBox)controles.Find(x => x.Name == "txtRolAdmin")).Text = rolAdmin;
             }
             catch(Exception)
             {

@@ -35,6 +35,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.txtDescuentoEnvios = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.txtRolAdmin = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lblTitulo
@@ -102,11 +104,32 @@
             this.label3.TabIndex = 19;
             this.label3.Text = "Porcentaje de descuento en envíos de misma organización";
             // 
+            // txtRolAdmin
+            // 
+            this.txtRolAdmin.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtRolAdmin.Location = new System.Drawing.Point(250, 272);
+            this.txtRolAdmin.Multiline = true;
+            this.txtRolAdmin.Name = "txtRolAdmin";
+            this.txtRolAdmin.ReadOnly = true;
+            this.txtRolAdmin.Size = new System.Drawing.Size(272, 58);
+            this.txtRolAdmin.TabIndex = 22;
+            // 
+            // label4
+            // 
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(35, 272);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(177, 83);
+            this.label4.TabIndex = 21;
+            this.label4.Text = "Rol administrador de usuarios";
+            // 
             // frmParametrosDelSistema
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(612, 535);
+            this.Controls.Add(this.txtRolAdmin);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.txtDescuentoEnvios);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.txtCorreoSoporte);
@@ -131,5 +154,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtDescuentoEnvios;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox txtRolAdmin;
+        private System.Windows.Forms.Label label4;
     }
 }
