@@ -242,7 +242,7 @@ namespace BLL
                 Articulo = x.Articulo.Codigo,
                 Ubicacion = x.Ubicacion.Descripcion,
                 CantidadPrevia = x.Cantidad,
-                NuevaCantidad = 0,
+                NuevaCantidad = x.Cantidad,
                 IdUbicacion = x.Ubicacion.Id
             }).ToList();
         }
@@ -278,6 +278,12 @@ namespace BLL
         public List<AjusteStockVista> AjustarVistaPorAuditoria(List<AjusteStockVista> lista, Auditoria auditoria)
         {
             var listaAjuste = this.ConvertirAAjusteStock(lista);
+            listaAjuste.ForEach(x => 
+            {
+                x.NuevaCantidad = 0;
+                x.Observaciones = "Ajuste por auditoria";
+            });
+            
             auditoria.Detalle.ForEach(x => 
             {
                 var item = listaAjuste.Find(l => l.Articulo.Id == x.Articulo.Id);
