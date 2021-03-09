@@ -229,7 +229,10 @@ namespace BLL
             {
                 envio.Detalle.ForEach(x => 
                 {
-                    precio += (x.PrecioUnitario * x.Cantidad);
+                    decimal precioTotal = x.PrecioUnitario * x.Cantidad;
+                    decimal descuento = x.Articulo.TipoDePrenda.Categoria.EsCompuesta ? (precioTotal * 2 / 100) : 0; 
+                    
+                    precio += precioTotal - descuento;
                 });
 
                 if (!envio.UbicacionDestino.ClienteExterno)
