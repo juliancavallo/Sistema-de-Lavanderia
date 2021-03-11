@@ -229,16 +229,21 @@ namespace BLL
             {
                 envio.Detalle.ForEach(x => 
                 {
-                    decimal precioTotal = x.PrecioUnitario * x.Cantidad;
-                    decimal descuento = x.Articulo.TipoDePrenda.Categoria.EsCompuesta ? (precioTotal * 2 / 100) : 0; 
+                    decimal precioTotal = x.PrecioUnitario * x.Cantidad; 
                     
-                    precio += precioTotal - descuento;
+                    precio += precioTotal;
                 });
 
                 if (!envio.UbicacionDestino.ClienteExterno)
                 {
                     var descuento = decimal.Parse(parametroDelSistemaBLL.Obtener(Entidades.Enums.ParametroDelSistema.PorcentajeDescuentoDeEnvios).Valor);
                     precio -= precio * descuento / 100;
+                }
+
+                if(envio.FechaCreacion.DayOfWeek == DayOfWeek.Saturday || envio.FechaCreacion.DayOfWeek == DayOfWeek.Sunday)
+                {
+                    decimal recargo = decimal.Parse(parametroDelSistemaBLL.Obtener(Entidades.Enums.ParametroDelSistema.PorcentajeRecargoFinDeSemana).Valor);
+                    precio += precio * recargo / 100;
                 }
             }
 

@@ -11,5 +11,6 @@ namespace Entidades.Enums
         public static string RolesAdministradoresDeUsuarios = "RolesAdministradoresDeUsuarios";
         public static string PorcentajeDescuentoDeEnvios = "PorcentajeDescuentoDeEnvios";
         public static string CapacidadMaximaHojaDeRuta = "CapacidadMaximaHojaDeRuta";
+        public static string PorcentajeRecargoFinDeSemana = "PorcentajeRecargoFinDeSemana";
     }
 }

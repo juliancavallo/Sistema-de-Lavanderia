@@ -192,11 +192,13 @@ namespace Controlador.Procesos
 
                         MessageBox.Show($"El Envio fue creado exitosamente con el número {envio.Id}. Puede consultarlo en Reportes > Envios a Clinica", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                        var descuento = parametroDelSistemaBLL.Obtener(Entidades.Enums.ParametroDelSistema.PorcentajeDescuentoDeEnvios).Valor;
+                        var descuentoCliente = parametroDelSistemaBLL.Obtener(Entidades.Enums.ParametroDelSistema.PorcentajeDescuentoDeEnvios).Valor;
+                        var recargoFinde = parametroDelSistemaBLL.Obtener(Entidades.Enums.ParametroDelSistema.PorcentajeRecargoFinDeSemana).Valor;
                         var capacidadMaxima = parametroDelSistemaBLL.Obtener(Entidades.Enums.ParametroDelSistema.CapacidadMaximaHojaDeRuta).Valor;
 
                         MessageBox.Show($"La facturación para este envío es de ${envioBLL.ObtenerFacturacionTotal(envio)}. " +
-                            $"{ (envio.UbicacionDestino.ClienteExterno ? string.Empty : Environment.NewLine + $"Se aplicó un descuento de {descuento}%.") }" +
+                            $"{ (envio.UbicacionDestino.ClienteExterno ? string.Empty : Environment.NewLine + $"Se aplicó un descuento de {descuentoCliente}% porque el destino es un cliente interno.") }" +
+                            $"{ (envio.FechaCreacion.DayOfWeek == DayOfWeek.Saturday || envio.FechaCreacion.DayOfWeek == DayOfWeek.Sunday ? Environment.NewLine + $"Se aplicó un recargo de {recargoFinde}% por crear el envío un fin de semana." : string.Empty) }" +
                             $"{ (envio.PesoTotal > decimal.Parse(capacidadMaxima) ? Environment.NewLine + "Importante: El envío supera la capacidad máxima aceptada para enviar en una hoja de ruta, por lo que será dividido en más envíos al momento de enviarlo. La facturación total será la suma de los nuevos envíos al momento de hacer la hoja de ruta" : string.Empty)}",
                             "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         frm.Hide();
