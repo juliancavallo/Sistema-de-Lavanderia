@@ -298,7 +298,7 @@ namespace BLL
                 //Se dividen los envios que superen la capacidad max en HR
                 if (envio.PesoTotal > capacidadMax)
                 {
-                    envios = envioBLL.DividirPorCapacidadMaxima(envio);
+                    envios.AddRange(envioBLL.DividirPorCapacidadMaxima(envio));
                     envios.ForEach(x =>
                     {
                         if (x.Id > 0)
@@ -307,6 +307,8 @@ namespace BLL
                             envioBLL.Alta(x);
                     });
                 }
+                else
+                    envios.Add(envio);
             }
             return envios;
         }

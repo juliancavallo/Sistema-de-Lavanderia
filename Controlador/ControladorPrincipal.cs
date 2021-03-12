@@ -71,7 +71,7 @@ namespace Controlador
             controles.Find(x => x.Name == NombreMenu.ReporteEnviosAClinica).Click += delegate (object sender, EventArgs e) { ClickMenu("frmReporteEnviosAClinica", CodigoMenu.ReporteEnviosAClinica); };
             controles.Find(x => x.Name == NombreMenu.ReporteEnviosALavadero).Click += delegate (object sender, EventArgs e) { ClickMenu("frmReporteEnviosALavadero", CodigoMenu.ReporteEnviosALavadero); };
             controles.Find(x => x.Name == NombreMenu.ReporteEnviosInternos).Click += delegate (object sender, EventArgs e) { ClickMenu("frmReporteEnviosInternos", CodigoMenu.ReporteEnviosInternos); };
-            controles.Find(x => x.Name == NombreMenu.ReporteRecepcionesEnLavadero).Click += delegate (object sender, EventArgs e) { ClickMenu("frmReporteRecepcionesEnLavadero", CodigoMenu.ReporteEnviosALavadero); };
+            controles.Find(x => x.Name == NombreMenu.ReporteRecepcionesEnLavadero).Click += delegate (object sender, EventArgs e) { ClickMenu("frmReporteRecepcionesEnLavadero", CodigoMenu.ReporteRecepcionesEnLavadero); };
             controles.Find(x => x.Name == NombreMenu.ReporteRecepcionesEnClinica).Click += delegate (object sender, EventArgs e) { ClickMenu("frmReporteRecepcionesEnClinica", CodigoMenu.ReporteRecepcionesEnClinica); };
             controles.Find(x => x.Name == NombreMenu.ReporteHojasDeRuta).Click += delegate (object sender, EventArgs e) { ClickMenu("frmReporteHojasDeRuta", CodigoMenu.ReporteHojasDeRuta); };
             controles.Find(x => x.Name == NombreMenu.ReporteMovimientos).Click += delegate (object sender, EventArgs e) { ClickMenu("frmReporteMovimientos", CodigoMenu.ReporteMovimientos); };
